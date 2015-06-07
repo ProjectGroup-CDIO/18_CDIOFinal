@@ -6,14 +6,13 @@
          xmlns="http://java.sun.com/xml/ns/javaee">
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>opr.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
+ <servlet>
+      <servlet-name>operatoerServlet</servlet-name>
+    <servlet-class>opr.server.impl.MySQLOperatoerDAO</servlet-class>
+  </servlet> 
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/_8_cdiofinal/greet</url-pattern>
+    <servlet-name>operatoerServlet</servlet-name>
+    <url-pattern>/_8_cdiofinal/loginservice</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
