@@ -1,5 +1,7 @@
 package opr.client.ui;
 
+import opr.client.service.IASEService;
+import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
@@ -22,6 +24,7 @@ public class MainView extends Composite implements Login.Callback {
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
+	private final IASEServiceAsync ase = GWT.create(IASEService.class);
 	
 	public MainView() throws Exception {
 		initWidget(ft);
