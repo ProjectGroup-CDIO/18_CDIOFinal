@@ -63,6 +63,10 @@ public class MainView extends Composite implements Login.Callback {
 		return service;
 	}
 	
+	public IASEServiceAsync getAse() {
+		return ase;
+	}
+
 	@Override
 	public void loginSucces(OperatoerDTO activeUser) {
 		ft.clear();

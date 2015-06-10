@@ -3,13 +3,19 @@ package opr.client.ui;
 public class BasicWeight implements IBasicWeight {
 
 	@Override
-	public void setDisplay() {
+	public double getSWeight() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void setTextDisplay() {
+	public double getSIWeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void tara() {
 		// TODO Auto-generated method stub
 		
 	}

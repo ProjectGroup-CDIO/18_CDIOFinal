@@ -11,8 +11,8 @@ public interface IASEService extends RemoteService{
 	
 	void setWeightDisplay(String msg);
 	void connect() throws UnknownHostException, IOException;
-	int getSWeight();
-	int getSIWeight();
+	double getSWeight() throws IOException;
+	double getSIWeight() throws IOException;
 	void tara();
 
 }

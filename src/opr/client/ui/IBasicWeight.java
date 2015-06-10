@@ -1,7 +1,8 @@
 package opr.client.ui;
 
 public interface IBasicWeight {
-	void setDisplay();
-	void setTextDisplay();
+	double getSWeight();
+	double getSIWeight();
+	void tara();
 	
 }

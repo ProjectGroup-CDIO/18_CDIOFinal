@@ -12,32 +12,42 @@ import opr.client.service.IASEService;
 import opr.server.Connector;
 import opr.server.interfaces.IASE;
 
-public class ASE implements IASE, IASEService {
+public class ASE extends Thread implements IASE, IASEService {
 	
 	private Socket sock;
 	private BufferedReader in;
 	private DataOutputStream out;
+	private int brutto;
+	private int tara;
+	private int netto = (brutto - tara);
 	
 	public ASE() {
-		try {
-			new Connector();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
+	
+//	public ASE() {
+//		try {
+//			new Connector();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Override
 	public void connect() throws UnknownHostException, IOException {
+		
+		if(sock!=null) return;
+		
 		sock = new Socket("62.79.16.17", 8000);
 		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		out = new DataOutputStream(sock.getOutputStream());
@@ -46,26 +56,34 @@ public class ASE implements IASE, IASEService {
 
 	@Override
 	public void setWeightDisplay(String msg) {
-		
+		//løl
 		
 	}
 
 	@Override
-	public int getSWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getSWeight() throws IOException {
+		out.writeBytes("S");
+		String response = in.readLine();
+		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
+		return weight;
 	}
 
 	@Override
-	public int getSIWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getSIWeight() throws IOException {
+		out.writeBytes("SI");
+		String response = in.readLine();
+		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
+		return weight;
+		
 	}
 
 	@Override
 	public void tara() {
-		// TODO Auto-generated method stub
-		
+		tara = brutto;	
+	}
+	
+	public void run() {
+		// TODO
 	}
 
 }
