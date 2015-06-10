@@ -11,6 +11,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,6 +21,7 @@ public class Login extends Composite {
 	Label lblOne = new Label("User ID ");
 	Label lblTwo = new Label("Password ");
 	TextBox userID = new TextBox();
+	LayoutPanel lPanel = new LayoutPanel();
 	PasswordTextBox password = new PasswordTextBox();
 
 	public interface Callback{
@@ -30,13 +32,13 @@ public class Login extends Composite {
 
 
 	public Login(final Callback c){
-		//this.c = c;
 		this.initWidget(vPanel);
+		
 		vPanel.add(lblOne);
 		vPanel.add(userID);
 		vPanel.add(lblTwo);
 		vPanel.add(password);
-
+	
 		Button btnOne = new Button("Submit", new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

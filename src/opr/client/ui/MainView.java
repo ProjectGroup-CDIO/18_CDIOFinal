@@ -5,12 +5,18 @@ import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import static com.google.gwt.dom.client.Style.Unit.EM;
 
 public class MainView extends Composite implements Login.Callback {
 	
@@ -22,11 +28,25 @@ public class MainView extends Composite implements Login.Callback {
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
+
+	//Test
+	private AbsolutePanel aPanel = new AbsolutePanel();
+	
+	//Test
+	
 	
 	public MainView() throws Exception {
-		initWidget(ft);
+		initWidget(aPanel);
+
+		aPanel.setSize(Integer.toString(Window.getClientWidth())+"px", Integer.toString(Window.getClientHeight())+"px");
+		Label lars =new Label();
+		lars.setText("Width"+Integer.toString(Window.getClientWidth()));
+		Label lars2 =new Label();
+		lars2.setText("Height:"+Integer.toString(Window.getClientHeight()));
+		aPanel.add(lars);
+		aPanel.add(lars2);
 		login = new Login(this);
-		ft.setWidget(0,0,login);
+		openLoginView();
 	}
 	
 	public void openEditView(int oprId) throws Exception {
@@ -43,10 +63,14 @@ public class MainView extends Composite implements Login.Callback {
 	}
 	
 	public void openLoginView() {
-		ft.clear();
-		ft.setWidget(0, 0, login);
+
+		content.clear();
 		activeUser = null;
 		login.clear();
+		content.add(login);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/2-115,Window.getClientHeight()/4);
+		
 	}
 	
 	public void openListView() throws Exception {
