@@ -21,8 +21,6 @@ import static com.google.gwt.dom.client.Style.Unit.EM;
 public class MainView extends Composite implements Login.Callback {
 	
 	private OperatoerDTO activeUser;
-	private FlexTable ft = new FlexTable();
-	private FlexCellFormatter ftFormat = ft.getFlexCellFormatter();
 	private VerticalPanel content = new VerticalPanel();
 	private Login login;
 	private MenuView menu;
@@ -39,12 +37,7 @@ public class MainView extends Composite implements Login.Callback {
 		initWidget(aPanel);
 
 		aPanel.setSize(Integer.toString(Window.getClientWidth())+"px", Integer.toString(Window.getClientHeight())+"px");
-		Label lars =new Label();
-		lars.setText("Width"+Integer.toString(Window.getClientWidth()));
-		Label lars2 =new Label();
-		lars2.setText("Height:"+Integer.toString(Window.getClientHeight()));
-		aPanel.add(lars);
-		aPanel.add(lars2);
+		
 		login = new Login(this);
 		openLoginView();
 	}
@@ -52,14 +45,16 @@ public class MainView extends Composite implements Login.Callback {
 	public void openEditView(int oprId) throws Exception {
 		content.clear();
 		content.add(new EditView(this, oprId));
-		ft.setWidget(0,1,content);
+	
 	}
 	
 	public void openAddView() throws Exception{
 		content.clear();
 		add = new AddView(this);
 		content.add(add);
-		ft.setWidget(0, 1, content);
+		
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content, 200, 200);
 	}
 	
 	public void openLoginView() {
@@ -76,7 +71,7 @@ public class MainView extends Composite implements Login.Callback {
 	public void openListView() throws Exception {
 		content.clear();
 		content.add(new ListView(this));
-		ft.setWidget(0, 1, content);
+	
 	}
 	
 	@Override
@@ -86,12 +81,12 @@ public class MainView extends Composite implements Login.Callback {
 	
 	@Override
 	public void loginSucces(OperatoerDTO activeUser) {
-		ft.clear();
+
+		aPanel.clear();
 		this.activeUser = activeUser;
 		menu = new MenuView(this);
-		ft.setWidget(0,0,menu);
-		ftFormat.setVerticalAlignment(0,0,HasVerticalAlignment.ALIGN_TOP);
-		
+		aPanel.add(menu);
+		aPanel.setWidgetPosition(menu, 10, 10);
 	}
 
 	@Override
