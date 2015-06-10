@@ -1,18 +1,14 @@
-package opr.client.service;
+package opr.server.interfaces;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-
-@RemoteServiceRelativePath("aseservice")
-public interface IASEService extends RemoteService{
+public interface IASE {
 	
 	void setWeightDisplay(String msg);
 	void connect() throws UnknownHostException, IOException;
 	double getSWeight() throws IOException;
 	double getSIWeight() throws IOException;
 	void tara();
-
+	
 }
