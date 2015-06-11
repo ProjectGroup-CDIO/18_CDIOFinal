@@ -49,14 +49,34 @@ public class MenuView extends Composite {
 			
 		});
 		
+		Button testBtn1 = new Button("WEIGHT", new ClickHandler(){
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				main.openWeightView();
+			}
+		});
 		
-		addBtn.setPixelSize(100, 30);
+		Button testBtn2 = new Button("N/A");
+		Button testBtn3 = new Button("N/A");
+		
+		
+		
+		
+		testBtn1.setPixelSize( 100, 30);
+		testBtn2.setPixelSize( 100, 30);
+		testBtn3.setPixelSize( 100, 30);
 		listBtn.setPixelSize(100, 30);
+		addBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
-		vPanel.add(addBtn);
-		vPanel.add(listBtn);
-		vPanel.add(logoutBtn);
 		
+		
+		vPanel.add(testBtn1);
+		vPanel.add(testBtn2);
+		vPanel.add(testBtn3);
+		vPanel.add(listBtn);
+		vPanel.add(addBtn);
+		vPanel.add(logoutBtn);
 		
 		
 		
