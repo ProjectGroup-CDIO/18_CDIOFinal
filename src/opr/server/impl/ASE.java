@@ -62,7 +62,7 @@ public class ASE extends Thread implements IASE, IASEService {
 
 	@Override
 	public double getSWeight() throws IOException {
-		out.writeBytes("S");
+		out.writeBytes("S\r\n");
 		String response = in.readLine();
 		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
 		return weight;
@@ -70,7 +70,7 @@ public class ASE extends Thread implements IASE, IASEService {
 
 	@Override
 	public double getSIWeight() throws IOException {
-		out.writeBytes("SI");
+		out.writeBytes("SI\r\n");
 		String response = in.readLine();
 		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
 		return weight;
@@ -83,7 +83,63 @@ public class ASE extends Thread implements IASE, IASEService {
 	}
 	
 	public void run() {
-		// TODO
+		try {
+			out.writeBytes("SIR\r\n");
+			String response;
+			double weight;
+			while((response = in.readLine()) != null) {
+				weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
+				System.out.println(weight);
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
+	public Socket getSock() {
+		return sock;
+	}
+
+	public void setSock(Socket sock) {
+		this.sock = sock;
+	}
+
+	public BufferedReader getIn() {
+		return in;
+	}
+
+	public void setIn(BufferedReader in) {
+		this.in = in;
+	}
+
+	public DataOutputStream getOut() {
+		return out;
+	}
+
+	public void setOut(DataOutputStream out) {
+		this.out = out;
+	}
+
+	public int getBrutto() {
+		return brutto;
+	}
+
+	public void setBrutto(int brutto) {
+		this.brutto = brutto;
+	}
+
+	public int getNetto() {
+		return netto;
+	}
+
+	public void setNetto(int netto) {
+		this.netto = netto;
+	}
+	
+	
 
 }
