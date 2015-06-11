@@ -25,8 +25,6 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
-	
-	//private final IASEServiceAsync ase = GWT.create(IASEService.class);
 
 	
 	public MainView() throws Exception {
@@ -83,10 +81,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		return service;
 	}
 	
-/*	public IASEServiceAsync getAse() {
-		return ase;
-	}*/
-
+	
 	@Override
 	public void loginSucces(OperatoerDTO activeUser) {
 
@@ -112,13 +107,9 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 
 	}
 
-	@Override
-	public IASEServiceAsync getSWeight(AsyncCallback<Double> callback) {
+	public IASEServiceAsync getASEService() {
 		return ASEservice;
 	}
 
-	@Override
-	public IASEServiceAsync tara(AsyncCallback<Void> callback) {
-		return ASEservice;
-	}
+	
 }

@@ -8,11 +8,13 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import opr.client.service.IASEService;
 import opr.server.Connector;
 import opr.server.interfaces.IASE;
 
-public class ASE extends Thread implements IASE, IASEService {
+public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runnable {
 	
 	private Socket sock;
 	private BufferedReader in;
@@ -82,23 +84,6 @@ public class ASE extends Thread implements IASE, IASEService {
 		tara = brutto;	
 	}
 	
-	public void run() {
-		try {
-			out.writeBytes("SIR\r\n");
-			String response;
-			double weight;
-			while((response = in.readLine()) != null) {
-				weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
-				System.out.println(weight);
-			}
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public Socket getSock() {
 		return sock;
@@ -138,6 +123,35 @@ public class ASE extends Thread implements IASE, IASEService {
 
 	public void setNetto(int netto) {
 		this.netto = netto;
+	}
+
+	
+
+	@Override
+	public void run() {
+		try {
+			out.writeBytes("SIR\r\n");
+			String response;
+			double weight;
+			while((response = in.readLine()) != null) {
+				weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
+				System.out.println(weight);
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

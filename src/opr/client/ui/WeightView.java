@@ -23,8 +23,7 @@ public class WeightView extends Composite {
 	private TextBox weightTxtBox = new TextBox(); 
 	
 	public interface Callback{
-		public IASEServiceAsync getSWeight(AsyncCallback<Double> callback);
-		public IASEServiceAsync tara(AsyncCallback<Void> callback);
+		public IASEServiceAsync getASEService();
 	}
 	
 	public WeightView(final Callback c) {
@@ -49,7 +48,7 @@ public class WeightView extends Composite {
 			@Override
 			public void onClick(ClickEvent event){
 				try {
-					c.getSWeight(new AsyncCallback<Double>(){
+					c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 						@Override
 						public void onFailure(Throwable caught) {
