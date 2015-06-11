@@ -21,6 +21,7 @@ public class Login extends Composite {
 	Label lblOne = new Label("User ID ");
 	Label lblTwo = new Label("Password ");
 	TextBox userID = new TextBox();
+
 	LayoutPanel lPanel = new LayoutPanel();
 	PasswordTextBox password = new PasswordTextBox();
 
@@ -81,4 +82,20 @@ public class Login extends Composite {
 	public String getPassW() {
 		return password.getText();
 	}
+	public TextBox getUserID() {
+		return userID;
+	}
+
+	public void setUserID(TextBox userID) {
+		this.userID = userID;
+	}
+
+	public PasswordTextBox getPassword() {
+		return password;
+	}
+
+	public void setPassword(PasswordTextBox password) {
+		this.password = password;
+	}
+	
 }

@@ -43,6 +43,14 @@ public class MainView extends Composite implements Login.Callback {
 		openLoginView();
 	}
 	
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
 	public void openEditView(int oprId) throws Exception {
 		content.clear();
 		content.add(new EditView(this, oprId));
