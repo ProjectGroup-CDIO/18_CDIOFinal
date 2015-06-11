@@ -1,5 +1,7 @@
 package opr.client.ui;
 
+import opr.client.service.IASEService;
+import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.client.ui.WeightView.Callback;
