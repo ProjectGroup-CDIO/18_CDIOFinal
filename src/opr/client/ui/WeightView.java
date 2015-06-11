@@ -2,6 +2,7 @@ package opr.client.ui;
 
 import opr.client.service.IASEServiceAsync;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -29,8 +30,7 @@ public class WeightView extends Composite {
 	public WeightView(final Callback c) {
 	
 		initWidget(this.vPanel);
-
-		
+		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
 		final TextArea weightDisplay = new TextArea();
 		weightDisplay.setPixelSize(290, 50);
@@ -39,6 +39,7 @@ public class WeightView extends Composite {
 		
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
+		
 		
 	
 		
