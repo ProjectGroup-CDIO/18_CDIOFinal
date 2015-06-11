@@ -14,6 +14,10 @@ public class CoinWeight extends Composite {
 	TextBox wText = new TextBox();
 	Label stkLabel = new Label("# of items");
 	TextBox stkText = new TextBox();
+	Button btnCoins = new Button("Coins");
+	Button btnBills = new Button("Bills");
+	Button btnFruit = new Button("Fruit");
+	Button btnCondiments = new Button("Condiments");
 	Button btn50 = new Button("50 øre");
 	Button btn1 = new Button("1 kr");
 	Button btn2 = new Button("2 kr");
@@ -36,13 +40,21 @@ public class CoinWeight extends Composite {
 		buttonPanel.add(btn5);
 		buttonPanel.add(btn10);
 		buttonPanel.add(btn20);
+	
 		
 		ft.setBorderWidth(5);
-		ft.setWidget(1, 0, wLabel);
-		ft.setWidget(2, 0, wText);
-		ft.setWidget(3, 0, stkLabel);
-		ft.setWidget(4, 0, stkText);
-		ft.setWidget(5, 0, buttonPanel);
+		ft.setWidget(1, 1, wLabel);
+		ft.setWidget(2, 1, wText);
+		ft.setWidget(3, 1, stkLabel);
+		ft.setWidget(4, 1, stkText);
+		ft.setWidget(1, 0, btnCoins);
+		ft.setWidget(2, 0, btnBills);
+		ft.setWidget(3, 0, btnFruit);
+		ft.setWidget(4, 0, btnCondiments);
+		
+		
+		
+		ft.setWidget(5, 1, buttonPanel);
 		
 		
 	}
