@@ -23,27 +23,11 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private int tara;
 	private int netto = (brutto - tara);
 	
-	public ASE() {
+	public ASE() throws UnknownHostException, IOException {
 		
 	}
 	
-//	public ASE() {
-//		try {
-//			new Connector();
-//		} catch (InstantiationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+
 	
 	@Override
 	public void connect() throws UnknownHostException, IOException {
@@ -80,7 +64,8 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	}
 
 	@Override
-	public void tara() {
+	public void tara() throws Exception {
+		getSWeight(); 
 		tara = brutto;	
 	}
 	

@@ -44,6 +44,7 @@ public class MenuView extends Composite {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				main.openLoginView();
 			}
 			

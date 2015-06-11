@@ -9,7 +9,7 @@ public interface IASE {
 	void connect() throws UnknownHostException, IOException;
 	double getSWeight() throws IOException;
 	double getSIWeight() throws IOException;
-	void tara();
+	void tara() throws Exception;
 	void start();
 	
 }

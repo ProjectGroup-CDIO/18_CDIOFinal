@@ -2,9 +2,9 @@ package opr.client.ui;
 
 import opr.client.service.IASEServiceAsync;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -52,7 +52,8 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							//Window.alert("Server fejl!" + caught.getMessage());
+						
+						Window.alert("An error occured: " + caught.getMessage());
 						}
 
 						@Override

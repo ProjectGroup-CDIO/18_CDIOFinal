@@ -60,7 +60,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	}
 	
 	public void openLoginView() {
-
+		aPanel.clear();
 		content.clear();
 		activeUser = null;
 		login.clear();
@@ -100,8 +100,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public void openWeightView() throws Exception{
 		content.clear();
 		WeightView weight = new WeightView(this);
-		openWeightView();
-	
+		content.add(weight);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/6,Window.getClientHeight()/4);
 
