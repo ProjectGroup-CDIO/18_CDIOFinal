@@ -63,6 +63,7 @@ public class MenuView extends Composite {
 		
 		});
 		
+
 		Button deltaBtn = new Button("Advanced weight", new ClickHandler(){
 			
 			@Override
@@ -74,6 +75,21 @@ public class MenuView extends Composite {
 				}
 			}
 		});
+		
+		Button testBtn2 = new Button("Coins", new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event) {
+			
+				try {
+					main.openCoinWeight();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		
+		});
+		
+		
 		Button testBtn3 = new Button("N/A");
 		
 		
