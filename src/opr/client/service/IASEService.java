@@ -14,5 +14,6 @@ public interface IASEService extends RemoteService{
 	double getSWeight() throws IOException;
 	double getSIWeight() throws IOException;
 	void tara();
+	void start() throws IOException, NumberFormatException;
 
 }
