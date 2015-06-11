@@ -98,6 +98,11 @@ public class MainView extends Composite implements Login.Callback {
 	public void loginFailiure() {
 		// TODO Auto-generated method stub	
 	}
-	
+
+	public void openWeightView() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
