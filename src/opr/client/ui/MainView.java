@@ -4,10 +4,12 @@ import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
+import opr.client.ui.WeightView.Callback;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -20,7 +22,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import static com.google.gwt.dom.client.Style.Unit.EM;
 
-public class MainView extends Composite implements Login.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -28,6 +30,7 @@ public class MainView extends Composite implements Login.Callback {
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
+	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
 	
@@ -99,10 +102,23 @@ public class MainView extends Composite implements Login.Callback {
 		// TODO Auto-generated method stub	
 	}
 
-	public void openWeightView() {
-		// TODO Auto-generated method stub
-		
+	public void openWeightView() throws Exception{
+		content.clear();
+		WeightView weight = new WeightView(this);
+		openWeightView();
+	
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/6,Window.getClientHeight()/4);
+
 	}
 
-	
+	@Override
+	public IASEServiceAsync getSWeight(AsyncCallback<Double> callback) {
+		return ASEservice;
+	}
+
+	@Override
+	public IASEServiceAsync tara(AsyncCallback<Void> callback) {
+		return ASEservice;
+	}
 }

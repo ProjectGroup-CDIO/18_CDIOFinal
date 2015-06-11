@@ -53,8 +53,13 @@ public class MenuView extends Composite {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				main.openWeightView();
+				try {
+					main.openWeightView();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+		
 		});
 		
 		Button testBtn2 = new Button("N/A");
