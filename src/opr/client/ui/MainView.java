@@ -19,6 +19,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
 	private Login login;
+	private CoinWeight coin;
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
@@ -59,8 +60,17 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.setWidgetPosition(content, 200, 200);
 	}
 	
+	public void openCoinWeight() throws Exception{
+		content.clear();
+		coin = new CoinWeight(this);
+		content.add(coin);
+		
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/2-115,Window.getClientHeight()/4);
+	}
+	
 	public void openLoginView() {
-		aPanel.clear();
+
 		content.clear();
 		activeUser = null;
 		login.clear();
@@ -100,7 +110,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public void openWeightView() throws Exception{
 		content.clear();
 		WeightView weight = new WeightView(this);
-		content.add(weight);
+		openWeightView();
+	
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/6,Window.getClientHeight()/4);
 
