@@ -1,18 +1,19 @@
 package opr.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
 
 import opr.server.impl.ASE;
+import opr.server.interfaces.IASE;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class Tester {
 	
-	ASE ase = new ASE();
+	IASE ase = new ASE();
 
 	@Before
 	public void setUp() {
@@ -29,9 +30,14 @@ public class Tester {
 	}
 
 	
+//	@Test
+//	public void testGetSWeight() throws IOException{
+//		assertEquals(0.000, ase.getSWeight(), 0.001);
+//	}
+	
 	@Test
-	public void testGetWeight() throws IOException{
-		assertEquals(0.000, ase.getSWeight(), 0.001);
+	public void testSIWeight() throws IOException {
+		assertEquals(0.000, ase.getSIWeight(), 6.000);
 	}
 
 }
