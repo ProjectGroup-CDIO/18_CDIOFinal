@@ -4,17 +4,15 @@ import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
-import opr.client.ui.WeightView.Callback;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback, WeightView.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -57,7 +55,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		content.add(add);
 		
 		aPanel.add(content);
-		aPanel.setWidgetPosition(content, 200, 200);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 	
 	public void openCoinWeight() throws Exception{
@@ -110,15 +108,23 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public void openWeightView() throws Exception{
 		content.clear();
 		WeightView weight = new WeightView(this);
-		openWeightView();
-	
+		content.add(weight);
 		aPanel.add(content);
-		aPanel.setWidgetPosition(content,Window.getClientWidth()/6,Window.getClientHeight()/4);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 
 	}
 
 	public IASEServiceAsync getASEService() {
 		return ASEservice;
+	}
+
+	public void openDeltaWeightView() {
+		content.clear();
+		DeltaWeightView dWView = new DeltaWeightView(this);
+		content.add(dWView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+		
 	}
 
 	
