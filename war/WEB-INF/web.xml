@@ -15,6 +15,15 @@
     <url-pattern>/_8_cdiofinal/loginservice</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+      <servlet-name>aseServlet</servlet-name>
+    <servlet-class>opr.server.impl.ASE</servlet-class>
+  </servlet> 
+  <servlet-mapping>
+    <servlet-name>aseServlet</servlet-name>
+    <url-pattern>/_8_cdiofinal/aseservice</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>_8_CDIOFinal.html</welcome-file>
