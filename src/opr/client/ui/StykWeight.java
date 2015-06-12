@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class CoinWeight extends Composite {
+public class StykWeight extends Composite {
 	private FlexTable ft = new FlexTable();
 	Label wLabel = new Label("Weight");
 	TextBox wText = new TextBox();
@@ -41,7 +41,7 @@ public class CoinWeight extends Composite {
 	Button btnSalt = new Button("Salt");
 	Button btnChemicalX = new Button("Chemical X");	
 	
-	public CoinWeight(final MainView mainView){
+	public StykWeight(final MainView mainView){
 		this.initWidget(ft);
 		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
 		

@@ -63,12 +63,12 @@ public class MenuView extends Composite {
 		
 		});
 		
-		Button testBtn2 = new Button("Coins", new ClickHandler(){
+		Button testBtn2 = new Button("Unit Weight", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
 			
 				try {
-					main.openCoinWeight();
+					main.openStykWeight();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
