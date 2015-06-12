@@ -146,7 +146,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	//method for opening DeltaWeightView when ADVANCED-button is pressed
 	//---------------------------------------------------------------------------
 
-	public void openDeltaWeightView() {
+	public void openDeltaWeightView() throws Exception {
 		content.clear();
 		DeltaWeightView dWView = new DeltaWeightView(this);
 		content.add(dWView);
