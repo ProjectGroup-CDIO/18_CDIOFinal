@@ -35,6 +35,7 @@ public class DeltaWeightView extends Composite{
 	public DeltaWeightView(final Callback c) {
 		initWidget(vPanel);
 		
+		viewInfo.addStyleName("deltaWeight");
 		vPanel.add(hPanel1);
 		hPanel1.add(viewInfo);
 		
