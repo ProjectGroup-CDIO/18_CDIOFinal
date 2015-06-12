@@ -76,7 +76,16 @@ public class MenuView extends Composite {
 		
 		});
 		
-		Button deltaWBtn = new Button("ADVANCED");
+		Button deltaWBtn = new Button("ADVANCED", new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent even){
+				try{
+					main.openDeltaWeightView();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		
 		
