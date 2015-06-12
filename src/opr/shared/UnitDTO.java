@@ -9,6 +9,7 @@ public class UnitDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 2846969203314216759L;
 	
+	private double value;
 	private double weightPerUnit;
 	private double tolerance;
 	

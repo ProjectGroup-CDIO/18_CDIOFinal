@@ -1,8 +1,12 @@
 package opr.server.impl;
 
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import opr.client.service.IDBService;
 import opr.server.Connector;
 import opr.server.interfaces.IUnitDAO;
 import opr.shared.DALException;
@@ -10,7 +14,7 @@ import opr.shared.UnitDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class UnitDAO extends RemoteServiceServlet implements IUnitDAO {
+public class UnitDAO extends RemoteServiceServlet implements IUnitDAO, IDBService {
 
 	/**
 	 * 
@@ -39,4 +43,15 @@ public class UnitDAO extends RemoteServiceServlet implements IUnitDAO {
 		}
 		catch (SQLException e) {throw new DALException(e.getMessage()); }	
 	}
+
+	public List<String> getTables() throws SQLException {
+		List<String> list = new ArrayList<String>();
+		DatabaseMetaData md = Connector.getConnection().getMetaData();
+		ResultSet rs = md.getTables(null, null, "%", null);
+		while (rs.next()) {
+			list.add(rs.getString(3));
+		}
+		return list;  
+	}
 }
+

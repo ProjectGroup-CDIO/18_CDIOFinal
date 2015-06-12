@@ -22,6 +22,15 @@
 		<servlet-name>aseServlet</servlet-name>
 		<url-pattern>/_8_cdiofinal/aseservice</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>dbServlet</servlet-name>
+		<servlet-class>opr.server.impl.UnitDAO</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dbServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/dbservice</url-pattern>
+	</servlet-mapping>
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
