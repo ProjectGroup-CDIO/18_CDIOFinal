@@ -8,15 +8,10 @@ import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
 
 import com.google.gwt.cell.client.DateCell;
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagingPolicy;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -27,8 +22,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
-	private FlexTable ft = new FlexTable();
-	private Label viewInfo = new Label("Delta Weight");
+
+	FlexTable ft = new FlexTable();
+	private Label viewInfo = new Label("Delta-weight");
 
 	private Label prdName = new Label("Product Name");
 	private Label prdNr = new Label("Product ID");
