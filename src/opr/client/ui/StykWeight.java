@@ -5,13 +5,15 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class StykWeight extends Composite {
 	private FlexTable ft = new FlexTable();
+	private Label unitLabel = new Label("Unit-weight");
+	private VerticalPanel vPanel = new VerticalPanel();
 	Label wLabel = new Label("Weight");
 	TextBox wText = new TextBox();
 	Label stkLabel = new Label("# of items");
@@ -42,7 +44,11 @@ public class StykWeight extends Composite {
 	Button btnChemicalX = new Button("Chemical X");	
 	
 	public StykWeight(final MainView mainView){
-		this.initWidget(ft);
+		this.initWidget(vPanel);
+		 unitLabel.addStyleName("unitLabel");
+		 vPanel.add(unitLabel);
+		 vPanel.add(ft);
+		
 		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
 		
 		wText.setEnabled(false);

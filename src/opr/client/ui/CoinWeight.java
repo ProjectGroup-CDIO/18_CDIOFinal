@@ -6,12 +6,22 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class CoinWeight extends Composite {
+	
 	private FlexTable ft = new FlexTable();
+	private VerticalPanel vPanel = new VerticalPanel();
+	private Label coinLabel = new Label("Coin-weight");
 	
 	public CoinWeight(final MainView mainView){
-		this.initWidget(ft);
+		
+		this.initWidget(vPanel);
+		coinLabel.addStyleName("coinLabel");
+		vPanel.add(coinLabel);
+		vPanel.add(ft);
+		
+		
 		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
 		
 		Label wLabel = new Label("Weight");
@@ -43,10 +53,5 @@ public class CoinWeight extends Composite {
 		ft.setWidget(3, 0, stkLabel);
 		ft.setWidget(4, 0, stkText);
 		ft.setWidget(5, 0, buttonPanel);
-		
-		
 	}
-
-	
-
 }

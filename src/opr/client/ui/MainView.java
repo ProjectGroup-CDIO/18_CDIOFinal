@@ -75,9 +75,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		content.clear();
 		coin = new StykWeight(this);
 		content.add(coin);
-		
 		aPanel.add(content);
-		aPanel.setWidgetPosition(content,Window.getClientWidth()/2-115,Window.getClientHeight()/4);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 	
 	//-------------------------------------------------------------------------

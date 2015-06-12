@@ -16,7 +16,7 @@ public class DeltaWeightView extends Composite{
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
 	private HorizontalPanel hPanel3 = new HorizontalPanel();
 	FlexTable ft = new FlexTable();
-	private Label viewInfo = new Label("Delta Weight");
+	private Label viewInfo = new Label("Delta-weight");
 	
 	private Label prdName = new Label("Product Name");
 	private Label prdNr = new Label("Product ID");
