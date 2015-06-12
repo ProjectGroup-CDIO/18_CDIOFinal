@@ -54,15 +54,7 @@ public class CoinWeight extends Composite {
 		
 		
 		
-		ft.setWidget(5, 1, buttonPanel);
-		
-		ft.setBorderWidth(5);
-		ft.setWidget(0, 1, wLabel);
-		ft.setWidget(0, 2, wText);
-		ft.setWidget(0, 3, stkLabel);
-		ft.setWidget(0, 4, stkText);
-		ft.setWidget(0, 5, buttonPanel);
-		
+		ft.setWidget(5, 1, buttonPanel);		
 		
 	}
 
