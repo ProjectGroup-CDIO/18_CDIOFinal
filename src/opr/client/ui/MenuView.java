@@ -15,6 +15,10 @@ public class MenuView extends Composite {
 		initWidget(this.vPanel);
 		this.vPanel.setBorderWidth(1);
 	
+		//-----------------------------------------------------
+		//add-button, opens AddView when pressed
+		//-----------------------------------------------------
+		
 		Button addBtn = new Button("ADD", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
@@ -28,6 +32,10 @@ public class MenuView extends Composite {
 		
 		});
 
+		//-----------------------------------------------------
+		//list-button, opens ListView when pressed
+		//-----------------------------------------------------
+		
 		Button listBtn = new Button("LIST", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
@@ -40,15 +48,20 @@ public class MenuView extends Composite {
 		
 		});
 		
+		//-----------------------------------------------------
+		//logout-button, reopens LoginView when pressed
+		//-----------------------------------------------------
+		
 		Button logoutBtn = new Button("LOGOUT", new ClickHandler() {
-
 			@Override
 			public void onClick(ClickEvent event) {
-				
 				main.openLoginView();
 			}
-			
 		});
+		
+		//-----------------------------------------------------
+		//weight-button, opens WeightView when pressed
+		//-----------------------------------------------------
 		
 		Button weightBtn = new Button("WEIGHT", new ClickHandler(){
 			
@@ -63,6 +76,10 @@ public class MenuView extends Composite {
 		
 		});
 		
+		//-----------------------------------------------------
+		//unit-weight-button, opens StykWeight when pressed
+		//-----------------------------------------------------
+		
 		Button unitWBtn = new Button("UNIT", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
@@ -76,6 +93,10 @@ public class MenuView extends Composite {
 		
 		});
 		
+		//-----------------------------------------------------
+		//delta-weight-button, opens DeltaWeightView when pressed
+		//-----------------------------------------------------
+		
 		Button deltaWBtn = new Button("ADVANCED", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent even){
@@ -88,7 +109,9 @@ public class MenuView extends Composite {
 		});
 		
 		
-		
+		//-----------------------------------------------------
+		//adding buttons to vertical panel, setting pixel size
+		//-----------------------------------------------------
 		
 		weightBtn.setPixelSize( 100, 30);
 		unitWBtn.setPixelSize( 100, 30);
