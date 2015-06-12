@@ -16,6 +16,11 @@ import opr.server.interfaces.IASE;
 
 public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runnable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3486195199860414450L;
+	
 	private Socket sock;
 	private BufferedReader in;
 	private DataOutputStream out;
@@ -23,7 +28,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private int tara;
 	private int netto = (brutto - tara);
 	
-	public ASE() throws UnknownHostException, IOException {
+	public ASE() {
 		
 	}
 	
