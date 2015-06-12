@@ -14,28 +14,27 @@ public class MenuView extends Composite {
 	public MenuView(final MainView main){
 		initWidget(this.vPanel);
 		this.vPanel.setBorderWidth(1);
-	
+
 		//-----------------------------------------------------
 		//add-button, opens AddView when pressed
 		//-----------------------------------------------------
-		
+
 		Button addBtn = new Button("ADD", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
-			
+
 				try {
 					main.openAddView();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		
 		});
 
 		//-----------------------------------------------------
 		//list-button, opens ListView when pressed
 		//-----------------------------------------------------
-		
+
 		Button listBtn = new Button("LIST", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
@@ -45,26 +44,25 @@ public class MenuView extends Composite {
 					e.printStackTrace();
 				}
 			}
-		
 		});
-		
+
 		//-----------------------------------------------------
 		//logout-button, reopens LoginView when pressed
 		//-----------------------------------------------------
-		
+
 		Button logoutBtn = new Button("LOGOUT", new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				main.openLoginView();
 			}
 		});
-		
+
 		//-----------------------------------------------------
 		//weight-button, opens WeightView when pressed
 		//-----------------------------------------------------
-		
+
 		Button weightBtn = new Button("WEIGHT", new ClickHandler(){
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				try {
@@ -73,30 +71,28 @@ public class MenuView extends Composite {
 					e.printStackTrace();
 				}
 			}
-		
 		});
-		
+
 		//-----------------------------------------------------
 		//unit-weight-button, opens StykWeight when pressed
 		//-----------------------------------------------------
-		
+
 		Button unitWBtn = new Button("UNIT", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
-			
+
 				try {
 					main.openStykWeight();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		
 		});
-		
+
 		//-----------------------------------------------------
 		//delta-weight-button, opens DeltaWeightView when pressed
 		//-----------------------------------------------------
-		
+
 		Button deltaWBtn = new Button("ADVANCED", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent even){
@@ -107,12 +103,11 @@ public class MenuView extends Composite {
 				}
 			}
 		});
-		
+
 		//-----------------------------------------------------
 		//coin-weight-button, opens CoinWeight when pressed
 		//-----------------------------------------------------
-		
-		
+
 		Button coinBtn = new Button("COIN", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event){
@@ -123,11 +118,11 @@ public class MenuView extends Composite {
 				}
 			}
 		});
-		
+
 		//-----------------------------------------------------
 		//adding buttons to vertical panel, setting pixel size
 		//-----------------------------------------------------
-		
+
 		weightBtn.setPixelSize( 100, 30);
 		unitWBtn.setPixelSize( 100, 30);
 		deltaWBtn.setPixelSize( 100, 30);
@@ -135,8 +130,7 @@ public class MenuView extends Composite {
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
-		
-		
+
 		vPanel.add(weightBtn);
 		vPanel.add(unitWBtn);
 		vPanel.add(deltaWBtn);
@@ -144,10 +138,6 @@ public class MenuView extends Composite {
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
 		vPanel.add(logoutBtn);
-		
-		
-		
-		
 	}
 }
 
