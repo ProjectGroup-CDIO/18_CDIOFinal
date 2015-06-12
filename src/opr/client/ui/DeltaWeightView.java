@@ -1,7 +1,6 @@
 package opr.client.ui;
 
 import opr.client.service.IASEServiceAsync;
-import opr.client.ui.WeightView.Callback;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
