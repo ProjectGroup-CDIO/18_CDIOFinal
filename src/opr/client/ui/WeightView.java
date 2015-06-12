@@ -22,13 +22,13 @@ public class WeightView extends Composite {
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
 	private Label weightLabel = new Label("Netto");
 	private TextBox weightTxtBox = new TextBox(); 
-	
+
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 	}
-	
+
 	public WeightView(final Callback c) {
-	
+
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
@@ -36,15 +36,15 @@ public class WeightView extends Composite {
 		weightDisplay.setPixelSize(290, 50);
 		weightDisplay.setEnabled(false);
 		vPanel.add(weightDisplay);
-		
+
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
-		
-		
-	
-		
+
+
+
+
 		//Weight-button, get
-		
+
 		Button getWeightButton = new Button("Get weight", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event){
@@ -53,29 +53,57 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-						
-						Window.alert("An error occured: " + caught.getMessage());
+
+							Window.alert("An error occured: " + caught.getMessage());
 						}
 
 						@Override
 						public void onSuccess(Double result) {
 							weightDisplay.setText("" + result);
 						}
+					});
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		});
+
+		hPanel1.add(getWeightButton);
+		getWeightButton.setPixelSize( 100, 30);
+
+
+		//Weight-button, save
+
+		Button saveWeightButton = new Button("Save");
+		hPanel1.add(saveWeightButton);
+		saveWeightButton.setPixelSize(100, 30);
+
+		
+		//Weight-button, tara
+		
+		Button taraWeightButton = new Button("Tara", new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event){
+				try {
+					//Ved ikke helt hvordan tara fungerer
+					c.getASEService().tara(new AsyncCallback<Callback>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("An error occured: " + caught.getMessage());
+						}
+						@Override
+						public void onSuccess(Callback result) {
+							// Dunno
+
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		
-		hPanel1.add(getWeightButton);
-		getWeightButton.setPixelSize( 100, 30);
-		
-		Button saveWeightButton = new Button("Save");
-		hPanel1.add(saveWeightButton);
-		saveWeightButton.setPixelSize(100, 30);
-		
-		Button taraWeightButton = new Button("Tara");
 		hPanel1.add(taraWeightButton);
 		taraWeightButton.setPixelSize(100, 30);
 	}
