@@ -68,7 +68,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	}
 	
 	public void openLoginView() {
-
+		aPanel.clear();
 		content.clear();
 		activeUser = null;
 		login.clear();
