@@ -156,5 +156,16 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		
 	}
 
+	//---------------------------------------------------------------------------
+	//method for opening CoinWeight when COIN-button is pressed
+	//---------------------------------------------------------------------------
+
+	public void openCoinWeight() {
+		content.clear();
+		CoinWeight CWView = new CoinWeight(this);
+		content.add(CWView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+	}
 	
 }
