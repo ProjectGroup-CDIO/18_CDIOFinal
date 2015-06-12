@@ -50,7 +50,7 @@ public class MenuView extends Composite {
 			
 		});
 		
-		Button testBtn1 = new Button("WEIGHT", new ClickHandler(){
+		Button weightBtn = new Button("WEIGHT", new ClickHandler(){
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -63,7 +63,7 @@ public class MenuView extends Composite {
 		
 		});
 		
-		Button testBtn2 = new Button("Unit Weight", new ClickHandler(){
+		Button unitWBtn = new Button("UNIT", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
 			
@@ -75,22 +75,23 @@ public class MenuView extends Composite {
 			}
 		
 		});
-		Button testBtn3 = new Button("N/A");
+		
+		Button deltaWBtn = new Button("ADVANCED");
 		
 		
 		
 		
-		testBtn1.setPixelSize( 100, 30);
-		testBtn2.setPixelSize( 100, 30);
-		testBtn3.setPixelSize( 100, 30);
+		weightBtn.setPixelSize( 100, 30);
+		unitWBtn.setPixelSize( 100, 30);
+		deltaWBtn.setPixelSize( 100, 30);
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
 		
 		
-		vPanel.add(testBtn1);
-		vPanel.add(testBtn2);
-		vPanel.add(testBtn3);
+		vPanel.add(weightBtn);
+		vPanel.add(unitWBtn);
+		vPanel.add(deltaWBtn);
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
 		vPanel.add(logoutBtn);
