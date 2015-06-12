@@ -9,6 +9,6 @@ public interface IASEServiceAsync {
 	void getSWeight(AsyncCallback<Double> callback);
 	void getSIWeight(AsyncCallback<Double> callback);
 	void tara(AsyncCallback<Void> callback);
-	void start(AsyncCallback<Void> callback);
+	void run(AsyncCallback<Void> callback);
 
 }

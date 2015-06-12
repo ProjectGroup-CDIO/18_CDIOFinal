@@ -1,5 +1,7 @@
 package opr.client.ui;
 
+import opr.client.service.IASEService;
+import opr.client.service.IASEServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
@@ -10,18 +12,18 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
 	private Login login;
+	private CoinWeight coin;
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
+	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
-	
-	//private final IASEServiceAsync ase = GWT.create(IASEService.class);
 
 	
 	public MainView() throws Exception {
@@ -33,6 +35,14 @@ public class MainView extends Composite implements Login.Callback {
 		openLoginView();
 	}
 	
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
 	public void openEditView(int oprId) throws Exception {
 		content.clear();
 		content.add(new EditView(this, oprId));
@@ -45,7 +55,16 @@ public class MainView extends Composite implements Login.Callback {
 		content.add(add);
 		
 		aPanel.add(content);
-		aPanel.setWidgetPosition(content, 200, 200);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+	}
+	
+	public void openCoinWeight() throws Exception{
+		content.clear();
+		coin = new CoinWeight(this);
+		content.add(coin);
+		
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/2-115,Window.getClientHeight()/4);
 	}
 	
 	public void openLoginView() {
@@ -70,10 +89,7 @@ public class MainView extends Composite implements Login.Callback {
 		return service;
 	}
 	
-/*	public IASEServiceAsync getAse() {
-		return ase;
-	}*/
-
+	
 	@Override
 	public void loginSucces(OperatoerDTO activeUser) {
 
@@ -89,8 +105,25 @@ public class MainView extends Composite implements Login.Callback {
 		// TODO Auto-generated method stub	
 	}
 
-	public void openWeightView() {
-		// TODO Auto-generated method stub
+	public void openWeightView() throws Exception{
+		content.clear();
+		WeightView weight = new WeightView(this);
+		content.add(weight);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+
+	}
+
+	public IASEServiceAsync getASEService() {
+		return ASEservice;
+	}
+
+	public void openDeltaWeightView() {
+		content.clear();
+		DeltaWeightView dWView = new DeltaWeightView(this);
+		content.add(dWView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 		
 	}
 

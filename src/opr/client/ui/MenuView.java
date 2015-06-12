@@ -44,35 +44,67 @@ public class MenuView extends Composite {
 
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				main.openLoginView();
 			}
 			
 		});
 		
-		Button testBtn1 = new Button("WEIGHT", new ClickHandler(){
+		Button weightBtn1 = new Button("WEIGHT", new ClickHandler(){
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				main.openWeightView();
+				try {
+					main.openWeightView();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		
+		});
+		
+
+		Button deltaBtn = new Button("Advanced weight", new ClickHandler(){
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				try {
+					main.openDeltaWeightView();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		
-		Button testBtn2 = new Button("N/A");
+		Button testBtn2 = new Button("Coins", new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event) {
+			
+				try {
+					main.openCoinWeight();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		
+		});
+		
+		
 		Button testBtn3 = new Button("N/A");
 		
 		
 		
 		
-		testBtn1.setPixelSize( 100, 30);
-		testBtn2.setPixelSize( 100, 30);
+		weightBtn1.setPixelSize( 100, 30);
+		deltaBtn.setPixelSize( 100, 30);
 		testBtn3.setPixelSize( 100, 30);
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
 		
 		
-		vPanel.add(testBtn1);
-		vPanel.add(testBtn2);
+		vPanel.add(weightBtn1);
+		vPanel.add(deltaBtn);
 		vPanel.add(testBtn3);
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
