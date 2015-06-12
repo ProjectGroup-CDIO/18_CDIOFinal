@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import opr.client.service.IDBService;
 import opr.server.Connector;
 import opr.server.interfaces.IUnitDAO;
 import opr.shared.DALException;
@@ -13,7 +14,7 @@ import opr.shared.UnitDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class UnitDAO extends RemoteServiceServlet implements IUnitDAO {
+public class UnitDAO extends RemoteServiceServlet implements IUnitDAO, IDBService {
 
 	/**
 	 * 
