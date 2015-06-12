@@ -10,5 +10,6 @@ public interface IASEServiceAsync {
 	void getSIWeight(AsyncCallback<Double> callback);
 	void tara(AsyncCallback<Void> callback);
 	void run(AsyncCallback<Void> callback);
+	void changeSocket(String Ip, int port, AsyncCallback<Void> callback);
 
 }

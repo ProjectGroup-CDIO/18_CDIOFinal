@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback, ConnectionView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -163,6 +163,17 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		content.clear();
 		CoinWeight CWView = new CoinWeight(this);
 		content.add(CWView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+	}
+	//---------------------------------------------------------------------------
+		//method for opening ConnectionView when connection-button is pressed
+		//---------------------------------------------------------------------------
+	
+	public void openConnetion() throws Exception{
+		content.clear();
+		ConnectionView ContView = new ConnectionView(this);
+		content.add(ContView);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
