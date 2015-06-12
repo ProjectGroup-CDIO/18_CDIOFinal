@@ -86,14 +86,14 @@ public class WeightView extends Composite {
 			public void onClick(ClickEvent event){
 				try {
 					//Ved ikke helt hvordan tara fungerer
-					c.getASEService().tara(new AsyncCallback<Callback>(){
+					c.getASEService().tara(new AsyncCallback<Void>(){
 
 						@Override
 						public void onFailure(Throwable caught) {
 							Window.alert("An error occured: " + caught.getMessage());
 						}
 						@Override
-						public void onSuccess(Callback result) {
+						public void onSuccess(Void result) {
 							// Dunno
 
 						}
