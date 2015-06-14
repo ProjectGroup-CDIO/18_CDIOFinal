@@ -1,8 +1,13 @@
 package opr.server.impl;
 
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import opr.client.service.IMetaService;
+import opr.server.Connector;
 import opr.server.interfaces.IMetaDAO;
 import opr.shared.DALException;
 
@@ -17,8 +22,15 @@ public class MetaDAO extends RemoteServiceServlet implements IMetaDAO, IMetaServ
 
 	@Override
 	public List<String> getTables() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> list = new ArrayList<String>();
+		try{
+			DatabaseMetaData md = Connector.getConnection().getMetaData();
+			ResultSet rs = md.getTables(null, null, "%", null);
+			while (rs.next()) {
+				list.add(rs.getString(3));
+			}
+		}catch(SQLException e) {throw new DALException(e.getMessage()); }
+		return list;
 	}
 
 }
