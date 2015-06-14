@@ -2,6 +2,8 @@ package opr.client.ui;
 
 import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.ICoinService;
+import opr.client.service.ICoinServiceAsync;
 import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerService;
@@ -25,7 +27,9 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 	private final IMetaServiceAsync Metaservice = GWT.create(IMetaService.class);
+	private final ICoinServiceAsync CoinService = GWT.create(ICoinService.class);
 
+	
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
 
@@ -107,10 +111,6 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 	
-	@Override
-	public IOperatoerServiceAsync getService() {
-		return service;
-	}
 	
 	//-------------------------------------------------------------------------
 	//method for opening MenuView if login is successful
@@ -143,9 +143,6 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 
 	}
 
-	public IASEServiceAsync getASEService() {
-		return ASEservice;
-	}
 
 	//---------------------------------------------------------------------------
 	//method for opening DeltaWeightView when ADVANCED-button is pressed
@@ -187,16 +184,26 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	//---------------------------------------------------------------------------
 	//method for getting the dataBase service
 	//---------------------------------------------------------------------------
+	@Override
+	public IOperatoerServiceAsync getService() {
+		return service;
+	}
 
+	
 	@Override
 	public IMetaServiceAsync getMetaService() {
 		// TODO Auto-generated method stub
 		return Metaservice;
 	}
 
-		//method for opening ConnectionView when connection-button is pressed
-		//---------------------------------------------------------------------------
+	public ICoinServiceAsync getCoinService() {
+		return CoinService;
+	}
 	
+	public IASEServiceAsync getASEService() {
+		return ASEservice;
+	}
+
 	public void openConnetion() throws Exception{
 		content.clear();
 		ConnectionView ContView = new ConnectionView(this);
