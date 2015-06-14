@@ -44,14 +44,17 @@ public class UnitDAO extends RemoteServiceServlet implements IUnitDAO, IDBServic
 		catch (SQLException e) {throw new DALException(e.getMessage()); }	
 	}
 
-	public List<String> getTables() throws SQLException {
+	public List<String> getTables() throws DALException {
 		List<String> list = new ArrayList<String>();
-		DatabaseMetaData md = Connector.getConnection().getMetaData();
-		ResultSet rs = md.getTables(null, null, "%", null);
-		while (rs.next()) {
-			list.add(rs.getString(3));
-		}
+		try{
+			DatabaseMetaData md = Connector.getConnection().getMetaData();
+			ResultSet rs = md.getTables(null, null, "%", null);
+			while (rs.next()) {
+				list.add(rs.getString(3));
+			}
+		}catch(SQLException e) {throw new DALException(e.getMessage()); }
 		return list;  
 	}
+
 }
 

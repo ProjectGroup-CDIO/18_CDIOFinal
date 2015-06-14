@@ -1,6 +1,5 @@
 package opr.client.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import opr.shared.DALException;
@@ -13,6 +12,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface IDBService extends RemoteService {
 	
 	UnitDTO getCoin(double value) throws DALException;
-	List<String> getTables() throws DALException, SQLException;
+	List<String> getTables() throws DALException;
 
 }

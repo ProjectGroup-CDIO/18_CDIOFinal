@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.IDBServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
 import opr.shared.UnitDTO;
@@ -41,13 +42,14 @@ public class DeltaWeightView extends Composite{
 	private TextBox weightData = new TextBox();
 
 
-	private List<OperatoerDTO> tableList;
+	private List<String> tableList;
 
 
 
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
+		public IDBServiceAsync getDBSerive();
 	}
 
 	public DeltaWeightView(final Callback c) throws Exception {
@@ -71,59 +73,53 @@ public class DeltaWeightView extends Composite{
 		/**
 		 * The list of data to display.
 		 */
-		
-		c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>() {
+		c.getDBSerive().getTables(new AsyncCallback<List<String>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Failed to access databse: "+caught.getMessage());
-			}
-
-			@Override
-			public void onSuccess(List<OperatoerDTO> result) {
-				tableList = result;
 				
 			}
-		
-	});
 
-		// Create a CellTable.
-		CellTable<OperatoerDTO> table = new CellTable<OperatoerDTO>();
-		table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-
-		// Add a text column to show the name.
-		TextColumn<OperatoerDTO> nameColumn = new TextColumn<OperatoerDTO>() {
 			@Override
-			public String getValue(OperatoerDTO object) {
-				return ""+object.getOprId();
+			public void onSuccess(List<String> result) {
+				tableList = result;
+				// Create a CellTable.
+				CellTable<String> table = new CellTable<String>();
+				table.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+				// Add a text column to show the name.
+				TextColumn<String> nameColumn = new TextColumn<String>() {
+					@Override
+					public String getValue(String object) {
+						return object;
+					}
+				};
+				table.addColumn(nameColumn, "Table name");
+
+
+				// Add a text column to show the address.
+//				    TextColumn<Contact> addressColumn = new TextColumn<Contact>() {
+//				      @Override
+//				      public String getValue(Contact object) {
+//				        return object.address;
+//				      }
+//				    };
+//				    table.addColumn(addressColumn, "Address");
+//				 
+
+
+				// Set the total row count. This isn't strictly necessary, but it affects
+				// paging calculations, so its good habit to keep the row count up to date.
+				table.setRowCount(tableList.size(), true);
+				// Push the data into the widget.
+				table.setRowData(0, tableList);
+				table.redraw();
+				ft.setWidget(3, 3, table);
+				
 			}
-		};
-		table.addColumn(nameColumn, "Table name");
-
-
-
-		// Add a text column to show the address.
-//		    TextColumn<Contact> addressColumn = new TextColumn<Contact>() {
-//		      @Override
-//		      public String getValue(Contact object) {
-//		        return object.address;
-//		      }
-//		    };
-//		    table.addColumn(addressColumn, "Address");
-//		 
-
-
-		// Set the total row count. This isn't strictly necessary, but it affects
-		// paging calculations, so its good habit to keep the row count up to date.
-		table.setRowCount(tableList.size(), true);
-
-		// Push the data into the widget.
-		table.setRowData(0, tableList);
-		table.redraw();
-		
-
-		// Add it to the root panel
-		//ft.setWidget(3, 3, table);
+			
+		});
+	
 
 
 

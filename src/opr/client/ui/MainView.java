@@ -2,6 +2,8 @@ package opr.client.ui;
 
 import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.IDBService;
+import opr.client.service.IDBServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
@@ -22,6 +24,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
+	private final IDBServiceAsync DBservice = GWT.create(IDBService.class);
+
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
 
@@ -166,5 +170,13 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
-	
+	//---------------------------------------------------------------------------
+	//method for getting the dataBase service
+	//---------------------------------------------------------------------------
+
+	@Override
+	public IDBServiceAsync getDBSerive() {
+		// TODO Auto-generated method stub
+		return DBservice;
+	}
 }
