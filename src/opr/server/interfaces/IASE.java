@@ -10,6 +10,6 @@ public interface IASE {
 	double getSWeight() throws IOException;
 	double getSIWeight() throws IOException;
 	void tara() throws Exception;
-	void start();
+	void run();
 	
 }

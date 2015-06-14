@@ -3,7 +3,8 @@ package opr.client.ui;
 import java.util.List;
 
 import opr.client.service.IASEServiceAsync;
-import opr.client.service.IDBServiceAsync;
+import opr.client.service.IMetaService;
+import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
 
@@ -45,7 +46,7 @@ public class DeltaWeightView extends Composite{
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
-		public IDBServiceAsync getDBSerive();
+		public IMetaServiceAsync getMetaService();
 	}
 
 	public DeltaWeightView(final Callback c) throws Exception {
@@ -69,7 +70,8 @@ public class DeltaWeightView extends Composite{
 		/**
 		 * The list of data to display.
 		 */
-		c.getDBSerive().getTables(new AsyncCallback<List<String>>(){
+		
+		c.getMetaService().getTables(new AsyncCallback<List<String>>(){
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Failed to access databse: "+caught.getMessage());

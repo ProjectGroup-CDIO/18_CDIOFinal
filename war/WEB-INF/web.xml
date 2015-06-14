@@ -24,14 +24,22 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>dbServlet</servlet-name>
-		<servlet-class>opr.server.impl.UnitDAO</servlet-class>
+		<servlet-name>metaServlet</servlet-name>
+		<servlet-class>opr.server.impl.MetaDAO</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>dbServlet</servlet-name>
-		<url-pattern>/_8_cdiofinal/dbservice</url-pattern>
+		<servlet-name>metaServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/metaservice</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>coinServlet</servlet-name>
+		<servlet-class>opr.server.impl.CoinDAO</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>coinServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/coinservice</url-pattern>
+	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>_8_CDIOFinal.html</welcome-file>
