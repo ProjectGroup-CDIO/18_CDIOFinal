@@ -119,6 +119,22 @@ public class MenuView extends Composite {
 				}
 			}
 		});
+		
+		//-----------------------------------------------------
+		//connectionView-button, opens Connection when pressed
+		//-----------------------------------------------------
+		
+		Button connectionBtn = new Button("Connection", new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				try {
+					main.openConnetion();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}	
+		});
 
 		//-----------------------------------------------------
 		//adding buttons to vertical panel, setting pixel size
@@ -131,6 +147,7 @@ public class MenuView extends Composite {
 
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
+		connectionBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
 
 		vPanel.add(weightBtn);
@@ -139,6 +156,7 @@ public class MenuView extends Composite {
 		vPanel.add(coinBtn);
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
+		vPanel.add(connectionBtn);
 		vPanel.add(logoutBtn);
 	}
 }

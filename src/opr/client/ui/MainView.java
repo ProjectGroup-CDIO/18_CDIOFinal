@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback, ConnectionView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -171,6 +171,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 	//---------------------------------------------------------------------------
+
 	//method for getting the dataBase service
 	//---------------------------------------------------------------------------
 
@@ -179,4 +180,16 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		// TODO Auto-generated method stub
 		return DBservice;
 	}
+
+		//method for opening ConnectionView when connection-button is pressed
+		//---------------------------------------------------------------------------
+	
+	public void openConnetion() throws Exception{
+		content.clear();
+		ConnectionView ContView = new ConnectionView(this);
+		content.add(ContView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+	}
+
 }
