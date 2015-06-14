@@ -3,9 +3,11 @@ package opr.client.ui;
 import java.util.List;
 
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.ICoinServiceAsync;
 import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
+import opr.shared.CoinDTO;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.cellview.client.CellTable;
@@ -40,6 +42,7 @@ public class DeltaWeightView extends Composite{
 
 	private List<String> tableList;
 	private List<OperatoerDTO> oprList;
+	private List<CoinDTO> coinList;
 
 
 
@@ -47,6 +50,7 @@ public class DeltaWeightView extends Composite{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
 		public IMetaServiceAsync getMetaService();
+		public ICoinServiceAsync getCoinService();
 	}
 
 	public DeltaWeightView(final Callback c) throws Exception {
@@ -123,26 +127,96 @@ public class DeltaWeightView extends Composite{
 
 						}
 					}
-
-
-
-
 				});
 
-
-
 			}
-
 		});
-
-
-
-
 	}
 
 
 	private void coinCellView(Callback c) {
-		// TODO Auto-generated method stub
+		try {
+			c.getCoinService().getCoinList(new AsyncCallback<List<CoinDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access databse: "+caught.getMessage());
+
+				}
+
+				public void onSuccess(List<CoinDTO> result) {
+					coinList = result;
+
+					CellTable<CoinDTO> coinTable = new CellTable<CoinDTO>();
+					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					// Add a text column to show the name.
+					TextColumn<CoinDTO> valueColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getValue());
+						}
+
+
+					};
+					coinTable.addColumn(valueColumn, "Coin Value");
+
+
+					TextColumn<CoinDTO> toleColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getTolerance());
+						}
+
+
+					};
+					coinTable.addColumn(toleColumn, "Tolerance");
+
+
+					TextColumn<CoinDTO> wPrUnitColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getWeightPerUnit());
+						}
+
+
+					};
+					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
+					
+					
+					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
+					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					coinTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							CoinDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+							if (selected != null) {
+								Window.alert("You selected: " + selected);
+							}
+
+
+						}
+					});
+					coinTable.setRowCount(oprList.size(), true);
+					// Push the data into the widget.
+					coinTable.setRowData(0, coinList);
+					coinTable.redraw();
+					ft.setWidget(3,1, coinTable);
+				}
+
+			});
+
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
