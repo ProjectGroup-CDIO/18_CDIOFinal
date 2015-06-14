@@ -70,7 +70,7 @@ public class DeltaWeightView extends Composite{
 		/**
 		 * The list of data to display.
 		 */
-		
+
 		c.getMetaService().getTables(new AsyncCallback<List<String>>(){
 			@Override
 			public void onFailure(Throwable caught) {
@@ -92,15 +92,15 @@ public class DeltaWeightView extends Composite{
 					}
 				};
 				tables.addColumn(nameColumn, "Table name");
-				
+
 				// Set the total row count. This isn't strictly necessary, but it affects
 				// paging calculations, so its good habit to keep the row count up to date.
 				tables.setRowCount(tableList.size(), true);
 				// Push the data into the widget.
 				tables.setRowData(0, tableList);
 				tables.redraw();
-				ft.setWidget(3, 3, tables);
-
+				ft.setWidget(3, 0, tables);
+				ft.setBorderWidth(2);
 				final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
 				tables.setSelectionModel(selectionModel);
 				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -111,68 +111,25 @@ public class DeltaWeightView extends Composite{
 						 * then we want to make it able to then show both coins and operatoer
 						 * 
 						 */
-						if (selected != null) {
-							Window.alert("You selected: " + selected);
-						}
+						//						if (selected != null) {
+						//							Window.alert("You selected: " + selected);
+						//						}
 						if(selected.equals("operatoer")){
-							try {
-								c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
+							oprCellView(c);
 
-									@Override
-									public void onFailure(Throwable caught) {
-										Window.alert("Failed to access databse: "+caught.getMessage());
-									}
-
-									@Override
-									public void onSuccess(List<OperatoerDTO> result) {
-										oprList = result;
-
-										CellTable<OperatoerDTO> oprTable = new CellTable<OperatoerDTO>();
-										oprTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
-										// Add a text column to show the name.
-										TextColumn<OperatoerDTO> oprColumn = new TextColumn<OperatoerDTO>() {
-											@Override
-											public String getValue(OperatoerDTO object) {
-												return Integer.toString(object.getOprId());
-											}
-
-										
-										};
-										oprTable.addColumn(oprColumn, "Opr ID");
-
-
-										TextColumn<OperatoerDTO> nameColumn = new TextColumn<OperatoerDTO>() {
-											@Override
-											public String getValue(OperatoerDTO object) {
-												return object.getOprNavn();
-											}
-
-										
-										};
-										oprTable.addColumn(nameColumn, "name");
-
-
-									//	Add a selection model to handle user selection.
-										oprTable.setRowCount(oprList.size(), true);
-										// Push the data into the widget.
-										oprTable.setRowData(0, oprList);
-										oprTable.redraw();
-										ft.setWidget(3,4, oprTable);
-
-
-									}
-
-								});
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+						}
+						if(selected.equals("coins")){
+							coinCellView(c);
 
 						}
 					}
+
+
+
+
 				});
 
-				
+
 
 			}
 
@@ -183,6 +140,126 @@ public class DeltaWeightView extends Composite{
 
 	}
 
+
+	private void coinCellView(Callback c) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	private void oprCellView(final Callback c) {
+		try {
+			c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access databse: "+caught.getMessage());
+				}
+
+				@Override
+				public void onSuccess(List<OperatoerDTO> result) {
+					oprList = result;
+
+					CellTable<OperatoerDTO> oprTable = new CellTable<OperatoerDTO>();
+					oprTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+					// Add a text column to show the name.
+					TextColumn<OperatoerDTO> oprColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return Integer.toString(object.getOprId());
+						}
+
+
+					};
+					oprTable.addColumn(oprColumn, "Opr ID");
+
+
+					TextColumn<OperatoerDTO> nameColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return object.getOprNavn();
+						}
+
+
+					};
+					oprTable.addColumn(nameColumn, "name");
+
+
+					TextColumn<OperatoerDTO> iniColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return object.getIni();
+						}
+
+
+					};
+					oprTable.addColumn(iniColumn, "initials");
+
+					TextColumn<OperatoerDTO> cprColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return object.getCpr();
+						}
+
+
+					};
+					oprTable.addColumn(cprColumn, "cpr");
+					TextColumn<OperatoerDTO> passwColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return object.getPassword();
+						}
+
+
+					};
+					oprTable.addColumn(passwColumn, "Password");
+
+					TextColumn<OperatoerDTO> activeColumn = new TextColumn<OperatoerDTO>() {
+						@Override
+						public String getValue(OperatoerDTO object) {
+							return Integer.toString(object.getActive());
+						}
+
+
+					};
+					oprTable.addColumn(activeColumn, "active rights ID");
+
+					final SingleSelectionModel<OperatoerDTO> selectionModel = new SingleSelectionModel<OperatoerDTO>();
+					oprTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+					oprTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							OperatoerDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+							if (selected != null) {
+								Window.alert("You selected: " + selected);
+							}
+
+
+						}
+
+
+					});
+					//	Add a selection model to handle user selection.
+					oprTable.setRowCount(oprList.size(), true);
+					// Push the data into the widget.
+					oprTable.setRowData(0, oprList);
+					oprTable.redraw();
+					ft.setWidget(3,1, oprTable);
+
+
+				}
+
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 
