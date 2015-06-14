@@ -94,7 +94,7 @@ public class MenuView extends Composite {
 		//delta-weight-button, opens DeltaWeightView when pressed
 		//-----------------------------------------------------
 
-		Button deltaWBtn = new Button("Delta weight", new ClickHandler(){
+		Button deltaWBtn = new Button("Delta Weight", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent even){
 				try{
@@ -135,6 +135,21 @@ public class MenuView extends Composite {
 				}
 			}	
 		});
+		
+		Button testBtn = new Button("ClickMe!", new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				try {
+					main.openTestView();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		});
 
 		//-----------------------------------------------------
 		//adding buttons to vertical panel, setting pixel size
@@ -158,6 +173,7 @@ public class MenuView extends Composite {
 		vPanel.add(addBtn);
 		vPanel.add(connectionBtn);
 		vPanel.add(logoutBtn);
+		vPanel.add(testBtn);
 	}
 }
 

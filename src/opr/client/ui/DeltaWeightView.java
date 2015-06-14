@@ -46,6 +46,7 @@ public class DeltaWeightView extends Composite{
 
 
 
+
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();

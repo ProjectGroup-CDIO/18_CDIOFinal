@@ -107,7 +107,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public void openListView() throws Exception {
 		content.clear();
 		content.add(new ListView(this));
-	
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 	
 	
@@ -167,8 +168,20 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
-	//---------------------------------------------------------------------------
+	
+	
+	//Test 
+	
+	public void openTestView() {
+		content.clear();
+		content.add(new TestView());
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 
+	}
+	
+	
+	//---------------------------------------------------------------------------
 	//method for getting the dataBase service
 	//---------------------------------------------------------------------------
 	@Override
