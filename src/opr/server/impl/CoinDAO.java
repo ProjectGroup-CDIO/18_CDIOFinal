@@ -2,11 +2,14 @@ package opr.server.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import opr.server.Connector;
 import opr.server.interfaces.ICoinDAO;
 import opr.shared.CoinDTO;
 import opr.shared.DALException;
+import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -38,6 +41,20 @@ public class CoinDAO extends RemoteServiceServlet implements ICoinDAO {
 			return new CoinDTO(rs.getDouble("value"), rs.getDouble("weight"), rs.getDouble("tolerance"));
 		}
 		catch (SQLException e) {throw new DALException(e.getMessage()); }	
+	}
+	
+	public List<CoinDTO> getCoinList() throws DALException {
+		List<CoinDTO> list = new ArrayList<CoinDTO>();
+		ResultSet rs = Connector.doQuery("SELECT * FROM coins");
+		try {
+			while (rs.next()) 
+			{
+				list.add(new CoinDTO(rs.getDouble("value"), rs.getDouble("weight"), rs.getDouble("tolerance")));
+			}
+		} catch(SQLException e) {
+			throw new DALException("Kunne ikke få CoinList");
+		}
+		return list;
 	}
 
 	
