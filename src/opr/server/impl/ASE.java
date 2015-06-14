@@ -28,18 +28,19 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private int tara;
 	private int netto = (brutto - tara);
 	
+	private static String host = "62.79.16.17";
+	private static int port = 8000;
+	
 	public ASE() {
 		
 	}
-	
-
-	
+		
 	@Override
 	public void connect() throws UnknownHostException, IOException {
 		
 		if(sock!=null) return;
 		
-		sock = new Socket("62.79.16.17", 8000);
+		sock = new Socket(host, port);
 		in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		out = new DataOutputStream(sock.getOutputStream());
 		
@@ -47,8 +48,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 
 	@Override
 	public void setWeightDisplay(String msg) {
-		//løl
-		
+		// løl	
 	}
 
 	@Override
@@ -128,21 +128,15 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 				System.out.println(weight);
 			}
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		
 	}
 
-	@Override
-	public void start() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 

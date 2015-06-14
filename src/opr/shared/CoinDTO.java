@@ -2,7 +2,7 @@ package opr.shared;
 
 import java.io.Serializable;
 
-public class UnitDTO implements Serializable {
+public class CoinDTO implements Serializable {
 	
 	/**
 	 * 
@@ -13,11 +13,12 @@ public class UnitDTO implements Serializable {
 	private double weightPerUnit;
 	private double tolerance;
 	
-	public UnitDTO() {
+	public CoinDTO() {
 		
 	}
 	
-	public UnitDTO(double weightPerUnit, double tolerance) {
+	public CoinDTO(double value, double weightPerUnit, double tolerance) {
+		this.value = value;
 		this.weightPerUnit = weightPerUnit;
 		this.tolerance = tolerance;
 	}
@@ -36,6 +37,10 @@ public class UnitDTO implements Serializable {
 
 	public void setTolerance(int tolerance) {
 		this.tolerance = tolerance;
-	}
+	} 
 	
+	public double getValue() {
+		return value;
+	}
+
 }
