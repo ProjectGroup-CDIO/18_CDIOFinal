@@ -143,6 +143,14 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void changeSocket(String Ip, int port) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
