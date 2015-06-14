@@ -2,6 +2,8 @@ package opr.client.ui;
 
 import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.IDBService;
+import opr.client.service.IDBServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
@@ -12,7 +14,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback, ConnectionView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -22,6 +24,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
+	private final IDBServiceAsync DBservice = GWT.create(IDBService.class);
+
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
 
@@ -146,7 +150,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	//method for opening DeltaWeightView when ADVANCED-button is pressed
 	//---------------------------------------------------------------------------
 
-	public void openDeltaWeightView() {
+	public void openDeltaWeightView() throws Exception {
 		content.clear();
 		DeltaWeightView dWView = new DeltaWeightView(this);
 		content.add(dWView);
@@ -166,5 +170,26 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
+	//---------------------------------------------------------------------------
+
+	//method for getting the dataBase service
+	//---------------------------------------------------------------------------
+
+	@Override
+	public IDBServiceAsync getDBSerive() {
+		// TODO Auto-generated method stub
+		return DBservice;
+	}
+
+		//method for opening ConnectionView when connection-button is pressed
+		//---------------------------------------------------------------------------
 	
+	public void openConnetion() throws Exception{
+		content.clear();
+		ConnectionView ContView = new ConnectionView(this);
+		content.add(ContView);
+		aPanel.add(content);
+		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
+	}
+
 }
