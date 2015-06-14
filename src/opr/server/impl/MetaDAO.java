@@ -6,7 +6,14 @@ import opr.client.service.IMetaService;
 import opr.server.interfaces.IMetaDAO;
 import opr.shared.DALException;
 
-public class MetaDAO implements IMetaDAO, IMetaService {
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+public class MetaDAO extends RemoteServiceServlet implements IMetaDAO, IMetaService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5711854845648826350L;
 
 	@Override
 	public List<String> getTables() throws DALException {
