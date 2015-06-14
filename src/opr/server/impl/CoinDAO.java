@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import opr.client.service.ICoinService;
 import opr.server.Connector;
 import opr.server.interfaces.ICoinDAO;
 import opr.shared.CoinDTO;
@@ -13,7 +14,7 @@ import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-public class CoinDAO extends RemoteServiceServlet implements ICoinDAO {
+public class CoinDAO extends RemoteServiceServlet implements ICoinDAO, ICoinService {
 
 	/**
 	 * 

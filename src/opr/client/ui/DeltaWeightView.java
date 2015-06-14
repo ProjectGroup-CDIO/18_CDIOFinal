@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.kiouri.sliderbar.client.solution.simplevertical.SliderBarSimpleVertical;
 
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
@@ -40,6 +41,8 @@ public class DeltaWeightView extends Composite{
 
 	private List<String> tableList;
 	private List<OperatoerDTO> oprList;
+	
+	
 
 
 
