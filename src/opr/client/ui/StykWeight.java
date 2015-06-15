@@ -208,30 +208,7 @@ public class StykWeight extends Composite {
 
 					};
 					coinTable.addColumn(valueColumn, "Coin Value");
-
-
-					TextColumn<CoinDTO> toleColumn = new TextColumn<CoinDTO>() {
-						@Override
-						public String getValue(CoinDTO object) {
-							return Double.toString(object.getTolerance());
-						}
-
-
-					};
-					coinTable.addColumn(toleColumn, "Tolerance");
-
-
-					TextColumn<CoinDTO> wPrUnitColumn = new TextColumn<CoinDTO>() {
-						@Override
-						public String getValue(CoinDTO object) {
-							return Double.toString(object.getWeightPerUnit());
-						}
-
-
-					};
-					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
-					
-					
+				
 					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
 					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -245,7 +222,8 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								Window.alert("You selected: " + selected);
+								//Window.alert("You selected: " + selected.getWeightPerUnit());
+								
 							}
 
 
