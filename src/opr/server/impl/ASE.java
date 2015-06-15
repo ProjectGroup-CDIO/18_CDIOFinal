@@ -28,11 +28,11 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private int tara;
 	private int netto = (brutto - tara);
 	
-	private static String host = "62.79.16.17";
+	private static String host = "10.16.161.152";
 	private static int port = 8000;
 	
-	public ASE() {
-		
+	public ASE() throws UnknownHostException, IOException {
+		connect();
 	}
 		
 	@Override
@@ -63,6 +63,9 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	public double getSIWeight() throws IOException {
 		out.writeBytes("SI\r\n");
 		String response = in.readLine();
+		if(response.startsWith("ES")) {
+			return -1;
+		}
 		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
 		return weight;
 		
