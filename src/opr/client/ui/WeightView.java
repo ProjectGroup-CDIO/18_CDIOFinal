@@ -98,29 +98,18 @@ public class WeightView extends Composite {
 						}
 						@Override
 						public void onSuccess(Void result) {
-							c.getASEService().getSWeight(new AsyncCallback<Double>(){
-
-								@Override
-								public void onFailure(Throwable caught) {
-									Window.alert("An error occured: " + caught.getMessage());
-
-								}
-
-								@Override
-								public void onSuccess(Double result) {
-									//lol
-								}
-							});
+							//implementering afventer
 						}
-					}); 
-				}	catch (Exception e) {
-						e.printStackTrace();
 					}
+							); 
+				}	catch (Exception e) {
+					e.printStackTrace();
 				}
-			});
+			}
+		});
 
-					hPanel1.add(taraWeightButton);
-					taraWeightButton.setPixelSize(105, 30);
-		
+		hPanel1.add(taraWeightButton);
+		taraWeightButton.setPixelSize(105, 30);
+
 	}
 }

@@ -55,8 +55,8 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	public double getSWeight() throws IOException {
 		out.writeBytes("S\r\n");
 		String response = in.readLine();
-		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
-		return weight;
+		brutto = Double.parseDouble(response.substring(3,response.length()-2).trim());
+		return brutto;
 	}
 
 	@Override
