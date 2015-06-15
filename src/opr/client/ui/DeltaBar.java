@@ -1,6 +1,7 @@
 package opr.client.ui;
 
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -20,11 +21,9 @@ private	LayoutPanel layoutPanel_1 = new LayoutPanel();
 private	LayoutPanel layoutPanel_2 = new LayoutPanel();
 private	LayoutPanel layoutPanel_3 = new LayoutPanel();
 	
-	public interface Callback{
-		
-	}
+
 	
-	public DeltaBar(final Callback c){
+	public DeltaBar(){
 		initWidget(hPanel);
 		hPanel.add(l1);
 		hPanel.add(layoutPanel);
@@ -67,16 +66,18 @@ private	LayoutPanel layoutPanel_3 = new LayoutPanel();
 		double upper = q+q*(tolerance);
 		double x = q+q*(tolerance*3);
 		double y = q-q*(tolerance*3);
+		weigthIndicator = (x-y/100)*4*z;
+		lowerWiegthBound = ((x-y/100)*4)*lower;
+		upperWiegthBound = ((x-y/100)*4)*upper;
 		l1.setText(Double.toString(y));
-		weigthIndicator = (x/100)*4*z;
-		lowerWiegthBound = (x/100)*4*lower;
-		upperWiegthBound = (x/100)*4*upper;
 		l2.setText(Double.toString(x));
+		//Window.alert(""+weigthIndicator + ":"+z + ":" + q +":" + tolerance);
 		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weigthIndicator, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_1, 0.0, Unit.PX, 37.0, Unit.PX);
 		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWiegthBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_2, 0.0, Unit.PX, 37.0, Unit.PX);
 		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWiegthBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
+		
 	}
 }
