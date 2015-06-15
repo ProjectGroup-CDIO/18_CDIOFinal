@@ -50,7 +50,7 @@ public class DeltaWeightView extends Composite{
 	private List<OperatoerDTO> oprList;
 	private List<CoinDTO> coinList;
 	private List<BatchDTO> batchList;
-
+	private DeltaBar dbar = new DeltaBar();
 
 
 	public interface Callback{
@@ -63,6 +63,8 @@ public class DeltaWeightView extends Composite{
 
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
+		
+		vPanel.add(dbar);
 
 		viewInfo.addStyleName("deltaWeight");
 		vPanel.add(viewInfo);
@@ -246,7 +248,8 @@ public class DeltaWeightView extends Composite{
 						batchIDBox.setText(""+selected.getBatch_id());
 						batchData.setText("" + selected.getBatchweight());
 						
-						getSIData(c);
+						
+						getSIData(c,selected.getBatchweight(),selected.getTolerance());
 						
 					}
 
@@ -264,7 +267,7 @@ public class DeltaWeightView extends Composite{
 		
 	}
 	
-	private void getSIData(final Callback c) {
+	private void getSIData(final Callback c, final double bW, final double tol) {
 		c.getASEService().getSIWeight(new AsyncCallback<Double>(){
 
 			@Override
@@ -276,7 +279,9 @@ public class DeltaWeightView extends Composite{
 			@Override
 			public void onSuccess(Double result) {
 				SIDataBox.setText(Double.toString(result));
-				getSIData(c);
+				dbar.deltaBarData(result, bW, tol);
+				
+				getSIData(c,bW,tol);
 				
 			}
 			

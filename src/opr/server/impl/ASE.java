@@ -42,7 +42,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private static int port = 8000;
 	
 	public ASE() throws UnknownHostException, IOException {
-		connect();
+		
 	}
 		
 	@Override

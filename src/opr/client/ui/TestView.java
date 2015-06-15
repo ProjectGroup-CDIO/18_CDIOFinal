@@ -14,7 +14,6 @@ import com.kiouri.sliderbar.client.view.SliderBarHorizontal;
 
 public class TestView extends Composite {
 	VerticalPanel vPanel = new VerticalPanel();
-//	ASE ase = new ASE();
 	
 	public interface Callback {
 		public IASEServiceAsync getASEService();
@@ -23,7 +22,6 @@ public class TestView extends Composite {
 	public TestView(final Callback c) {
 		initWidget(vPanel);
 
-		SliderBarHorizontal hBar = new SliderBarHorizontal();
 		final Label label = new Label("Hello");
 		Button btn = new Button("Click", new ClickHandler() {
 
