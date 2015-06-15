@@ -222,7 +222,7 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								//Window.alert("You selected: " + selected.getWeightPerUnit());
+								Window.alert("You selected: " + selected.getWeightPerUnit());
 								
 							}
 
