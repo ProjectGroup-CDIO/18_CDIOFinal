@@ -134,13 +134,24 @@ public class DeltaWeightView extends Composite{
 							coinCellView(c);
 
 						}
+						if(selected.equals("batch")){
+							batchCellView(c);
+
+						}
 					}
+
 				});
 
 			}
 		});
 	}
 
+
+	private void batchCellView(Callback c) {
+		
+		
+	}
+	
 
 	private void coinCellView(Callback c) {
 		try {
