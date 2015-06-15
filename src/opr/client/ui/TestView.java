@@ -13,7 +13,7 @@ public class TestView extends Composite {
 		initWidget(vPanel);
 
 		SliderBarHorizontal hBar = new SliderBarHorizontal();
-		Label label = new Label("Hello");
+		Label label = new Label("Hello Badboi");
 		
 	//	hBar.
 		

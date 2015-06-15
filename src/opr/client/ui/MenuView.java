@@ -121,7 +121,7 @@ public class MenuView extends Composite {
 			}	
 		});
 		
-		Button testBtn = new Button("ClickMe!", new ClickHandler() {
+		Button testBtn = new Button("ClickOnMe!", new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
