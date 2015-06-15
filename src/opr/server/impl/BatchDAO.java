@@ -11,6 +11,8 @@ import opr.server.interfaces.IBatchDAO;
 import opr.shared.BatchDTO;
 import opr.shared.CoinDTO;
 import opr.shared.DALException;
+import opr.shared.LogDTO;
+import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -34,7 +36,7 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public BatchDTO getBatch(int batchid) throws Exception {
 		ResultSet rs = Connector.doQuery("SELECT * FROM batch WHERE batch_id = " + batchid);
@@ -60,6 +62,22 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 			throw new DALException("Kunne ikke få BatchList");
 		}
 		return list;
+	}
+
+	@Override
+	public void updateLog(LogDTO logDTO) throws Exception {
+		Connector.doUpdate(
+				"INSERT INTO vejelog (log_id, opr_id, batch_id, afvigelse) VALUES " +
+						"("+logDTO.getLog_id()+", "+logDTO.getOpr_id()+", "+logDTO.getBatch_id()+", "+logDTO.getAfvigelse()+")"
+				);
+	}
+
+	public void createOperatoer(OperatoerDTO opr) throws DALException {		
+		Connector.doUpdate(
+				"INSERT INTO operatoer(opr_id, opr_navn, ini, cpr, password, aktiv) VALUES " +
+						"(" + opr.getOprId() + ", '" + opr.getOprNavn() + "', '" + opr.getIni() + "', '" + 
+						opr.getCpr() + "', '" + opr.getPassword() + "', "+opr.getActive()+")"
+				);
 	}
 
 }

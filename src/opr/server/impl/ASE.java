@@ -28,11 +28,11 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private int tara;
 	private int netto = (brutto - tara);
 	
-	private static String host = "10.16.161.152";
+	private static String host = "62.79.16.17";
 	private static int port = 8000;
 	
 	public ASE() throws UnknownHostException, IOException {
-		connect();
+		
 	}
 		
 	@Override
