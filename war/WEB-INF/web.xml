@@ -40,6 +40,15 @@
 		<servlet-name>coinServlet</servlet-name>
 		<url-pattern>/_8_cdiofinal/coinservice</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>batchServlet</servlet-name>
+		<servlet-class>opr.server.impl.BatchDAO</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>batchServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/batchservice</url-pattern>
+	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>_8_CDIOFinal.html</welcome-file>

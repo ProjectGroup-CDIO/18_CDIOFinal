@@ -5,7 +5,7 @@
 h1 {
   font-size: 2em;
   font-weight: bold;
-  color: #777777;
+  color: #999999;
   margin: 0px 0px 0px;
   text-align: center;
   border-width: 1px;
@@ -18,18 +18,23 @@ h1 {
 	margin-right: auto;
 }
 
-<<<<<<< HEAD
 .gwt-TextBox {
 	width: 99%;
 	margin-left: auto;
 	margin-right: auto;	
 }
-=======
+
+.gwt-PasswordTextBox {
+	width: 99%;
+	margin-left: auto;
+	margin-right: auto;
+}
 .gwt-Button{
 	width: 100%;
+	color: white;
+	background-color: black;
+	button-color: black;
 }
-
->>>>>>> branch 'master' of https://github.com/ProjectGroup-CDIO/18_CDIOFinal.git
 
 .deltaWeight {
 	font-size: 25pt;
@@ -52,6 +57,10 @@ h1 {
 .sendButton {
   display: block;
   font-size: 16pt;
+}
+
+.aPanel {
+	align: center;
 }
 
 /** Most GWT widgets already have a style name defined */
