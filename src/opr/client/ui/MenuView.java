@@ -94,7 +94,7 @@ public class MenuView extends Composite {
 		//delta-weight-button, opens DeltaWeightView when pressed
 		//-----------------------------------------------------
 
-		Button deltaWBtn = new Button("Delta Weight", new ClickHandler(){
+		Button deltaWBtn = new Button("DELTA", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent even){
 				try{
@@ -104,27 +104,12 @@ public class MenuView extends Composite {
 				}
 			}
 		});
-
-		//-----------------------------------------------------
-		//coin-weight-button, opens CoinWeight when pressed
-		//-----------------------------------------------------
-
-		Button coinBtn = new Button("COIN", new ClickHandler(){
-			@Override
-			public void onClick(ClickEvent event){
-				try{
-					main.openCoinWeight();
-				} catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		});
 		
 		//-----------------------------------------------------
 		//connectionView-button, opens Connection when pressed
 		//-----------------------------------------------------
 		
-		Button connectionBtn = new Button("Connection", new ClickHandler(){
+		Button connectionBtn = new Button("CONNECTION", new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -136,7 +121,7 @@ public class MenuView extends Composite {
 			}	
 		});
 		
-		Button testBtn = new Button("ClickMe!", new ClickHandler() {
+		Button testBtn = new Button("ClickOnMe!", new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -158,17 +143,15 @@ public class MenuView extends Composite {
 		weightBtn.setPixelSize( 100, 30);
 		unitWBtn.setPixelSize( 100, 30);
 		deltaWBtn.setPixelSize( 100, 30);
-		coinBtn.setPixelSize(100, 30);
-
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		connectionBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
+		testBtn.setPixelSize(100, 30);
 
 		vPanel.add(weightBtn);
 		vPanel.add(unitWBtn);
 		vPanel.add(deltaWBtn);
-		vPanel.add(coinBtn);
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
 		vPanel.add(connectionBtn);

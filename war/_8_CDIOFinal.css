@@ -13,8 +13,24 @@ h1 {
 }
 
 .gtw-Button {
-	width: 100px;
+	width: 99%;
+	margin-left: auto;
+	margin-right: auto;
 }
+
+<<<<<<< HEAD
+.gwt-TextBox {
+	width: 99%;
+	margin-left: auto;
+	margin-right: auto;	
+}
+=======
+.gwt-Button{
+	width: 100%;
+}
+
+>>>>>>> branch 'master' of https://github.com/ProjectGroup-CDIO/18_CDIOFinal.git
+
 .deltaWeight {
 	font-size: 25pt;
 }
@@ -29,6 +45,8 @@ h1 {
 
 .weightLabel {
 	font-size: 25pt;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .sendButton {

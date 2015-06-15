@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WeightView extends Composite {
 
+	
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
@@ -32,11 +33,7 @@ public class WeightView extends Composite {
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
-		final TextArea weightDisplay = new TextArea();
-		weightDisplay.setPixelSize(290, 50);
-		weightDisplay.setEnabled(false);
-		vPanel.add(weightDisplay);
-
+		vPanel.setBorderWidth(2);
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
 
@@ -59,7 +56,7 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onSuccess(Double result) {
-							weightDisplay.setText("" + result);
+							weightLabel.setText("Netto: " + result + " kg");
 						}
 					});
 				} catch (Exception e) {
@@ -69,14 +66,14 @@ public class WeightView extends Composite {
 		});
 
 		hPanel1.add(getWeightButton);
-		getWeightButton.setPixelSize( 100, 30);
+		getWeightButton.setPixelSize( 105, 30);
 
 
 		//Weight-button, save
 
 		Button saveWeightButton = new Button("Save");
 		hPanel1.add(saveWeightButton);
-		saveWeightButton.setPixelSize(100, 30);
+		saveWeightButton.setPixelSize(105, 30);
 
 		
 		//Weight-button, tara
@@ -102,6 +99,6 @@ public class WeightView extends Composite {
 		});
 		
 		hPanel1.add(taraWeightButton);
-		taraWeightButton.setPixelSize(100, 30);
+		taraWeightButton.setPixelSize(105, 30);
 	}
 }

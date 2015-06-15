@@ -99,7 +99,7 @@ public class AddView extends Composite {
 			}
 
 		});
-		ft.setWidget(2, 5, btnADD);
+		ft.setWidget(2, 0, btnADD);
 
 	}
 

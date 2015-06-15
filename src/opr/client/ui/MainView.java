@@ -16,7 +16,8 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MainView extends Composite implements Login.Callback, WeightView.Callback, DeltaWeightView.Callback, ConnectionView.Callback {
+public class MainView extends Composite implements Login.Callback, WeightView.Callback,
+		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -161,20 +162,11 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	//method for opening CoinWeight when COIN-button is pressed
 	//---------------------------------------------------------------------------
 
-	public void openCoinWeight() {
-		content.clear();
-		CoinWeight CWView = new CoinWeight(this);
-		content.add(CWView);
-		aPanel.add(content);
-		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
-	}
-	
-	
 	//Test 
 	
 	public void openTestView() {
 		content.clear();
-		content.add(new TestView());
+		content.add(new TestView(this));
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 
