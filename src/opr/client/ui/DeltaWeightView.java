@@ -3,10 +3,12 @@ package opr.client.ui;
 import java.util.List;
 
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinServiceAsync;
 import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
+import opr.shared.BatchDTO;
 import opr.shared.CoinDTO;
 import opr.shared.OperatoerDTO;
 
@@ -34,18 +36,20 @@ public class DeltaWeightView extends Composite{
 	private Label viewInfo = new Label("Delta-weight");
 
 	private Label prdName = new Label("Product Name");
-	private Label prdNr = new Label("Product ID");
-	private Label wData = new Label("Weight data");
+	private Label batchID = new Label("BatchID");
+	private Label wData = new Label("Batch weight");
+	private Label SIData = new Label("SI - WeightData");
 
 	private TextBox productName = new TextBox(); 
-	private TextBox productNr = new TextBox();
-	private TextBox weightData = new TextBox();
+	private TextBox batchIDBox = new TextBox();
+	private TextBox batchData = new TextBox();
+	private TextBox SIDataBox = new TextBox();
 
 
 	private List<String> tableList;
 	private List<OperatoerDTO> oprList;
 	private List<CoinDTO> coinList;
-
+	private List<BatchDTO> batchList;
 
 
 
@@ -54,6 +58,7 @@ public class DeltaWeightView extends Composite{
 		public IOperatoerServiceAsync getService();
 		public IMetaServiceAsync getMetaService();
 		public ICoinServiceAsync getCoinService();
+		public IBatchServiceAsync getBatchService();
 	}
 
 	public DeltaWeightView(final Callback c) throws Exception {
@@ -65,12 +70,13 @@ public class DeltaWeightView extends Composite{
 
 		hPanel1.add(ft);
 		ft.setWidget(1, 0, prdName);
-		ft.setWidget(1, 1, prdNr);		
+		ft.setWidget(1, 1, batchID);		
 		ft.setWidget(1, 2, wData);
+		ft.setWidget(1, 3, SIData);
 		ft.setWidget(2, 0, productName);
-		ft.setWidget(2, 1, productNr);
-		ft.setWidget(2, 2, weightData);
-
+		ft.setWidget(2, 1, batchIDBox);
+		ft.setWidget(2, 2, batchData);
+		ft.setWidget(2, 3, SIDataBox);
 		
 		hPanel2.add(ft2);
 		vPanel.add(hPanel2);
@@ -147,12 +153,135 @@ public class DeltaWeightView extends Composite{
 	}
 
 
-	private void batchCellView(Callback c) {
+	private void batchCellView(final Callback c) {
 		
+		
+		c.getBatchService().getBatchList(new AsyncCallback<List<BatchDTO>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Failed to access databse: "+caught.getMessage());
+			}
+			@Override
+			public void onSuccess(List<BatchDTO> result) {
+				batchList = result;
+				
+				
+				CellTable<BatchDTO> batchTable = new CellTable<BatchDTO>();
+				batchTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+				// Add a text column to show the name.
+				TextColumn<BatchDTO> IDColumn = new TextColumn<BatchDTO>() {
+					@Override
+					public String getValue(BatchDTO object) {
+						return Integer.toString(object.getBatch_id());
+					}
+
+
+				};
+				batchTable.addColumn(IDColumn, "Batch ID");
+				
+				// Add a text column to show the name.
+				TextColumn<BatchDTO> raaNavnColumn = new TextColumn<BatchDTO>() {
+					@Override
+					public String getValue(BatchDTO object) {
+						return object.getRaavare_navn();
+					}
+
+
+				};
+				batchTable.addColumn(raaNavnColumn, "Raavare");
+				
+				// Add a text column to show the name.
+				TextColumn<BatchDTO> raavareIDColumn = new TextColumn<BatchDTO>() {
+					@Override
+					public String getValue(BatchDTO object) {
+						return Integer.toString(object.getRaavare_id());
+					}
+
+
+				};
+				batchTable.addColumn(raavareIDColumn, "Raavare ID");
+
+				// Add a text column to show the name.
+				TextColumn<BatchDTO> baWghtColumn = new TextColumn<BatchDTO>() {
+					@Override
+					public String getValue(BatchDTO object) {
+						return Double.toString(object.getBatchweight());
+					}
+
+
+				};
+				batchTable.addColumn(baWghtColumn, "Batch Weight");
+				
+				// Add a text column to show the name.
+				TextColumn<BatchDTO> toleranceColumn = new TextColumn<BatchDTO>() {
+					@Override
+					public String getValue(BatchDTO object) {
+						return Double.toString(object.getTolerance());
+					}
+
+
+				};
+				batchTable.addColumn(toleranceColumn, "Tolerance");
+				
+				final SingleSelectionModel<BatchDTO> selectionModel = new SingleSelectionModel<BatchDTO>();
+				batchTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+				batchTable.setSelectionModel(selectionModel);
+				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+					public void onSelectionChange(SelectionChangeEvent event) {
+						BatchDTO selected = selectionModel.getSelectedObject();
+						/*
+						 * Here we want to display the data in the table operatoer
+						 * then we want to make it able to then show both coins and operatoer
+						 * 
+						 */
+						if (selected != null) {
+							Window.alert("You selected: " + selected);
+						}
+
+						
+						productName.setText(selected.getRaavare_navn());
+						batchIDBox.setText(""+selected.getBatch_id());
+						batchData.setText("" + selected.getBatchweight());
+						
+						getSIData(c);
+						
+					}
+
+				
+				});
+				
+				batchTable.setRowCount(batchList.size(), true);
+				// Push the data into the widget.
+				batchTable.setRowData(0, batchList);
+				batchTable.redraw();
+				ft2.setWidget(0,1, batchTable);
+			}
+			
+		});
 		
 	}
 	
+	private void getSIData(final Callback c) {
+		c.getASEService().getSIWeight(new AsyncCallback<Double>(){
 
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error accesing weight" + caught.getMessage());
+				
+			}
+
+			@Override
+			public void onSuccess(Double result) {
+				SIDataBox.setText(Double.toString(result));
+				getSIData(c);
+				
+			}
+			
+		});		
+	}
 	private void coinCellView(Callback c) {
 		try {
 			c.getCoinService().getCoinList(new AsyncCallback<List<CoinDTO>>(){
@@ -162,7 +291,7 @@ public class DeltaWeightView extends Composite{
 					Window.alert("Failed to access databse: "+caught.getMessage());
 
 				}
-
+				@Override
 				public void onSuccess(List<CoinDTO> result) {
 					coinList = result;
 
@@ -222,6 +351,8 @@ public class DeltaWeightView extends Composite{
 
 						}
 					});
+					
+					
 					coinTable.setRowCount(coinList.size(), true);
 					// Push the data into the widget.
 					coinTable.setRowData(0, coinList);
