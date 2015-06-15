@@ -55,11 +55,11 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 		try {
 			while (rs.next()) 
 			{
-				list.add(new BatchDTO(rs.getInt("batch_id"), rs.getInt("raavare_id"), rs.getString("raavare_navn"),
+				list.add(new BatchDTO(rs.getInt("batch_id"), rs.getInt("raavare_id"), rs.getString("raavare"),
 						rs.getDouble("batchweight"), rs.getDouble("tolerance")));
 			}
 		} catch(SQLException e) {
-			throw new DALException("Kunne ikke få BatchList");
+			throw new DALException("Kunne ikke få BatchList: " + e.getMessage());
 		}
 		return list;
 	}

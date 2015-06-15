@@ -1,7 +1,22 @@
 package opr.client.ui;
 
+import java.util.List;
+
+import opr.client.service.IASEServiceAsync;
+import opr.client.service.IBatchServiceAsync;
+import opr.client.service.ICoinServiceAsync;
+import opr.client.service.IMetaServiceAsync;
+import opr.client.service.IOperatoerServiceAsync;
+import opr.client.ui.DeltaWeightView.Callback;
+import opr.shared.CoinDTO;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -9,6 +24,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 public class StykWeight extends Composite {
 	private FlexTable ft = new FlexTable();
@@ -42,8 +59,16 @@ public class StykWeight extends Composite {
 	Button btnPepper = new Button("Pepper");
 	Button btnSalt = new Button("Salt");
 	Button btnChemicalX = new Button("Chemical X");	
+	private List<CoinDTO> coinList;
 	
-	public StykWeight(final MainView mainView){
+	public interface Callback{
+		public IASEServiceAsync getASEService();
+		public IOperatoerServiceAsync getService();
+		public IMetaServiceAsync getMetaService();
+		public ICoinServiceAsync getCoinService();
+	}
+	
+	public StykWeight(final Callback c){
 		this.initWidget(vPanel);
 		 unitLabel.addStyleName("unitLabel");
 		 vPanel.add(unitLabel);
@@ -71,7 +96,7 @@ public class StykWeight extends Composite {
 		
 		btnCoins.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {
+				try {/*
 					HorizontalPanel buttonPanel = new HorizontalPanel();
 					buttonPanel.add(btn50);
 					buttonPanel.add(btn1);
@@ -85,7 +110,8 @@ public class StykWeight extends Composite {
 					btn5.setPixelSize(80, 30);
 					btn10.setPixelSize(80, 30);
 					btn20.setPixelSize(80, 30);
-					ft.setWidget(5, 1, buttonPanel);
+					ft.setWidget(5, 1, buttonPanel);*/
+					coinCellView(c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -155,5 +181,92 @@ public class StykWeight extends Composite {
 				}
 			}
 		});
+	}
+	private void coinCellView(Callback c) {
+		try {
+			c.getCoinService().getCoinList(new AsyncCallback<List<CoinDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access databse: "+caught.getMessage());
+
+				}
+				@Override
+				public void onSuccess(List<CoinDTO> result) {
+					coinList = result;
+
+					CellTable<CoinDTO> coinTable = new CellTable<CoinDTO>();
+					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					// Add a text column to show the name.
+					TextColumn<CoinDTO> valueColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getValue());
+						}
+
+
+					};
+					coinTable.addColumn(valueColumn, "Coin Value");
+
+
+					TextColumn<CoinDTO> toleColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getTolerance());
+						}
+
+
+					};
+					coinTable.addColumn(toleColumn, "Tolerance");
+
+
+					TextColumn<CoinDTO> wPrUnitColumn = new TextColumn<CoinDTO>() {
+						@Override
+						public String getValue(CoinDTO object) {
+							return Double.toString(object.getWeightPerUnit());
+						}
+
+
+					};
+					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
+					
+					
+					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
+					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					coinTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							CoinDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+							if (selected != null) {
+								Window.alert("You selected: " + selected);
+							}
+
+
+						}
+					});
+					
+					
+					coinTable.setRowCount(coinList.size(), true);
+					// Push the data into the widget.
+					coinTable.setRowData(0, coinList);
+					coinTable.redraw();
+					ft.setWidget(5, 1, coinTable);
+				}
+
+			});
+
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

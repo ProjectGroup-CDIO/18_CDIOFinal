@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface IASEService extends RemoteService{
 	
 	void setWeightDisplay(String msg);
+	void setBrutto(double brutto);
 	void connect() throws IOException;
 	double getSWeight() throws IOException;
 	double getSIWeight() throws IOException;

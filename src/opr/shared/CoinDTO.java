@@ -22,25 +22,13 @@ public class CoinDTO implements Serializable {
 		this.weightPerUnit = weightPerUnit;
 		this.tolerance = tolerance;
 	}
-
-	public double getWeightPerUnit() {
-		return weightPerUnit;
-	}
-
-	public void setWeightPerUnit(int weightPerUnit) {
-		this.weightPerUnit = weightPerUnit;
-	}
-
-	public double getTolerance() {
-		return tolerance;
-	}
-
-	public void setTolerance(int tolerance) {
-		this.tolerance = tolerance;
-	} 
+	public double getValue() {return value;}
+	public void setValue(double value) {this.value = value;}
+	public double getWeightPerUnit() {return weightPerUnit;}
+	public void setWeightPerUnit(double weightPerUnit) {this.weightPerUnit = weightPerUnit;	}
+	public double getTolerance() {return tolerance;}
+	public void setTolerance(double tolerance) {this.tolerance = tolerance;}
+	public String toString() { return value + " " + weightPerUnit + " " + tolerance; }
 	
-	public double getValue() {
-		return value;
-	}
 
 }
