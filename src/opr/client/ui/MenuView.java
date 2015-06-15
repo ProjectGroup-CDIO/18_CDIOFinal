@@ -104,21 +104,6 @@ public class MenuView extends Composite {
 				}
 			}
 		});
-
-		//-----------------------------------------------------
-		//coin-weight-button, opens CoinWeight when pressed
-		//-----------------------------------------------------
-
-		Button coinBtn = new Button("COIN", new ClickHandler(){
-			@Override
-			public void onClick(ClickEvent event){
-				try{
-					main.openCoinWeight();
-				} catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		});
 		
 		//-----------------------------------------------------
 		//connectionView-button, opens Connection when pressed
@@ -158,7 +143,6 @@ public class MenuView extends Composite {
 		weightBtn.setPixelSize( 100, 30);
 		unitWBtn.setPixelSize( 100, 30);
 		deltaWBtn.setPixelSize( 100, 30);
-		coinBtn.setPixelSize(100, 30);
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		connectionBtn.setPixelSize(100, 30);
@@ -168,7 +152,6 @@ public class MenuView extends Composite {
 		vPanel.add(weightBtn);
 		vPanel.add(unitWBtn);
 		vPanel.add(deltaWBtn);
-		vPanel.add(coinBtn);
 		vPanel.add(listBtn);
 		vPanel.add(addBtn);
 		vPanel.add(connectionBtn);

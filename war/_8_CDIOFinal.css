@@ -15,6 +15,12 @@ h1 {
 .gtw-Button {
 	width: 100px;
 }
+
+.gwt-Button{
+	width: 100%;
+}
+
+
 .deltaWeight {
 	font-size: 25pt;
 }
