@@ -27,8 +27,10 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
-
+	private HorizontalPanel hPanel2 = new HorizontalPanel();
+	
 	FlexTable ft = new FlexTable();
+	FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
 
 	private Label prdName = new Label("Product Name");
@@ -69,6 +71,9 @@ public class DeltaWeightView extends Composite{
 		ft.setWidget(2, 1, productNr);
 		ft.setWidget(2, 2, weightData);
 
+		
+		hPanel2.add(ft2);
+		vPanel.add(hPanel2);
 
 
 
@@ -104,8 +109,10 @@ public class DeltaWeightView extends Composite{
 				// Push the data into the widget.
 				tables.setRowData(0, tableList);
 				tables.redraw();
-				ft.setWidget(3, 0, tables);
-				ft.setBorderWidth(2);
+				//Placement of tables on the flextable nr 2
+				ft2.setWidget(0, 0, tables);
+				
+				
 				final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
 				tables.setSelectionModel(selectionModel);
 				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -204,11 +211,11 @@ public class DeltaWeightView extends Composite{
 
 						}
 					});
-					coinTable.setRowCount(oprList.size(), true);
+					coinTable.setRowCount(coinList.size(), true);
 					// Push the data into the widget.
 					coinTable.setRowData(0, coinList);
 					coinTable.redraw();
-					ft.setWidget(3,1, coinTable);
+					ft2.setWidget(0,1, coinTable);
 				}
 
 			});
@@ -324,7 +331,7 @@ public class DeltaWeightView extends Composite{
 					// Push the data into the widget.
 					oprTable.setRowData(0, oprList);
 					oprTable.redraw();
-					ft.setWidget(3,1, oprTable);
+					ft2.setWidget(0,1, oprTable);
 
 
 				}
