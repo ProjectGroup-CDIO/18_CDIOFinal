@@ -98,7 +98,19 @@ public class WeightView extends Composite {
 						}
 						@Override
 						public void onSuccess(Void result) {
-							//implementering afventer
+							c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+								@Override
+								public void onFailure(Throwable caught) {
+									Window.alert("An error occured: " + caught.getMessage());
+								}
+
+								@Override
+								public void onSuccess(Double result) {
+									weightLabel.setText("Netto: " + result + " kg");
+								}
+							});
+
 						}
 					}
 							); 
