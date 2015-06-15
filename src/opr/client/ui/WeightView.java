@@ -33,7 +33,7 @@ public class WeightView extends Composite {
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
 		final TextArea weightDisplay = new TextArea();
-		weightDisplay.setPixelSize(290, 50);
+		weightDisplay.setPixelSize(302, 50);
 		weightDisplay.setEnabled(false);
 		vPanel.add(weightDisplay);
 
@@ -69,14 +69,14 @@ public class WeightView extends Composite {
 		});
 
 		hPanel1.add(getWeightButton);
-		getWeightButton.setPixelSize( 100, 30);
+		getWeightButton.setPixelSize( 105, 30);
 
 
 		//Weight-button, save
 
 		Button saveWeightButton = new Button("Save");
 		hPanel1.add(saveWeightButton);
-		saveWeightButton.setPixelSize(100, 30);
+		saveWeightButton.setPixelSize(105, 30);
 
 		
 		//Weight-button, tara
@@ -102,6 +102,6 @@ public class WeightView extends Composite {
 		});
 		
 		hPanel1.add(taraWeightButton);
-		taraWeightButton.setPixelSize(100, 30);
+		taraWeightButton.setPixelSize(105, 30);
 	}
 }

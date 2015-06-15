@@ -48,6 +48,11 @@ public class StykWeight extends Composite {
 		 unitLabel.addStyleName("unitLabel");
 		 vPanel.add(unitLabel);
 		 vPanel.add(ft);
+		 
+		 btnCoins.setPixelSize(100, 30);
+		 btnBills.setPixelSize(100, 30);
+		 btnFruit.setPixelSize(100, 30);
+		 btnCondiments.setPixelSize(100, 30);
 		
 		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
 		
@@ -74,6 +79,12 @@ public class StykWeight extends Composite {
 					buttonPanel.add(btn5);
 					buttonPanel.add(btn10);
 					buttonPanel.add(btn20);
+					btn50.setPixelSize(80, 30);
+					btn1.setPixelSize(80, 30);
+					btn2.setPixelSize(80, 30);
+					btn5.setPixelSize(80, 30);
+					btn10.setPixelSize(80, 30);
+					btn20.setPixelSize(80, 30);
 					ft.setWidget(5, 1, buttonPanel);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -90,6 +101,11 @@ public class StykWeight extends Composite {
 					buttonPanel.add(btn200);
 					buttonPanel.add(btn500);
 					buttonPanel.add(btn1000);
+					btn50r.setPixelSize(80, 30);
+					btn100.setPixelSize(80, 30);
+					btn200.setPixelSize(80, 30);
+					btn500.setPixelSize(80, 30);
+					btn1000.setPixelSize(80, 30);
 					ft.setWidget(5, 1, buttonPanel);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -107,6 +123,11 @@ public class StykWeight extends Composite {
 					buttonPanel.add(btnPineapple);
 					buttonPanel.add(btnKiwi);
 					buttonPanel.add(btnMango);
+					btnBanana.setPixelSize(80, 30);
+					btnStrawberry.setPixelSize(80, 30);
+					btnPineapple.setPixelSize(80, 30);
+					btnKiwi.setPixelSize(80, 30);
+					btnMango.setPixelSize(80, 30);
 					ft.setWidget(5, 1, buttonPanel);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -123,6 +144,10 @@ public class StykWeight extends Composite {
 					buttonPanel.add(btnPepper);
 					buttonPanel.add(btnSalt);
 					buttonPanel.add(btnChemicalX);
+					btnSugar.setPixelSize(80, 30);
+					btnPepper.setPixelSize(80, 30);
+					btnSalt.setPixelSize(80, 30);
+					btnChemicalX.setPixelSize(80, 30);
 					ft.setWidget(5, 1, buttonPanel);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
