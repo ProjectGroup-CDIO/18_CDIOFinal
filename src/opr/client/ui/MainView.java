@@ -2,12 +2,15 @@ package opr.client.ui;
 
 import opr.client.service.IASEService;
 import opr.client.service.IASEServiceAsync;
+import opr.client.service.IBatchService;
+import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinService;
 import opr.client.service.ICoinServiceAsync;
 import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
+import opr.client.ui.ListView.Callback;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
@@ -17,7 +20,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite implements Login.Callback, WeightView.Callback,
-		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback {
+		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback, ListView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -29,6 +32,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 	private final IMetaServiceAsync Metaservice = GWT.create(IMetaService.class);
 	private final ICoinServiceAsync CoinService = GWT.create(ICoinService.class);
+	private final IBatchServiceAsync BatchService = GWT.create(IBatchService.class);
+	
 
 	
 
@@ -195,6 +200,11 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public IASEServiceAsync getASEService() {
 		return ASEservice;
 	}
+	
+
+	public IBatchServiceAsync getBatchService() {
+		return BatchService;
+	}
 
 	public void openConnetion() throws Exception{
 		content.clear();
@@ -203,6 +213,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
+
 
 	
 

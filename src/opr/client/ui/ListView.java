@@ -3,6 +3,11 @@ package opr.client.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import opr.client.service.IASEServiceAsync;
+import opr.client.service.IBatchServiceAsync;
+import opr.client.service.ICoinServiceAsync;
+import opr.client.service.IMetaServiceAsync;
+import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,8 +33,16 @@ public class ListView extends Composite {
 	private ArrayList<HorizontalPanel> al;
 	private OperatoerDTO opr;
 
+	public interface Callback{
+		
+		public IOperatoerServiceAsync getService();
+		public void openListView() throws Exception;
+		public void openEditView(int i) throws Exception;
+		
+	}
 	
-	public ListView(final MainView main) throws Exception {
+	
+	public ListView(final Callback c) throws Exception {
 		initWidget(this.vPanel);
 		final FlexTable ft = new FlexTable();
 		final FlexCellFormatter ftFormat = ft.getFlexCellFormatter();
@@ -40,7 +53,7 @@ public class ListView extends Composite {
 		ft.setText(0, 0, "Opr ID");
 		ft.setText(0, 1, "Navn");
 		
-		main.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>() {
+		c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -72,7 +85,7 @@ public class ListView extends Composite {
 					RadioButton btn = (RadioButton) ft.getWidget(i+1, 2);
 					if(btn.getValue()) {
 						try {
-							main.openEditView(Integer.parseInt(ft.getText(i+1, 0)));
+							c.openEditView(Integer.parseInt(ft.getText(i+1, 0)));
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -93,7 +106,7 @@ public class ListView extends Composite {
 					RadioButton btn = (RadioButton) ft.getWidget(i+1, 2);
 					if(btn.getValue()) {
 						try {
-							main.getService().getOperatoer(Integer.parseInt(ft.getText(i+1, 0)), new AsyncCallback<OperatoerDTO>() {
+							c.getService().getOperatoer(Integer.parseInt(ft.getText(i+1, 0)), new AsyncCallback<OperatoerDTO>() {
 
 								@Override
 								public void onFailure(Throwable caught) {
@@ -105,7 +118,7 @@ public class ListView extends Composite {
 								public void onSuccess(OperatoerDTO result) {
 									opr = result; 
 									try {
-										main.getService().deleteOperatoer(opr, new AsyncCallback<Void>() {
+										c.getService().deleteOperatoer(opr, new AsyncCallback<Void>() {
 
 											@Override
 											public void onFailure(Throwable caught) {
@@ -117,7 +130,7 @@ public class ListView extends Composite {
 											public void onSuccess(Void result) {
 												Window.alert("Success: Operatør "+opr.getOprNavn()+" slettet.\n(Sat til inaktiv)");
 												try {
-													main.openListView();
+													c.openListView();
 												} catch (Exception e) {
 													// TODO Auto-generated catch block
 													e.printStackTrace();
