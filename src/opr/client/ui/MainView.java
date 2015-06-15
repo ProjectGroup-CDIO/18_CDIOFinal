@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite implements Login.Callback, WeightView.Callback,
-		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback, ListView.Callback {
+		StykWeight.Callback, DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback, ListView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
@@ -87,7 +87,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 
 	public void openStykWeight() throws Exception{
 		content.clear();
-		coin = new StykWeight(this);
+		StykWeight coin = new StykWeight(this);
 		content.add(coin);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
