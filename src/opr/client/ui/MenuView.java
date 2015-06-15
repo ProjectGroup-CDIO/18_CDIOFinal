@@ -159,11 +159,11 @@ public class MenuView extends Composite {
 		unitWBtn.setPixelSize( 100, 30);
 		deltaWBtn.setPixelSize( 100, 30);
 		coinBtn.setPixelSize(100, 30);
-
 		listBtn.setPixelSize(100, 30);
 		addBtn.setPixelSize(100, 30);
 		connectionBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
+		testBtn.setPixelSize(100, 30);
 
 		vPanel.add(weightBtn);
 		vPanel.add(unitWBtn);
