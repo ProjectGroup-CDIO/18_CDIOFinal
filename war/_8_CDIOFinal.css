@@ -50,6 +50,8 @@ h1 {
 
 .weightLabel {
 	font-size: 25pt;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .sendButton {

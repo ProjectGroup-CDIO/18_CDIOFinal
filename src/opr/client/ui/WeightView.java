@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WeightView extends Composite {
 
+	
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
@@ -32,11 +33,7 @@ public class WeightView extends Composite {
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
-		final TextArea weightDisplay = new TextArea();
-		weightDisplay.setPixelSize(302, 50);
-		weightDisplay.setEnabled(false);
-		vPanel.add(weightDisplay);
-
+		vPanel.setBorderWidth(2);
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
 
@@ -59,7 +56,7 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onSuccess(Double result) {
-							weightDisplay.setText("" + result);
+							weightLabel.setText("Netto: " + result + " kg");
 						}
 					});
 				} catch (Exception e) {
