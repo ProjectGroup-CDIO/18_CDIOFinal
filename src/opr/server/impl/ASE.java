@@ -28,7 +28,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private double tara;
 	private double netto;
 	
-	
+
 	//------------------------------------
 	//Vægtens IP
 	//62.79.16.17
@@ -37,6 +37,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	//127.0.0.1
 	//------------------------------------
 	
+
 	private static String host = "62.79.16.17";
 	private static int port = 8000;
 	
