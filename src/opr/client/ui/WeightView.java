@@ -2,7 +2,6 @@ package opr.client.ui;
 
 import opr.client.service.IASEServiceAsync;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -11,24 +10,25 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WeightView extends Composite {
 
-	
+
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
-	private Label weightLabel = new Label("Netto");
-	private TextBox weightTxtBox = new TextBox(); 
+	private Label weightLabel = new Label("Netto"); 
 
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 	}
 
 	public WeightView(final Callback c) {
+
+		//-------------------------------------------
+		//initialiserer panel, tilføjer paneler og labels
+		//-------------------------------------------
 
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
@@ -38,9 +38,9 @@ public class WeightView extends Composite {
 		vPanel.add(hPanel1);
 
 
-
-
+		//-------------------------------------------
 		//Weight-button, get
+		//-------------------------------------------
 
 		Button getWeightButton = new Button("Get weight", new ClickHandler(){
 			@Override
@@ -50,7 +50,6 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-
 							Window.alert("An error occured: " + caught.getMessage());
 						}
 
@@ -69,15 +68,25 @@ public class WeightView extends Composite {
 		getWeightButton.setPixelSize( 105, 30);
 
 
+		//-------------------------------------------
 		//Weight-button, save
+		//-------------------------------------------
 
-		Button saveWeightButton = new Button("Save");
+		Button saveWeightButton = new Button("Save", new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event){
+				//implementering afventer
+			}
+		});
+
 		hPanel1.add(saveWeightButton);
 		saveWeightButton.setPixelSize(105, 30);
 
-		
+
+		//-------------------------------------------		
 		//Weight-button, tara
-		
+		//-------------------------------------------
+
 		Button taraWeightButton = new Button("Tara", new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event){
@@ -89,16 +98,29 @@ public class WeightView extends Composite {
 						}
 						@Override
 						public void onSuccess(Void result) {
-							System.out.println(result);
+							c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+								@Override
+								public void onFailure(Throwable caught) {
+									Window.alert("An error occured: " + caught.getMessage());
+
+								}
+
+								@Override
+								public void onSuccess(Double result) {
+									//lol
+								}
+							});
 						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
+					}); 
+				}	catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+
+					hPanel1.add(taraWeightButton);
+					taraWeightButton.setPixelSize(105, 30);
 		
-		hPanel1.add(taraWeightButton);
-		taraWeightButton.setPixelSize(105, 30);
 	}
 }
