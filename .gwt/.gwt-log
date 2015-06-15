@@ -562,3 +562,11 @@ Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
       Compiling...
          Compilation completed in 0.01 seconds
       Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.VerticalSplitPanel.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method verticalSplitPanelThumb
+         Adding image 'com.google.gwt.user.client.ui.VerticalSplitPanel.Resources.verticalSplitPanelThumb'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0.06 seconds
+      Removing invalidated units
