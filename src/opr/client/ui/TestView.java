@@ -39,7 +39,7 @@ public class TestView extends Composite {
 					@Override
 					public void onSuccess(Double result) {
 						label.setText("vægten står på "+ result);
-						Window.alert("Success everybody: "+result);	
+//						Window.alert("Success everybody: "+result);	
 					}
 					
 				});
