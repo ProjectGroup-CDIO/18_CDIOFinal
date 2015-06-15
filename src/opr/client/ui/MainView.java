@@ -10,6 +10,7 @@ import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
+import opr.client.ui.ListView.Callback;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
@@ -19,7 +20,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite implements Login.Callback, WeightView.Callback,
-		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback {
+		DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback, ListView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();

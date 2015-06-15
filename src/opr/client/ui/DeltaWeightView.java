@@ -226,7 +226,7 @@ public class DeltaWeightView extends Composite{
 				batchTable.addColumn(toleranceColumn, "Tolerance");
 				
 				final SingleSelectionModel<BatchDTO> selectionModel = new SingleSelectionModel<BatchDTO>();
-				batchTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+			
 
 				batchTable.setSelectionModel(selectionModel);
 				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
