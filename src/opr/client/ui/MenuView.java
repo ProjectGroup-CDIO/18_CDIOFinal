@@ -94,7 +94,7 @@ public class MenuView extends Composite {
 		//delta-weight-button, opens DeltaWeightView when pressed
 		//-----------------------------------------------------
 
-		Button deltaWBtn = new Button("Delta Weight", new ClickHandler(){
+		Button deltaWBtn = new Button("DELTA", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent even){
 				try{
@@ -124,7 +124,7 @@ public class MenuView extends Composite {
 		//connectionView-button, opens Connection when pressed
 		//-----------------------------------------------------
 		
-		Button connectionBtn = new Button("Connection", new ClickHandler(){
+		Button connectionBtn = new Button("CONNECTION", new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
