@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class WeightView extends Composite {
 
-	
+
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
@@ -26,11 +26,10 @@ public class WeightView extends Composite {
 
 	public WeightView(final Callback c) {
 
-		
 		//-------------------------------------------
 		//initialiserer panel, tilføjer paneler og labels
 		//-------------------------------------------
-		
+
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
@@ -39,11 +38,10 @@ public class WeightView extends Composite {
 		vPanel.add(hPanel1);
 
 
-
 		//-------------------------------------------
 		//Weight-button, get
 		//-------------------------------------------
-		
+
 		Button getWeightButton = new Button("Get weight", new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event){
@@ -52,7 +50,6 @@ public class WeightView extends Composite {
 
 						@Override
 						public void onFailure(Throwable caught) {
-
 							Window.alert("An error occured: " + caught.getMessage());
 						}
 
@@ -70,20 +67,26 @@ public class WeightView extends Composite {
 		hPanel1.add(getWeightButton);
 		getWeightButton.setPixelSize( 105, 30);
 
-	
+
 		//-------------------------------------------
 		//Weight-button, save
 		//-------------------------------------------
-		
-		Button saveWeightButton = new Button("Save");
+
+		Button saveWeightButton = new Button("Save", new ClickHandler(){
+			@Override
+			public void onClick(ClickEvent event){
+				//implementering afventer
+			}
+		});
+
 		hPanel1.add(saveWeightButton);
 		saveWeightButton.setPixelSize(105, 30);
 
-	
+
 		//-------------------------------------------		
 		//Weight-button, tara
 		//-------------------------------------------
-		
+
 		Button taraWeightButton = new Button("Tara", new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event){
@@ -95,16 +98,29 @@ public class WeightView extends Composite {
 						}
 						@Override
 						public void onSuccess(Void result) {
-							System.out.println(result);
+							c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+								@Override
+								public void onFailure(Throwable caught) {
+									Window.alert("An error occured: " + caught.getMessage());
+
+								}
+
+								@Override
+								public void onSuccess(Double result) {
+									//lol
+								}
+							});
 						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
+					}); 
+				}	catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+
+					hPanel1.add(taraWeightButton);
+					taraWeightButton.setPixelSize(105, 30);
 		
-		hPanel1.add(taraWeightButton);
-		taraWeightButton.setPixelSize(105, 30);
 	}
 }

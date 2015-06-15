@@ -24,11 +24,11 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	private Socket sock;
 	private BufferedReader in;
 	private DataOutputStream out;
-	private int brutto;
-	private int tara;
-	private int netto = (brutto - tara);
+	private double brutto;
+	private double tara;
+	private double netto = (brutto - tara);
 	
-	private static String host = "10.16.161.152";
+	private static String host = "127.0.0.1";
 	private static int port = 8000;
 	
 	public ASE() throws UnknownHostException, IOException {
@@ -73,7 +73,6 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 
 	@Override
 	public void tara() throws Exception {
-		getSWeight(); 
 		tara = brutto;	
 	}
 	
@@ -102,19 +101,19 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 		this.out = out;
 	}
 
-	public int getBrutto() {
+	public double getBrutto() {
 		return brutto;
 	}
 
-	public void setBrutto(int brutto) {
+	public void setBrutto(double brutto) {
 		this.brutto = brutto;
 	}
 
-	public int getNetto() {
+	public double getNetto() {
 		return netto;
 	}
 
-	public void setNetto(int netto) {
+	public void setNetto(double netto) {
 		this.netto = netto;
 	}
 
@@ -147,8 +146,4 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
-
 }

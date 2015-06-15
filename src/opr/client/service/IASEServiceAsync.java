@@ -11,5 +11,6 @@ public interface IASEServiceAsync {
 	void tara(AsyncCallback<Void> callback);
 	void run(AsyncCallback<Void> callback);
 	void changeSocket(String Ip, int port, AsyncCallback<Void> callback);
+	void setBrutto(double brutto, AsyncCallback<Void> callback);
 
 }
