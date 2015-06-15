@@ -7,13 +7,12 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 public class DeltaBar extends Composite {
 
 	private double weigthIndicator = 201.0;
+	private double lowerWeigthBound = 191.0;
+	private double upperWeigthBound = 211.0;
 	
-	private double lowerWiegthBound = 191.0;
-	private double upperWiegthBound = 211.0;
+	
 	public DeltaBar(final MainView main){
-		
-		
-				
+			
 		LayoutPanel layoutPanel = new LayoutPanel();
 		layoutPanel.setStyleName("layoutPanel0");
 		initWidget(layoutPanel);
@@ -28,13 +27,13 @@ public class DeltaBar extends Composite {
 		LayoutPanel layoutPanel_2 = new LayoutPanel();
 		layoutPanel_2.setStyleName("layoutPanel1");
 		layoutPanel.add(layoutPanel_2);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWiegthBound, Unit.PX, 2.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWeigthBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_2, 0.0, Unit.PX, 37.0, Unit.PX);
 		
 		LayoutPanel layoutPanel_3 = new LayoutPanel();
 		layoutPanel_3.setStyleName("layoutPanel1");
 		layoutPanel.add(layoutPanel_3);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWiegthBound, Unit.PX, 2.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeigthBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
 	
 		
@@ -46,15 +45,15 @@ public class DeltaBar extends Composite {
 		this.weigthIndicator = weigthIndicator;
 	}
 	public double getLowerWiegthBound() {
-		return lowerWiegthBound;
+		return lowerWeigthBound;
 	}
 	public void setLowerWiegthBound(double lowerWiegthBound) {
-		this.lowerWiegthBound = lowerWiegthBound;
+		this.lowerWeigthBound = lowerWiegthBound;
 	}
 	public double getUpperWiegthBound() {
-		return upperWiegthBound;
+		return upperWeigthBound;
 	}
 	public void setUpperWiegthBound(double upperWiegthBound) {
-		this.upperWiegthBound = upperWiegthBound;
+		this.upperWeigthBound = upperWiegthBound;
 	}
 }
