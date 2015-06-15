@@ -80,3 +80,15 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+.layoutPanel0{
+	border-style: solid;
+    border-color: #f6fbfe;
+}
+.layoutPanel1{
+	border-style: solid;
+    border-color: #0000ff;
+}
+.layoutPanel2{
+	border-style: solid;
+    border-color: #ff0000;
+}
