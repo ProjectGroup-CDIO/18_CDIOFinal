@@ -94,9 +94,8 @@ public class StykWeight extends Composite {
 		ft.setWidget(3, 1, stkLabel);
 		ft.setWidget(4, 1, stkText);
 		ft.setWidget(1, 0, btnCoins);
-		ft.setWidget(2, 0, btnBills);
-		ft.setWidget(3, 0, btnFruit);
-		ft.setWidget(4, 0, btnCondiments);
+		ft.setWidget(2, 0, btnFruit);
+		ft.setWidget(3, 0, btnCondiments);
 		
 		btnCoins.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
@@ -252,7 +251,7 @@ public class StykWeight extends Composite {
 		}
 
 	}
-	private void fruitCellView(Callback c) {
+	private void fruitCellView(final Callback c) {
 		try {
 			c.getFruitService().getFruitList(new AsyncCallback<List<FruitDTO>>(){
 
@@ -284,18 +283,31 @@ public class StykWeight extends Composite {
 					fruitTable.setSelectionModel(selectionModel);
 					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 						public void onSelectionChange(SelectionChangeEvent event) {
-							FruitDTO selected = selectionModel.getSelectedObject();
+							final FruitDTO selected = selectionModel.getSelectedObject();
 							/*
 							 * Here we want to display the data in the table operatoer
 							 * then we want to make it able to then show both coins and operatoer
 							 * 
 							 */
 							if (selected != null) {
-								//Window.alert("You selected: " + selected.getWeightPerUnit());
-								double weight = 1;
-								wText.setText(weight+"");
-								double tWeight = weight/selected.getWeightPerUnit();
-								stkText.setText("Number of units: "+tWeight);
+								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+									@Override
+									public void onFailure(Throwable caught) {
+										Window.alert("An error occured: " + caught.getMessage());
+									}
+
+									@Override
+									public void onSuccess(Double result) {
+										wText.setText("Netto: " + result + " kg");
+										double tWeight = (result)/(selected.getWeightPerUnit());
+										stkText.setText("Number of units: "+tWeight);
+									}
+								});
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 
 
