@@ -5,10 +5,12 @@ import java.util.List;
 import opr.client.service.IASEServiceAsync;
 import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinServiceAsync;
+import opr.client.service.IFruitServiceAsync;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.client.ui.DeltaWeightView.Callback;
 import opr.shared.CoinDTO;
+import opr.shared.FruitDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -60,12 +62,14 @@ public class StykWeight extends Composite {
 	Button btnSalt = new Button("Salt");
 	Button btnChemicalX = new Button("Chemical X");	
 	private List<CoinDTO> coinList;
+	private List<FruitDTO> fruitList;
 	
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
 		public IMetaServiceAsync getMetaService();
 		public ICoinServiceAsync getCoinService();
+		public IFruitServiceAsync getFruitService();
 	}
 	
 	public StykWeight(final Callback c){
@@ -96,21 +100,7 @@ public class StykWeight extends Composite {
 		
 		btnCoins.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {/*
-					HorizontalPanel buttonPanel = new HorizontalPanel();
-					buttonPanel.add(btn50);
-					buttonPanel.add(btn1);
-					buttonPanel.add(btn2);
-					buttonPanel.add(btn5);
-					buttonPanel.add(btn10);
-					buttonPanel.add(btn20);
-					btn50.setPixelSize(80, 30);
-					btn1.setPixelSize(80, 30);
-					btn2.setPixelSize(80, 30);
-					btn5.setPixelSize(80, 30);
-					btn10.setPixelSize(80, 30);
-					btn20.setPixelSize(80, 30);
-					ft.setWidget(5, 1, buttonPanel);*/
+				try {
 					coinCellView(c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -118,21 +108,21 @@ public class StykWeight extends Composite {
 				}
 			}
 		});
-		btnBills.addClickHandler(new ClickHandler(){
+		btnFruit.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {
-					HorizontalPanel buttonPanel = new HorizontalPanel();
-					buttonPanel.add(btn50r);
-					buttonPanel.add(btn100);
-					buttonPanel.add(btn200);
-					buttonPanel.add(btn500);
-					buttonPanel.add(btn1000);
-					btn50r.setPixelSize(80, 30);
-					btn100.setPixelSize(80, 30);
-					btn200.setPixelSize(80, 30);
-					btn500.setPixelSize(80, 30);
-					btn1000.setPixelSize(80, 30);
-					ft.setWidget(5, 1, buttonPanel);
+				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("An error occured: " + caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(Double result) {
+						wText.setText("Netto: " + result + " kg");
+					}
+				});
+					fruitCellView(c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -182,7 +172,7 @@ public class StykWeight extends Composite {
 			}
 		});
 	}
-	private void coinCellView(Callback c) {
+	private void coinCellView(final Callback c) {
 		try {
 			c.getCoinService().getCoinList(new AsyncCallback<List<CoinDTO>>(){
 
@@ -215,7 +205,86 @@ public class StykWeight extends Composite {
 					coinTable.setSelectionModel(selectionModel);
 					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 						public void onSelectionChange(SelectionChangeEvent event) {
-							CoinDTO selected = selectionModel.getSelectedObject();
+							final CoinDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+							if (selected != null) {
+								//Window.alert("You selected: " + selected.getWeightPerUnit());
+								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+									@Override
+									public void onFailure(Throwable caught) {
+										Window.alert("An error occured: " + caught.getMessage());
+									}
+
+									@Override
+									public void onSuccess(Double result) {
+										wText.setText("Netto: " + result + " kg");
+										double tWeight = (result)/(selected.getWeightPerUnit());
+										stkText.setText("Number of units: "+tWeight);
+									}
+								});
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+					
+					
+					coinTable.setRowCount(coinList.size(), true);
+					// Push the data into the widget.
+					coinTable.setRowData(0, coinList);
+					coinTable.redraw();
+					ft.setWidget(5, 1, coinTable);
+				}
+
+			});
+
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	private void fruitCellView(Callback c) {
+		try {
+			c.getFruitService().getFruitList(new AsyncCallback<List<FruitDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access databse: "+caught.getMessage());
+
+				}
+				@Override
+				public void onSuccess(List<FruitDTO> result) {
+					fruitList = result;
+
+					CellTable<FruitDTO> fruitTable = new CellTable<FruitDTO>();
+					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					// Add a text column to show the name.
+					TextColumn<FruitDTO> nameColumn = new TextColumn<FruitDTO>() {
+						@Override
+						public String getValue(FruitDTO object) {
+							return object.getName();
+						}
+
+					};
+					fruitTable.addColumn(nameColumn, "Fruit name");
+				
+					final SingleSelectionModel<FruitDTO> selectionModel = new SingleSelectionModel<FruitDTO>();
+					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					fruitTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							FruitDTO selected = selectionModel.getSelectedObject();
 							/*
 							 * Here we want to display the data in the table operatoer
 							 * then we want to make it able to then show both coins and operatoer
@@ -234,11 +303,11 @@ public class StykWeight extends Composite {
 					});
 					
 					
-					coinTable.setRowCount(coinList.size(), true);
+					fruitTable.setRowCount(fruitList.size(), true);
 					// Push the data into the widget.
-					coinTable.setRowData(0, coinList);
-					coinTable.redraw();
-					ft.setWidget(5, 1, coinTable);
+					fruitTable.setRowData(0, fruitList);
+					fruitTable.redraw();
+					ft.setWidget(5, 1, fruitTable);
 				}
 
 			});

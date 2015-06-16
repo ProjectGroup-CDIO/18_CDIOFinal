@@ -42,6 +42,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>fruitServlet</servlet-name>
+		<servlet-class>opr.server.impl.FruitDAO</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fruitServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/fruitservice</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>batchServlet</servlet-name>
 		<servlet-class>opr.server.impl.BatchDAO</servlet-class>
 	</servlet>
