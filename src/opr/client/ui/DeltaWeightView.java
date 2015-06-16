@@ -30,11 +30,11 @@ public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
-	
+
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
-
+	private Label lol = new Label("Table name");
 	private Label prdName = new Label("Product Name");
 	private Label batchID = new Label("BatchID");
 	private Label wData = new Label("Batch weight");
@@ -112,7 +112,6 @@ public class DeltaWeightView extends Composite{
 				
 				
 				tables.addColumn(nameColumn, "Table name");
-				
 				// Set the total row count. This isn't strictly necessary, but it affects
 				// paging calculations, so its good habit to keep the row count up to date.
 				tables.setRowCount(tableList.size(), true);

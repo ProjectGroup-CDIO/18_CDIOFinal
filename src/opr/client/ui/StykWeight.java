@@ -192,12 +192,12 @@ public class StykWeight extends Composite {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getValue());
+							
 						}
 
 
 					};
 					coinTable.addColumn(valueColumn, "Coin Value");
-				
 					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
 					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -240,6 +240,7 @@ public class StykWeight extends Composite {
 					coinTable.setRowData(0, coinList);
 					coinTable.redraw();
 					ft.setWidget(5, 1, coinTable);
+//					ft.setStyleName("H2");
 				}
 
 			});
