@@ -50,6 +50,15 @@
 		<url-pattern>/_8_cdiofinal/fruitservice</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>condimentsServlet</servlet-name>
+		<servlet-class>opr.server.impl.CondimentsDAO</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>condimentsServlet</servlet-name>
+		<url-pattern>/_8_cdiofinal/condimentsservice</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>batchServlet</servlet-name>
 		<servlet-class>opr.server.impl.BatchDAO</servlet-class>

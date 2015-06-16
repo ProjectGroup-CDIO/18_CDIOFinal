@@ -10,7 +10,6 @@ import opr.server.Connector;
 import opr.server.interfaces.IFruitDAO;
 import opr.shared.DALException;
 import opr.shared.FruitDTO;
-import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
