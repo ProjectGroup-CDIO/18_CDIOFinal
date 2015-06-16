@@ -109,8 +109,10 @@ public class DeltaWeightView extends Composite{
 						return object;
 					}
 				};
+				
+				
 				tables.addColumn(nameColumn, "Table name");
-
+				
 				// Set the total row count. This isn't strictly necessary, but it affects
 				// paging calculations, so its good habit to keep the row count up to date.
 				tables.setRowCount(tableList.size(), true);
@@ -119,7 +121,8 @@ public class DeltaWeightView extends Composite{
 				tables.redraw();
 				//Placement of tables on the flextable nr 2
 				ft2.setWidget(0, 0, tables);
-				
+				ft2.setStyleName("H2");
+//				tables.getRowElement(0).getCells().getItem(0).setId("H3");
 				
 				final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
 				tables.setSelectionModel(selectionModel);
@@ -136,7 +139,7 @@ public class DeltaWeightView extends Composite{
 						//						}
 						if(selected.equals("operatoer")){
 							oprCellView(c);
-
+							
 						}
 						if(selected.equals("coins")){
 							coinCellView(c);
@@ -401,7 +404,6 @@ public class DeltaWeightView extends Composite{
 
 					};
 					oprTable.addColumn(oprColumn, "Opr ID");
-
 
 					TextColumn<OperatoerDTO> nameColumn = new TextColumn<OperatoerDTO>() {
 						@Override

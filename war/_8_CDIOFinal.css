@@ -92,3 +92,20 @@ h1 {
 	border-style: solid;
     border-color: #fb428e;
 }
+.H2 td{
+	font-size: 2em;
+  	color: #000000;
+  	margin: 0px 0px 0px;
+  	border-width: 1px;
+  	border-style: solid;
+  	font-size: 100%;
+  	font-style: normal;
+  	text-shadow: #000 0px 0px 0 !important;
+}
+#H3{
+  color: ##BEC7CC !important;
+  /* padding: 3px 15px; */
+  /* text-align: left; */
+  /* text-shadow: #ddf 1px 1px 0; */
+  /* overflow: hidden; */
+}
