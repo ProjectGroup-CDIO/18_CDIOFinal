@@ -222,8 +222,11 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								Window.alert("You selected: " + selected.getWeightPerUnit());
-								
+								//Window.alert("You selected: " + selected.getWeightPerUnit());
+								double weight = 1;
+								wText.setText(weight+"");
+								double tWeight = weight/selected.getWeightPerUnit();
+								stkText.setText("Number of units: "+tWeight);
 							}
 
 
