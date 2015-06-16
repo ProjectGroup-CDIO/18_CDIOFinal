@@ -6,6 +6,8 @@ import opr.client.service.IBatchService;
 import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinService;
 import opr.client.service.ICoinServiceAsync;
+import opr.client.service.ICondimentsService;
+import opr.client.service.ICondimentsServiceAsync;
 import opr.client.service.IFruitService;
 import opr.client.service.IFruitServiceAsync;
 import opr.client.service.IMetaService;
@@ -35,6 +37,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IMetaServiceAsync Metaservice = GWT.create(IMetaService.class);
 	private final ICoinServiceAsync CoinService = GWT.create(ICoinService.class);
 	private final IFruitServiceAsync FruitService = GWT.create(IFruitService.class);
+	private final ICondimentsServiceAsync CondimentsService = GWT.create(ICondimentsService.class);
 	private final IBatchServiceAsync BatchService = GWT.create(IBatchService.class);
 	
 
@@ -231,7 +234,11 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public IFruitServiceAsync getFruitService() {
 		return FruitService;
 	}
-
+	
+	@Override
+	public ICondimentsServiceAsync getCondimentsService(){
+		return CondimentsService;
+	}
 
 	
 
