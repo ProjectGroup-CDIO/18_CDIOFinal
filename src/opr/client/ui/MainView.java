@@ -15,6 +15,7 @@ import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -42,7 +43,17 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	
 	public MainView() throws Exception {
 		initWidget(aPanel);
-
+		ASEservice.connect(new AsyncCallback<Void>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Der kunne ikke skabes forbindelse til vægten.");	
+				System.out.println("No connection established");
+			}
+			@Override
+			public void onSuccess(Void result) {
+				Window.alert("Forbindelse til vægten er oprettet");			
+			}			
+		});
 		aPanel.setSize(Integer.toString(Window.getClientWidth())+"px", Integer.toString(Window.getClientHeight())+"px");
 		
 		login = new Login(this);
