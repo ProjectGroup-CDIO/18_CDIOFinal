@@ -9,9 +9,9 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 
 public class DeltaBar extends Composite {
 
-	private double weigthIndicator = 201.0;
-	private double lowerWiegthBound = 191.0;
-	private double upperWiegthBound = 211.0;
+	private double weightIndicator = 201.0;
+	private double lowerWeightBound = 191.0;
+	private double upperWeightBound = 211.0;
 	private LayoutPanel layoutPanel = new LayoutPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
 	Label l1 = new Label("Y");
@@ -43,22 +43,22 @@ private	LayoutPanel layoutPanel_3 = new LayoutPanel();
 		
 	}
 	public double getWeigthIndicator() {
-		return weigthIndicator;
+		return weightIndicator;
 	}
 	public void setWeigthIndicator(double weigthIndicator) {
-		this.weigthIndicator = weigthIndicator;
+		this.weightIndicator = weigthIndicator;
 	}
 	public double getLowerWiegthBound() {
-		return lowerWiegthBound;
+		return lowerWeightBound;
 	}
 	public void setLowerWiegthBound(double lowerWiegthBound) {
-		this.lowerWiegthBound = lowerWiegthBound;
+		this.lowerWeightBound = lowerWiegthBound;
 	}
 	public double getUpperWiegthBound() {
-		return upperWiegthBound;
+		return upperWeightBound;
 	}
 	public void setUpperWiegthBound(double upperWiegthBound) {
-		this.upperWiegthBound = upperWiegthBound;
+		this.upperWeightBound = upperWiegthBound;
 	}
 	public void deltaBarData(double z, double q, double tolerance){
 		
@@ -66,17 +66,17 @@ private	LayoutPanel layoutPanel_3 = new LayoutPanel();
 		double upper = q+q*(tolerance);
 		double x = q+q*(tolerance*3);
 		double y = q-q*(tolerance*3);
-		weigthIndicator = (x-y/100)*4*z;
-		lowerWiegthBound = ((x-y/100)*4)*lower;
-		upperWiegthBound = ((x-y/100)*4)*upper;
+		weightIndicator = (x-y/100)*4*z;
+		lowerWeightBound = ((x-y/100)*4)*lower;
+		upperWeightBound = ((x-y/100)*4)*upper;
 		l1.setText(Double.toString(y));
 		l2.setText(Double.toString(x));
 		//Window.alert(""+weigthIndicator + ":"+z + ":" + q +":" + tolerance);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weigthIndicator, Unit.PX, 2.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weightIndicator, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_1, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWiegthBound, Unit.PX, 2.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWeightBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_2, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWiegthBound, Unit.PX, 2.0, Unit.PX);
+		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeightBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
 		
 	}
