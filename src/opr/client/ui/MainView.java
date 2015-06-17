@@ -6,11 +6,14 @@ import opr.client.service.IBatchService;
 import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinService;
 import opr.client.service.ICoinServiceAsync;
+import opr.client.service.ICondimentsService;
+import opr.client.service.ICondimentsServiceAsync;
+import opr.client.service.IFruitService;
+import opr.client.service.IFruitServiceAsync;
 import opr.client.service.IMetaService;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerService;
 import opr.client.service.IOperatoerServiceAsync;
-import opr.client.ui.ListView.Callback;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.core.shared.GWT;
@@ -33,6 +36,8 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IASEServiceAsync ASEservice = GWT.create(IASEService.class);
 	private final IMetaServiceAsync Metaservice = GWT.create(IMetaService.class);
 	private final ICoinServiceAsync CoinService = GWT.create(ICoinService.class);
+	private final IFruitServiceAsync FruitService = GWT.create(IFruitService.class);
+	private final ICondimentsServiceAsync CondimentsService = GWT.create(ICondimentsService.class);
 	private final IBatchServiceAsync BatchService = GWT.create(IBatchService.class);
 	
 
@@ -225,6 +230,15 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 
+	@Override
+	public IFruitServiceAsync getFruitService() {
+		return FruitService;
+	}
+	
+	@Override
+	public ICondimentsServiceAsync getCondimentsService(){
+		return CondimentsService;
+	}
 
 	
 
