@@ -1,7 +1,6 @@
 package opr.client.ui;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -9,11 +8,14 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 
 public class DeltaBar extends Composite {
 
-	private static final double TOTALPIXELS = 402;
-	private static final double MIDDLE = TOTALPIXELS/2;
 	private double weightIndicator = 201.0;
 	private double lowerWeightBound = 191.0;
 	private double upperWeightBound = 211.0;
+	private static final double TOTALPIXELS = 402;
+	private static final double MIDDLE = TOTALPIXELS/2;
+	
+	
+
 	private LayoutPanel layoutPanel = new LayoutPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
 	Label l1 = new Label("Y");
@@ -44,33 +46,37 @@ public class DeltaBar extends Composite {
 
 
 	}
-	public double getWeigthIndicator() {
+	public double getWeightIndicator() {
 		return weightIndicator;
 	}
-	public void setWeigthIndicator(double weigthIndicator) {
+	public void setWeightIndicator(double weigthIndicator) {
 		this.weightIndicator = weigthIndicator;
 	}
-	public double getLowerWiegthBound() {
+	public double getLowerWeightBound() {
 		return lowerWeightBound;
 	}
-	public void setLowerWiegthBound(double lowerWiegthBound) {
+	public void setLowerWeightBound(double lowerWiegthBound) {
 		this.lowerWeightBound = lowerWiegthBound;
 	}
-	public double getUpperWiegthBound() {
+	public double getUpperWeightBound() {
 		return upperWeightBound;
 	}
-	public void setUpperWiegthBound(double upperWiegthBound) {
+	public void setUpperWeightBound(double upperWiegthBound) {
 		this.upperWeightBound = upperWiegthBound;
 	}
 	public void deltaBarData(double z, double q, double tolerance){
+		
+		double lower = q-q*(tolerance);
+		double upper = q+q*(tolerance);
 
-		double lower = q-q*tolerance;
-		double upper = q+q*tolerance;
 		double x = q+q*(tolerance*3);
 		double y = q-q*(tolerance*3);
+		
 		weightIndicator = (x-y/100)*4*z;
+		
 		lowerWeightBound = ((x-y/100)*4)*lower;
 		upperWeightBound = ((x-y/100)*4)*upper;
+		
 		l1.setText(Double.toString(y));
 		l2.setText(Double.toString(x));
 		//Window.alert(""+weigthIndicator + ":"+z + ":" + q +":" + tolerance);
