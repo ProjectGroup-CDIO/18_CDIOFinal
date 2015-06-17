@@ -46,8 +46,8 @@ public class DeltaWeightView extends Composite{
 	private TextBox SIDataBox = new TextBox();
 
 
-	
-	
+
+
 	private List<BatchDTO> batchList;
 	private DeltaBar dbar = new DeltaBar();
 
@@ -59,22 +59,23 @@ public class DeltaWeightView extends Composite{
 
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
+
 		vPanel.setHeight("328px");
-		
-				viewInfo.addStyleName("deltaWeight");
-				vPanel.add(viewInfo);
-				viewInfo.setHeight("92px");
+		viewInfo.addStyleName("deltaWeight");
+		vPanel.add(viewInfo);
+		viewInfo.setHeight("92px");
 
 		vPanel.add(dbar);
+		vPanel.add(vPanel2);
 		dbar.setHeight("71px");
-		vPanel.add(hPanel1);
-		hPanel1.setHeight("97px");
-		vPanel.add(ft2);
+		vPanel2.add(hPanel1);
+		vPanel2.setBorderWidth(2);
+		hPanel1.setHeight("52px");
+		vPanel2.add(ft2);
 		ft2.setWidth("550");
-		
 
 		hPanel1.add(ft);
-		ft.setWidth("580px");
+		ft.setWidth("555px");
 		ft.setWidget(1, 0, prdName);
 		ft.setWidget(1, 1, batchID);		
 		ft.setWidget(1, 2, wData);
@@ -85,13 +86,13 @@ public class DeltaWeightView extends Composite{
 		ft.setWidget(2, 2, batchData);
 		ft.setWidget(2, 3, SIDataBox);
 		SIDataBox.setWidth("128px");
-		
+
 		ft2.setStyleName("H2");
 		batchCellView(c);
-		
 
 
-		
+
+
 	}
 
 
