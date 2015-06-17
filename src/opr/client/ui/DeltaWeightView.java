@@ -28,6 +28,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
+	private VerticalPanel vPanel2 = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 
 	FlexTable ft = new FlexTable();
@@ -71,6 +72,7 @@ public class DeltaWeightView extends Composite{
 		vPanel.add(ft2);
 		ft2.setWidth("550");
 		
+
 		hPanel1.add(ft);
 		ft.setWidth("580px");
 		ft.setWidget(1, 0, prdName);

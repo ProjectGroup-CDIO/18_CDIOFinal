@@ -39,6 +39,13 @@ public class Login extends Composite {
 		vPanel.add(userID);
 		vPanel.add(lblTwo);
 		vPanel.add(password);
+		
+		userID.addStyleName("userID");
+		userID.setPixelSize(151, 20);
+		vPanel.setBorderWidth(2);
+		password.addStyleName("password");
+		password.setPixelSize(151, 20);
+		vPanel.setBorderWidth(2);
 	
 		Button btnOne = new Button("Submit", new ClickHandler() {
 			@Override
@@ -67,6 +74,9 @@ public class Login extends Composite {
 		});
 
 		vPanel.add(btnOne);	
+		btnOne.addStyleName("btnOne");
+		vPanel.setBorderWidth(2);
+		btnOne.setPixelSize(160, 30);
 
 
 	}

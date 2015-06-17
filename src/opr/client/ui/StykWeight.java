@@ -76,7 +76,7 @@ public class StykWeight extends Composite {
 		wText.setEnabled(false);
 		stkText.setEnabled(false);
 				
-		ft.setBorderWidth(5);
+		ft.setBorderWidth(2);
 		ft.setWidget(1, 1, wLabel);
 		ft.setWidget(2, 1, wText);
 		ft.setWidget(3, 1, stkLabel);
@@ -225,7 +225,6 @@ public class StykWeight extends Composite {
 						}
 					});
 					
-					
 					coinTable.setRowCount(coinList.size(), true);
 					coinTable.setSize("100%", "100%");
 					// Push the data into the widget.
@@ -234,6 +233,7 @@ public class StykWeight extends Composite {
 					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
 					//ft.setHTML(0, 0, "Choose one of the buttons");
 					ft.setWidget(5, 0, coinTable);
+					cellFormatter.setColSpan(5, 0, 2);
 
 				}
 

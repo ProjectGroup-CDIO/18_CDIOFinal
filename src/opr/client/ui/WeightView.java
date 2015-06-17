@@ -33,9 +33,10 @@ public class WeightView extends Composite {
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
-		vPanel.setBorderWidth(2);
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
+		
+		
 
 
 		//-------------------------------------------
@@ -66,6 +67,7 @@ public class WeightView extends Composite {
 
 		hPanel1.add(getWeightButton);
 		getWeightButton.setPixelSize( 105, 30);
+		hPanel1.setBorderWidth(3);
 
 
 		//-------------------------------------------
@@ -81,7 +83,7 @@ public class WeightView extends Composite {
 
 		hPanel1.add(saveWeightButton);
 		saveWeightButton.setPixelSize(105, 30);
-
+		hPanel1.setBorderWidth(3);
 
 		//-------------------------------------------		
 		//Weight-button, tara
@@ -122,6 +124,7 @@ public class WeightView extends Composite {
 
 		hPanel1.add(taraWeightButton);
 		taraWeightButton.setPixelSize(105, 30);
+		hPanel1.setBorderWidth(3);
 
 	}
 }
