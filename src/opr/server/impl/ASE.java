@@ -13,6 +13,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import opr.client.service.IASEService;
 import opr.server.Connector;
 import opr.server.interfaces.IASE;
+import opr.shared.DALException;
 
 public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runnable {
 	
@@ -30,10 +31,13 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	
 
 	//------------------------------------
-	//Vægtens IP
+	//Vægtens globale IP
 	//62.79.16.17
 	//
-	//Local IP
+	//Vægtens lokale IP
+	//169.254.2.2
+	//
+	//localhost IP
 	//127.0.0.1
 	//------------------------------------
 	
@@ -70,11 +74,14 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	}
 
 	@Override
-	public double getSIWeight() throws IOException {
+	public double getSIWeight() throws IOException, DALException {
 		out.writeBytes("SI\r\n");
 		String response = in.readLine();
 		if(response.startsWith("ES")) {
 			return -1;
+		}else if(response.startsWith("S+")){
+			throw new DALException("Weight Overload");
+			
 		}
 		double weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
 		return weight;
@@ -85,7 +92,6 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	public void tara() throws Exception {
 		tara = brutto;	
 	}
-	
 
 	public Socket getSock() {
 		return sock;

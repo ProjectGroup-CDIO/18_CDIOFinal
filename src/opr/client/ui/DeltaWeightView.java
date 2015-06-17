@@ -30,11 +30,11 @@ public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
-	
+
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
-
+	private Label lol = new Label("Table name");
 	private Label prdName = new Label("Product Name");
 	private Label batchID = new Label("BatchID");
 	private Label wData = new Label("Batch weight");
@@ -63,7 +63,7 @@ public class DeltaWeightView extends Composite{
 
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
-		
+
 		vPanel.add(dbar);
 
 		viewInfo.addStyleName("deltaWeight");
@@ -79,7 +79,7 @@ public class DeltaWeightView extends Composite{
 		ft.setWidget(2, 1, batchIDBox);
 		ft.setWidget(2, 2, batchData);
 		ft.setWidget(2, 3, SIDataBox);
-		
+
 		hPanel2.add(ft2);
 		vPanel.add(hPanel2);
 
@@ -109,10 +109,9 @@ public class DeltaWeightView extends Composite{
 						return object;
 					}
 				};
-				
-				
+
+
 				tables.addColumn(nameColumn, "Table name");
-				
 				// Set the total row count. This isn't strictly necessary, but it affects
 				// paging calculations, so its good habit to keep the row count up to date.
 				tables.setRowCount(tableList.size(), true);
@@ -122,8 +121,8 @@ public class DeltaWeightView extends Composite{
 				//Placement of tables on the flextable nr 2
 				ft2.setWidget(0, 0, tables);
 				ft2.setStyleName("H2");
-//				tables.getRowElement(0).getCells().getItem(0).setId("H3");
-				
+				//				tables.getRowElement(0).getCells().getItem(0).setId("H3");
+
 				final SingleSelectionModel<String> selectionModel = new SingleSelectionModel<String>();
 				tables.setSelectionModel(selectionModel);
 				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -139,7 +138,7 @@ public class DeltaWeightView extends Composite{
 						//						}
 						if(selected.equals("operatoer")){
 							oprCellView(c);
-							
+
 						}
 						if(selected.equals("coins")){
 							coinCellView(c);
@@ -159,8 +158,8 @@ public class DeltaWeightView extends Composite{
 
 
 	private void batchCellView(final Callback c) {
-		
-		
+
+
 		c.getBatchService().getBatchList(new AsyncCallback<List<BatchDTO>>(){
 
 			@Override
@@ -170,8 +169,8 @@ public class DeltaWeightView extends Composite{
 			@Override
 			public void onSuccess(List<BatchDTO> result) {
 				batchList = result;
-				
-				
+
+
 				CellTable<BatchDTO> batchTable = new CellTable<BatchDTO>();
 				batchTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -185,7 +184,7 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(IDColumn, "Batch ID");
-				
+
 				// Add a text column to show the name.
 				TextColumn<BatchDTO> raaNavnColumn = new TextColumn<BatchDTO>() {
 					@Override
@@ -196,7 +195,7 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(raaNavnColumn, "Raavare");
-				
+
 				// Add a text column to show the name.
 				TextColumn<BatchDTO> raavareIDColumn = new TextColumn<BatchDTO>() {
 					@Override
@@ -218,7 +217,7 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(baWghtColumn, "Batch Weight");
-				
+
 				// Add a text column to show the name.
 				TextColumn<BatchDTO> toleranceColumn = new TextColumn<BatchDTO>() {
 					@Override
@@ -229,9 +228,9 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(toleranceColumn, "Tolerance");
-				
+
 				final SingleSelectionModel<BatchDTO> selectionModel = new SingleSelectionModel<BatchDTO>();
-			
+
 
 				batchTable.setSelectionModel(selectionModel);
 				selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -246,48 +245,41 @@ public class DeltaWeightView extends Composite{
 							Window.alert("You selected: " + selected);
 						}
 
-						
 						productName.setText(selected.getRaavare_navn());
 						batchIDBox.setText(""+selected.getBatch_id());
 						batchData.setText("" + selected.getBatchweight());
-						
-						
-						getSIData(c,selected.getBatchweight(),selected.getTolerance());
-						
-					}
 
-				
+						getSIData(c, selected.getBatchweight(), selected.getTolerance());
+					}
 				});
-				
+
 				batchTable.setRowCount(batchList.size(), true);
 				// Push the data into the widget.
 				batchTable.setRowData(0, batchList);
 				batchTable.redraw();
 				ft2.setWidget(0,1, batchTable);
 			}
-			
 		});
-		
 	}
-	
+
 	private void getSIData(final Callback c, final double bW, final double tol) {
 		c.getASEService().getSIWeight(new AsyncCallback<Double>(){
-
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Error accesing weight" + caught.getMessage());
-				
+				if(caught.getMessage().equals("Weight Overload")) {
+					SIDataBox.setText("N/A");
+					getSIData(c,bW,tol);
+				}else{
+					Window.alert("Error accesing weight" + caught.getMessage());
+				}
 			}
 
 			@Override
 			public void onSuccess(Double result) {
 				SIDataBox.setText(Double.toString(result));
-				dbar.deltaBarData(result, bW, tol);
-				
+				dbar.deltaBarData2(result, bW, tol);
 				getSIData(c,bW,tol);
-				
 			}
-			
 		});		
 	}
 	private void coinCellView(Callback c) {
@@ -312,34 +304,27 @@ public class DeltaWeightView extends Composite{
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getValue());
 						}
-
-
 					};
-					coinTable.addColumn(valueColumn, "Coin Value");
 
+					coinTable.addColumn(valueColumn, "Coin Value");
 
 					TextColumn<CoinDTO> toleColumn = new TextColumn<CoinDTO>() {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getTolerance());
 						}
-
-
 					};
 					coinTable.addColumn(toleColumn, "Tolerance");
-
 
 					TextColumn<CoinDTO> wPrUnitColumn = new TextColumn<CoinDTO>() {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getWeightPerUnit());
 						}
-
-
 					};
+
 					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
-					
-					
+
 					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
 					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -355,12 +340,10 @@ public class DeltaWeightView extends Composite{
 							if (selected != null) {
 								Window.alert("You selected: " + selected);
 							}
-
-
 						}
 					});
-					
-					
+
+
 					coinTable.setRowCount(coinList.size(), true);
 					// Push the data into the widget.
 					coinTable.setRowData(0, coinList);
