@@ -29,7 +29,6 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
-	private HorizontalPanel hPanel2 = new HorizontalPanel();
 
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
@@ -59,25 +58,33 @@ public class DeltaWeightView extends Composite{
 
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
+		vPanel.setHeight("328px");
+		
+				viewInfo.addStyleName("deltaWeight");
+				vPanel.add(viewInfo);
+				viewInfo.setHeight("92px");
 
 		vPanel.add(dbar);
-
-		viewInfo.addStyleName("deltaWeight");
-		vPanel.add(viewInfo);
+		dbar.setHeight("71px");
 		vPanel.add(hPanel1);
-
+		hPanel1.setHeight("97px");
+		vPanel.add(ft2);
+		ft2.setWidth("550");
+		
 		hPanel1.add(ft);
+		ft.setWidth("580px");
 		ft.setWidget(1, 0, prdName);
 		ft.setWidget(1, 1, batchID);		
 		ft.setWidget(1, 2, wData);
 		ft.setWidget(1, 3, SIData);
 		ft.setWidget(2, 0, productName);
+		productName.setWidth("");
 		ft.setWidget(2, 1, batchIDBox);
 		ft.setWidget(2, 2, batchData);
 		ft.setWidget(2, 3, SIDataBox);
-
-		hPanel2.add(ft2);
-		vPanel.add(hPanel2);
+		SIDataBox.setWidth("128px");
+		
+		ft2.setStyleName("H2");
 		batchCellView(c);
 		
 
@@ -146,7 +153,7 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(baWghtColumn, "Batch Weight");
-
+				batchTable.setStyleName("H2");
 				// Add a text column to show the name.
 				TextColumn<BatchDTO> toleranceColumn = new TextColumn<BatchDTO>() {
 					@Override
@@ -186,7 +193,7 @@ public class DeltaWeightView extends Composite{
 				// Push the data into the widget.
 				batchTable.setRowData(0, batchList);
 				batchTable.redraw();
-				ft2.setWidget(0,1, batchTable);
+				ft2.setWidget(0,0, batchTable);
 			}
 		});
 	}
