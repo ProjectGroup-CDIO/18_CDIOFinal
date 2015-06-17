@@ -16,9 +16,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class ConnectionView extends Composite {
 	private VerticalPanel vPanel = new VerticalPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
-	Label ipLabel = new Label("Ip adress");
+	Label ipLabel = new Label("IP-address");
 	TextBox ipTextbox = new TextBox();
-	Label portLabel = new Label("Port Number");
+	Label portLabel = new Label("Port-number");
 	TextBox portTextbox = new TextBox();
 	Button connectButton = new Button("Connect");
 	Button disConnectButton = new Button("Disconnect");
@@ -41,6 +41,13 @@ public class ConnectionView extends Composite {
 		hPanel.add(disConnectButton);
 		hPanel.add(colorLabel);
 		
+		ipLabel.addStyleName("ipLabel");
+		portLabel.addStyleName("portLabel");
+		vPanel.setBorderWidth(2);
+		connectButton.setPixelSize(100,30);
+		disConnectButton.setPixelSize(100, 30);
+		ipTextbox.setPixelSize(192, 20);
+		portTextbox.setPixelSize(192, 20);
 		
 		Button btnOne = new Button("Connect", new ClickHandler() {
 			
