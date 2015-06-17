@@ -1,14 +1,11 @@
 package opr.client.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import opr.client.service.IASEServiceAsync;
 import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinServiceAsync;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
-import opr.client.ui.DeltaWeightView.Callback;
 import opr.shared.BatchDTO;
 import opr.shared.CoinDTO;
 import opr.shared.OperatoerDTO;
@@ -16,8 +13,8 @@ import opr.shared.OperatoerDTO;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
@@ -27,7 +24,6 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -35,9 +31,8 @@ import com.google.gwt.view.client.SingleSelectionModel;
 public class ListView extends Composite {
 
 	private VerticalPanel vPanel = new VerticalPanel();
-	private Anchor remove;
-	private Anchor edit;
-	private OperatoerDTO opr;
+	private	HorizontalPanel buttonPanel = new HorizontalPanel();
+	private	HorizontalPanel hPanel = new HorizontalPanel();
 
 	private List<String> tableList;
 	private List<OperatoerDTO> oprList;
@@ -45,11 +40,14 @@ public class ListView extends Composite {
 	private List<BatchDTO> batchList;
 
 	private BatchDTO batchSelect;
-	private OperatoerDTO oprSelect;
 	private CoinDTO coinSelect;
+	private OperatoerDTO oprSelect;
+
+	private int chosen = 0;
 
 	private	FlexTable ft = new FlexTable();
 	private FlexCellFormatter ftFormat = ft.getFlexCellFormatter();
+
 	public interface Callback{
 
 		public IOperatoerServiceAsync getService();
@@ -63,13 +61,13 @@ public class ListView extends Composite {
 
 
 	public ListView(final Callback c) throws Exception {
-		initWidget(this.vPanel);
-		ft.setBorderWidth(1);
-		HorizontalPanel hPanel = new HorizontalPanel();
+		initWidget(vPanel);
 
-		ft.add(hPanel);
-		hPanel.add(edit);
-		hPanel.add(remove);
+		vPanel.add(ft);
+		ft.setBorderWidth(1);
+
+		ft.setWidget(0,0,hPanel);
+		vPanel.add(buttonPanel);
 
 
 		/**
@@ -97,7 +95,6 @@ public class ListView extends Composite {
 					}
 				};
 
-
 				tables.addColumn(nameColumn, "Table name");
 				// Set the total row count. This isn't strictly necessary, but it affects
 				// paging calculations, so its good habit to keep the row count up to date.
@@ -120,9 +117,6 @@ public class ListView extends Composite {
 						 * then we want to make it able to then show both coins and operatoer
 						 * 
 						 */
-						//						if (selected != null) {
-						//							Window.alert("You selected: " + selected);
-						//						}
 						if(selected.equals("operatoer")){
 							oprCellView(c);
 
@@ -142,57 +136,85 @@ public class ListView extends Composite {
 			}
 		});
 
-
+		//edit is only set up to work with operatoer atm
 		Button editBtn = new Button("Edit");
 		editBtn.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-
+				if(chosen == 0){
+					Window.alert("Nothing is chosen, please choose something to remove - only works with operatoer");
+				}else if(chosen == 1){
+					try {
+						c.openEditView(oprSelect.getOprId());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
 			}
+		
 
 		});
-
+		/*
+		 * Removal is done by checking what has been chosen as the object currently, then contact the server to remove that
+		 * from the database
+		 * Only setup to "remove"
+		 */
 		Button removeBtn = new Button("Remove");
 		removeBtn.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-
-
 				try {
-					c.getService().getOperatoer(0, new AsyncCallback<OperatoerDTO>() {
+					if(chosen == 0){
+						Window.alert("Nothing is chosen, please choose something to remove - only works with operatoer");
+					}else if(chosen == 1){
 
-						@Override
-						public void onFailure(Throwable caught) {
-							Window.alert("Noget gik galt: "+caught.getMessage());
+						c.getService().deleteOperatoer(oprSelect, new AsyncCallback<Void>(){
 
-						}
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert("an error occured" +caught.getMessage());
 
-						@Override
-						public void onSuccess(OperatoerDTO result) {
+							}
 
+							@Override
+							public void onSuccess(Void result) {
 
-						}
+								try {
+									c.openListView();
+								} catch (Exception e) {
+								
+									e.printStackTrace();
+								}
 
-					});
+							}
+
+						});
+
+					}
+					//if we had time to implement the system to be able to delete the other data in the database.
+					//				else if(chosen == 2){
+					//					
+					//				}else if(chosen == 3){
+					//					
+					//				}else if(chosen == 4){
+					//					
+					//				}
+
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
+
+
 				}
-
-
 			}
 		});
 
-		vPanel.add(ft);
-		HorizontalPanel buttonPanel = new HorizontalPanel();
 		buttonPanel.add(editBtn);
 		buttonPanel.add(removeBtn);
-		vPanel.add(buttonPanel);
-
-
 	}
 
 
@@ -251,9 +273,7 @@ public class ListView extends Composite {
 							 * then we want to make it able to then show both coins and operatoer
 							 * 
 							 */
-							if (selected != null) {
-								Window.alert("You selected: " + selected);
-							}
+						
 							coinSelect = selected;
 						}
 					});
@@ -279,7 +299,6 @@ public class ListView extends Composite {
 	private void oprCellView(final Callback c) {
 		try {
 			c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
-
 				@Override
 				public void onFailure(Throwable caught) {
 					Window.alert("Failed to access databse: "+caught.getMessage());
@@ -363,10 +382,11 @@ public class ListView extends Composite {
 							 * then we want to make it able to then show both coins and operatoer
 							 * 
 							 */
-							if (selected != null) {
-								Window.alert("You selected: " + selected);
-							}
+							
+							//sets oprSelected to be the one we marked in the table
 							oprSelect = selected;
+							//sets the chosen to 1 so we know that if we click a button we will use the oprSelect for methods.
+							chosen = 1;
 
 						}
 
@@ -473,9 +493,7 @@ public class ListView extends Composite {
 						 * then we want to make it able to then show both coins and operatoer
 						 * 
 						 */
-						if (selected != null) {
-							Window.alert("You selected: " + selected);
-						}
+					
 						batchSelect = selected;
 
 					}

@@ -34,7 +34,6 @@ public class DeltaWeightView extends Composite{
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
-	private Label lol = new Label("Table name");
 	private Label prdName = new Label("Product Name");
 	private Label batchID = new Label("BatchID");
 	private Label wData = new Label("Batch weight");
@@ -170,9 +169,6 @@ public class DeltaWeightView extends Composite{
 						 * then we want to make it able to then show both coins and operatoer
 						 * 
 						 */
-						if (selected != null) {
-							Window.alert("You selected: " + selected);
-						}
 
 						productName.setText(selected.getRaavare_navn());
 						batchIDBox.setText(""+selected.getBatch_id());

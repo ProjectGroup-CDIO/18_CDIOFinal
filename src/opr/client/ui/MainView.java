@@ -24,7 +24,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite implements Login.Callback, WeightView.Callback,
-		StykWeight.Callback, DeltaWeightView.Callback, ConnectionView.Callback, TestView.Callback, ListView.Callback {
+		StykWeight.Callback, DeltaWeightView.Callback,
+		ConnectionView.Callback, TestView.Callback, ListView.Callback, EditView.Callback {
 	
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();

@@ -42,7 +42,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	//------------------------------------
 	
 
-	private static String host = "127.0.0.1";
+	private static String host = "69.79.16.17";
 	private static int port = 8000;
 	
 	public ASE() throws UnknownHostException, IOException {

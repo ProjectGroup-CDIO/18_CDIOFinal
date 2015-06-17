@@ -1,5 +1,6 @@
 package opr.client.ui;
 
+import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,6 +15,8 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class EditView extends Composite {
 	private FlexTable ft = new FlexTable();
+	private Label lblID = new Label("ID");
+	private TextBox txtBoxID = new TextBox();
 	private Label lblCPR = new Label ("CPR");
 	private TextBox txtBoxCPR = new TextBox();
 	private Label lblNavn = new Label ("Navn");
@@ -21,16 +24,21 @@ public class EditView extends Composite {
 	private Label lblPassword = new Label ("Password");
 	private TextBox txtBoxPassword = new TextBox();
 	private Label lblIn = new Label ("Initialer");
+	private Label lblAct = new Label ("Active status");
+	private TextBox txtBoxActive = new TextBox();
 	private TextBox txtBoxIn = new TextBox();
 	private OperatoerDTO opr;
 
-	private Label lblID = new Label("ID");
-	private TextBox txtBoxID = new TextBox();
 
-	public EditView(final MainView main, final int oprID) throws Exception {
+	public interface Callback{
+		public IOperatoerServiceAsync getService();
+		public void openListView() throws Exception;
+	}
+	
+	public EditView(final Callback c, final int oprID) throws Exception {
 		this.initWidget(ft);
 
-		main.getService().getOperatoer(oprID, new AsyncCallback<OperatoerDTO>(){
+		c.getService().getOperatoer(oprID, new AsyncCallback<OperatoerDTO>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -45,6 +53,7 @@ public class EditView extends Composite {
 				txtBoxNavn.setText(opr.getOprNavn());
 				txtBoxPassword.setText(opr.getPassword());
 				txtBoxIn.setText(opr.getIni());
+				txtBoxActive.setText(Integer.toString(opr.getActive()));
 				
 			}
 			
@@ -54,6 +63,7 @@ public class EditView extends Composite {
 		ft.setWidget(0, 2, lblNavn);
 		ft.setWidget(0, 3, lblPassword);
 		ft.setWidget(0, 4, lblIn);
+		ft.setWidget(0, 5, lblAct);
 
 		txtBoxID.setText(""+oprID);
 
@@ -68,6 +78,7 @@ public class EditView extends Composite {
 		ft.setWidget(1, 2, txtBoxNavn);
 		ft.setWidget(1, 3, txtBoxPassword);
 		ft.setWidget(1, 4, txtBoxIn);
+		ft.setWidget(1, 5, txtBoxActive);
 		
 		Button btnEdit = new Button("Edit", new ClickHandler(){
 			@Override
@@ -75,10 +86,10 @@ public class EditView extends Composite {
 				
 				//ikke testet
 				opr = new OperatoerDTO(oprID, txtBoxNavn.getText(), txtBoxIn.getText(),
-						txtBoxCPR.getText(), txtBoxPassword.getText());
+						txtBoxCPR.getText(), txtBoxPassword.getText(),Integer.parseInt(txtBoxActive.getText()));
 				//ikke testet
 				try {
-					main.getService().updateOperatoer(opr, new AsyncCallback<Void>() {
+					c.getService().updateOperatoer(opr, new AsyncCallback<Void>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -90,7 +101,7 @@ public class EditView extends Composite {
 						public void onSuccess(Void result) {
 							Window.alert("Successfully updated operator");
 							try {
-								main.openListView();
+								c.openListView();
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

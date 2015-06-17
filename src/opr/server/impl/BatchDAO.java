@@ -72,12 +72,4 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 				);
 	}
 
-	public void createOperatoer(OperatoerDTO opr) throws DALException {		
-		Connector.doUpdate(
-				"INSERT INTO operatoer(opr_id, opr_navn, ini, cpr, password, aktiv) VALUES " +
-						"(" + opr.getOprId() + ", '" + opr.getOprNavn() + "', '" + opr.getIni() + "', '" + 
-						opr.getCpr() + "', '" + opr.getPassword() + "', "+opr.getActive()+")"
-				);
-	}
-
 }
