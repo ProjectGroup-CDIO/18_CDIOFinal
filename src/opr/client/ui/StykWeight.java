@@ -76,7 +76,7 @@ public class StykWeight extends Composite {
 		wText.setEnabled(false);
 		stkText.setEnabled(false);
 				
-		ft.setBorderWidth(5);
+		ft.setBorderWidth(2);
 		ft.setWidget(1, 1, wLabel);
 		ft.setWidget(2, 1, wText);
 		ft.setWidget(3, 1, stkLabel);
