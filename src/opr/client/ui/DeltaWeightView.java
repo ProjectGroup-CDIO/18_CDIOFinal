@@ -79,8 +79,7 @@ public class DeltaWeightView extends Composite{
 		hPanel2.add(ft2);
 		vPanel.add(hPanel2);
 		batchCellView(c);
-		//
-
+		
 
 
 		

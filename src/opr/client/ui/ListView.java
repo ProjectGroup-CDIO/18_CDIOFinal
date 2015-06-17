@@ -44,6 +44,10 @@ public class ListView extends Composite {
 	private List<CoinDTO> coinList;
 	private List<BatchDTO> batchList;
 
+	private BatchDTO batchSelect;
+	private OperatoerDTO oprSelect;
+	private CoinDTO coinSelect;
+
 	private	FlexTable ft = new FlexTable();
 	private FlexCellFormatter ftFormat = ft.getFlexCellFormatter();
 	public interface Callback{
@@ -62,7 +66,7 @@ public class ListView extends Composite {
 		initWidget(this.vPanel);
 		ft.setBorderWidth(1);
 		HorizontalPanel hPanel = new HorizontalPanel();
-		
+
 		ft.add(hPanel);
 		hPanel.add(edit);
 		hPanel.add(remove);
@@ -138,45 +142,14 @@ public class ListView extends Composite {
 			}
 		});
 
-		c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Failed to access databse: "+caught.getMessage());
-			}
-
-			@Override
-			public void onSuccess(List<OperatoerDTO> result) {
-				l = result;
-				int j = 1;
-				for(int i = 0; i < l.size(); i++) {
-					if (l.get(i).getActive() > 0) {
-						ft.setText(j, 0,
-								String.valueOf(l.get(i).getOprId()));
-						ft.setText(j, 1, l.get(i).getOprNavn());
-						ft.setWidget(j, 2, new RadioButton("check 'em", ""));
-						j++;
-					}
-				}
-			}
-		});
 
 		Button editBtn = new Button("Edit");
 		editBtn.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				for(int i = 0; i < l.size(); i++) {
-					RadioButton btn = (RadioButton) ft.getWidget(i+1, 2);
-					if(btn.getValue()) {
-						try {
-							c.openEditView(Integer.parseInt(ft.getText(i+1, 0)));
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
+
+
 			}
 
 		});
@@ -187,59 +160,30 @@ public class ListView extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 
-				for(int i = 0; i < l.size(); i++) {
-					RadioButton btn = (RadioButton) ft.getWidget(i+1, 2);
-					if(btn.getValue()) {
-						try {
-							c.getService().getOperatoer(Integer.parseInt(ft.getText(i+1, 0)), new AsyncCallback<OperatoerDTO>() {
 
-								@Override
-								public void onFailure(Throwable caught) {
-									Window.alert("Noget gik galt: "+caught.getMessage());
+				try {
+					c.getService().getOperatoer(0, new AsyncCallback<OperatoerDTO>() {
 
-								}
+						@Override
+						public void onFailure(Throwable caught) {
+							Window.alert("Noget gik galt: "+caught.getMessage());
 
-								@Override
-								public void onSuccess(OperatoerDTO result) {
-									opr = result; 
-									try {
-										c.getService().deleteOperatoer(opr, new AsyncCallback<Void>() {
-
-											@Override
-											public void onFailure(Throwable caught) {
-												Window.alert("Error: "+caught.getMessage());
-
-											}
-
-											@Override
-											public void onSuccess(Void result) {
-												Window.alert("Success: Operatør "+opr.getOprNavn()+" slettet.\n(Sat til inaktiv)");
-												try {
-													c.openListView();
-												} catch (Exception e) {
-													// TODO Auto-generated catch block
-													e.printStackTrace();
-												}
-
-											}
-
-										});
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-
-								}
-
-							});
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
-					}
-				}
-			}
 
+						@Override
+						public void onSuccess(OperatoerDTO result) {
+
+
+						}
+
+					});
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+
+			}
 		});
 
 		vPanel.add(ft);
@@ -310,6 +254,7 @@ public class ListView extends Composite {
 							if (selected != null) {
 								Window.alert("You selected: " + selected);
 							}
+							coinSelect = selected;
 						}
 					});
 
@@ -421,7 +366,7 @@ public class ListView extends Composite {
 							if (selected != null) {
 								Window.alert("You selected: " + selected);
 							}
-
+							oprSelect = selected;
 
 						}
 
@@ -531,6 +476,7 @@ public class ListView extends Composite {
 						if (selected != null) {
 							Window.alert("You selected: " + selected);
 						}
+						batchSelect = selected;
 
 					}
 				});
@@ -544,6 +490,6 @@ public class ListView extends Composite {
 		});
 	}
 
-	
+
 
 }
