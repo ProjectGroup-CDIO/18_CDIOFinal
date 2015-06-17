@@ -28,6 +28,7 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
+	private VerticalPanel vPanel2 = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
 
@@ -61,10 +62,12 @@ public class DeltaWeightView extends Composite{
 		initWidget(vPanel);
 
 		vPanel.add(dbar);
-
 		viewInfo.addStyleName("deltaWeight");
 		vPanel.add(viewInfo);
-		vPanel.add(hPanel1);
+		vPanel.add(vPanel2);
+		vPanel2.setBorderWidth(2);
+		vPanel2.add(hPanel1);
+		
 
 		hPanel1.add(ft);
 		ft.setWidget(1, 0, prdName);
@@ -77,7 +80,7 @@ public class DeltaWeightView extends Composite{
 		ft.setWidget(2, 3, SIDataBox);
 
 		hPanel2.add(ft2);
-		vPanel.add(hPanel2);
+		vPanel2.add(hPanel2);
 		batchCellView(c);
 		
 
