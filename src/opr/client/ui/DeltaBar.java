@@ -18,8 +18,8 @@ public class DeltaBar extends Composite {
 
 	private LayoutPanel layoutPanel = new LayoutPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
-	Label l1 = new Label("Y");
-	Label l2 = new Label("X");
+	Label l1 = new Label("0.0");
+	Label l2 = new Label("6.0");
 
 	private	LayoutPanel layoutPanel_1 = new LayoutPanel();
 	private	LayoutPanel layoutPanel_2 = new LayoutPanel();
