@@ -100,9 +100,10 @@ public class DeltaBar extends Composite {
 
 		double lower_w;
 		double upper_w;
-
-		double y = w_batch-(2*w_batch*tolerance);
-		double x = w_batch+(2*w_batch*tolerance);
+		
+		//gør baren 3 gange så stor som tolerancen
+		double y = w_batch-(3*w_batch*tolerance);
+		double x = w_batch+(3*w_batch*tolerance);
 		
 		double pxPrUnit = TOTALPIXELS/(x-y);
 		
@@ -125,9 +126,6 @@ public class DeltaBar extends Composite {
 		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeightBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
 
-		System.out.println("%%%%555->>>> pxPrUnit: "+pxPrUnit);
-		System.out.println("#######---> lower: "+lower_w);
-		System.out.println("#######---> upper: "+ upper_w);
 	}
 	
 	public void setIndicator(double w_input, double leftborder, double pxprkg) {

@@ -79,7 +79,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 		String response = in.readLine();
 		if(response.startsWith("ES")) {
 			return -1;
-		}else if(response.startsWith("S+")){
+		}else if(response.startsWith("S +")){
 			throw new DALException("Weight Overload");
 			
 		}
