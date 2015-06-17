@@ -92,30 +92,23 @@ public class DeltaBar extends Composite {
 
 	public void deltaBarData2(double w_input, double w_batch, double tolerance){
 
-		double ratio = MIDDLE/w_batch;
-		
 		double lower_w;
 		double upper_w;
-//		double lowerWeightBound;
-//		double upperWeightBound;
 
 		double y = w_batch-(2*w_batch*tolerance);
 		double x = w_batch+(2*w_batch*tolerance);
 		
-		double pxPrUnit = TOTALPIXELS/(y-x);
-		double unitPrPx = (y-x)/TOTALPIXELS;
+		double pxPrUnit = TOTALPIXELS/(x-y);
 		
 		lower_w = w_batch-(w_batch*tolerance);
 		upper_w = w_batch+(w_batch*tolerance);
 		
-//		lowerWeightBound = pxPrUnit * lower_w;
-//		upperWeightBound = pxPrUnit * upper_w;
+		lowerWeightBound = (lower_w - y)*pxPrUnit;
+		upperWeightBound = (upper_w - y)*pxPrUnit;
 		
-		lowerWeightBound = MIDDLE*((w_batch-y)-(w_batch*tolerance));
-		upperWeightBound = ((402.0/(x-y))*(w_batch*tolerance));
-		
-		
-		weightIndicator = (w_input*TOTALPIXELS)/x;
+		if(w_input < y) weightIndicator = (y - y) * pxPrUnit;
+		else if(w_input > x) weightIndicator = (x - y) * pxPrUnit;
+		else weightIndicator = (w_input - y) * pxPrUnit;
 		
 		l1.setText(Double.toString(y));
 		l2.setText(Double.toString(x));
@@ -129,5 +122,9 @@ public class DeltaBar extends Composite {
 		System.out.println("%%%%555->>>> pxPrUnit: "+pxPrUnit);
 		System.out.println("#######---> lower: "+lower_w);
 		System.out.println("#######---> upper: "+ upper_w);
+	}
+	
+	public void setIndicator(double w_input, double leftborder, double pxprkg) {
+		weightIndicator = (w_input - leftborder) * pxprkg;
 	}
 }

@@ -63,6 +63,7 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		
 		login = new Login(this);
 		openLoginView();
+//		openDeltaWeightView();
 	}
 	
 	public Login getLogin() {

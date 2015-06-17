@@ -30,10 +30,13 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	
 
 	//------------------------------------
-	//Vægtens IP
+	//Vægtens globale IP
 	//62.79.16.17
 	//
-	//Local IP
+	//Vægtens lokale IP
+	//169.254.2.2
+	//
+	//localhost IP
 	//127.0.0.1
 	//------------------------------------
 	
@@ -85,7 +88,6 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	public void tara() throws Exception {
 		tara = brutto;	
 	}
-	
 
 	public Socket getSock() {
 		return sock;
