@@ -28,8 +28,8 @@ import com.google.gwt.view.client.SingleSelectionModel;
 
 public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel = new VerticalPanel();
+	private VerticalPanel vPanel2 = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
-	private HorizontalPanel hPanel2 = new HorizontalPanel();
 
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
@@ -45,8 +45,8 @@ public class DeltaWeightView extends Composite{
 	private TextBox SIDataBox = new TextBox();
 
 
-	
-	
+
+
 	private List<BatchDTO> batchList;
 	private DeltaBar dbar = new DeltaBar();
 
@@ -59,29 +59,39 @@ public class DeltaWeightView extends Composite{
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
 
-		vPanel.add(dbar);
-
+		vPanel.setHeight("328px");
 		viewInfo.addStyleName("deltaWeight");
 		vPanel.add(viewInfo);
-		vPanel.add(hPanel1);
+		viewInfo.setHeight("92px");
+
+		vPanel.add(dbar);
+		vPanel.add(vPanel2);
+		dbar.setHeight("71px");
+		vPanel2.add(hPanel1);
+		vPanel2.setBorderWidth(2);
+		hPanel1.setHeight("52px");
+		vPanel2.add(ft2);
+		ft2.setWidth("550");
 
 		hPanel1.add(ft);
+		ft.setWidth("555px");
 		ft.setWidget(1, 0, prdName);
 		ft.setWidget(1, 1, batchID);		
 		ft.setWidget(1, 2, wData);
 		ft.setWidget(1, 3, SIData);
 		ft.setWidget(2, 0, productName);
+		productName.setWidth("");
 		ft.setWidget(2, 1, batchIDBox);
 		ft.setWidget(2, 2, batchData);
 		ft.setWidget(2, 3, SIDataBox);
+		SIDataBox.setWidth("128px");
 
-		hPanel2.add(ft2);
-		vPanel.add(hPanel2);
+		ft2.setStyleName("H2");
 		batchCellView(c);
-		
 
 
-		
+
+
 	}
 
 
@@ -145,7 +155,7 @@ public class DeltaWeightView extends Composite{
 
 				};
 				batchTable.addColumn(baWghtColumn, "Batch Weight");
-
+				batchTable.setStyleName("H2");
 				// Add a text column to show the name.
 				TextColumn<BatchDTO> toleranceColumn = new TextColumn<BatchDTO>() {
 					@Override
@@ -182,7 +192,7 @@ public class DeltaWeightView extends Composite{
 				// Push the data into the widget.
 				batchTable.setRowData(0, batchList);
 				batchTable.redraw();
-				ft2.setWidget(0,1, batchTable);
+				ft2.setWidget(0,0, batchTable);
 			}
 		});
 	}

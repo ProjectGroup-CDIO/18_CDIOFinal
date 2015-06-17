@@ -30,7 +30,6 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
 	private Login login;
-	private StykWeight coin;
 	private MenuView menu;
 	private AddView add;
 	private final IOperatoerServiceAsync service = GWT.create(IOperatoerService.class);
