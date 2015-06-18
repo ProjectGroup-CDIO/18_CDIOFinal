@@ -31,8 +31,8 @@ public class DeltaWeightView extends Composite{
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 	private HorizontalPanel hPanel2 = new HorizontalPanel();
 
-	FlexTable ft = new FlexTable();
-	FlexTable ft2 = new FlexTable();
+	private FlexTable ft = new FlexTable();
+	private FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
 	private Label lol = new Label("Table name");
 	private Label prdName = new Label("Product Name");
@@ -44,9 +44,6 @@ public class DeltaWeightView extends Composite{
 	private TextBox batchIDBox = new TextBox();
 	private TextBox batchData = new TextBox();
 	private TextBox SIDataBox = new TextBox();
-
-
-	
 	
 	private List<BatchDTO> batchList;
 	private DeltaBar dbar = new DeltaBar();
