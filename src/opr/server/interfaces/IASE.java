@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 
 import opr.shared.DALException;
 
-public interface IASE extends Runnable {
+public interface IASE {
 	
 	void connect() throws UnknownHostException, IOException;
 	double getSWeight() throws IOException;

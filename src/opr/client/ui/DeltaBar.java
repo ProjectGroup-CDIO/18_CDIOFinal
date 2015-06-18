@@ -12,9 +12,6 @@ public class DeltaBar extends Composite {
 	private double lowerWeightBound = 191.0;
 	private double upperWeightBound = 211.0;
 	private static final double TOTALPIXELS = 536;
-	private static final double MIDDLE = TOTALPIXELS/2;
-	
-	
 
 	private LayoutPanel layoutPanel = new LayoutPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
@@ -64,30 +61,7 @@ public class DeltaBar extends Composite {
 	public void setUpperWeightBound(double upperWiegthBound) {
 		this.upperWeightBound = upperWiegthBound;
 	}
-	public void deltaBarData(double z, double q, double tolerance){
-		
-		double lower = q-q*(tolerance);
-		double upper = q+q*(tolerance);
-
-		double x = q+q*(tolerance*3);
-		double y = q-q*(tolerance*3);
-		
-		weightIndicator = (x-y/100)*4*z;
-		
-		lowerWeightBound = ((x-y/100)*4)*lower;
-		upperWeightBound = ((x-y/100)*4)*upper;
-		
-		l1.setText(Double.toString(y));
-		l2.setText(Double.toString(x));
-		//Window.alert(""+weigthIndicator + ":"+z + ":" + q +":" + tolerance);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weightIndicator, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_1, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWeightBound, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_2, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeightBound, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
-
-	}
+	
 	
 	/**
 	 * 
@@ -96,28 +70,32 @@ public class DeltaBar extends Composite {
 	 * @param tolerance	batchtolerance
 	 */
 
-	public void deltaBarData2(double w_input, double w_batch, double tolerance){
+	public void deltaBarData(double w_input, double w_batch, double tolerance){
 
 		double lower_w;
 		double upper_w;
-
-		double y = w_batch-(2*w_batch*tolerance);
-		double x = w_batch+(2*w_batch*tolerance);
 		
-		double pxPrUnit = TOTALPIXELS/(x-y);
+		//gør baren 3 gange så stor som tolerancen
+		double a_w = w_batch-(3*w_batch*tolerance);
+		double b_w = w_batch+(3*w_batch*tolerance);
+		
+		double pxPrUnit = TOTALPIXELS/(b_w-a_w);
 		
 		lower_w = w_batch-(w_batch*tolerance);
 		upper_w = w_batch+(w_batch*tolerance);
 		
-		lowerWeightBound = (lower_w - y)*pxPrUnit;
-		upperWeightBound = (upper_w - y)*pxPrUnit;
+		lowerWeightBound = (lower_w - a_w)*pxPrUnit;
+		upperWeightBound = (upper_w - a_w)*pxPrUnit;
 		
-		if(w_input < y) weightIndicator = (y - y) * pxPrUnit;
-		else if(w_input > x) weightIndicator = (x - y) * pxPrUnit;
-		else weightIndicator = (w_input - y) * pxPrUnit;
+		//hvis vægten er under barens nedre grænse, står viseren blot på grænsen.
+		if(w_input < a_w) weightIndicator = 0.0;
+		//det samme hvis den er over den være grænse
+		else if(w_input > b_w) weightIndicator = TOTALPIXELS;
+		//ellers viser den nuværende vægt
+		else weightIndicator = (w_input - a_w) * pxPrUnit;
 		
-		l1.setText(Double.toString(y));
-		l2.setText(Double.toString(x));
+		l1.setText(Double.toString(a_w));
+		l2.setText(Double.toString(b_w));
 		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weightIndicator, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_1, 0.0, Unit.PX, 37.0, Unit.PX);
 		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWeightBound, Unit.PX, 2.0, Unit.PX);
@@ -125,9 +103,6 @@ public class DeltaBar extends Composite {
 		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeightBound, Unit.PX, 2.0, Unit.PX);
 		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
 
-		System.out.println("%%%%555->>>> pxPrUnit: "+pxPrUnit);
-		System.out.println("#######---> lower: "+lower_w);
-		System.out.println("#######---> upper: "+ upper_w);
 	}
 	
 	public void setIndicator(double w_input, double leftborder, double pxprkg) {

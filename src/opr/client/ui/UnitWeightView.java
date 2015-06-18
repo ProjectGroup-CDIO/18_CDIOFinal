@@ -26,7 +26,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -161,7 +160,7 @@ public class UnitWeightView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -226,7 +225,6 @@ public class UnitWeightView extends Composite {
 					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
 					ft.setWidget(5, 0, coinTable);
 					cellFormatter.setColSpan(5, 0, 2);
-
 				}
 
 			});
@@ -243,7 +241,7 @@ public class UnitWeightView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -328,7 +326,7 @@ public class UnitWeightView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override

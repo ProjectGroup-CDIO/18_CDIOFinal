@@ -4,13 +4,7 @@ import java.util.List;
 
 import opr.client.service.IASEServiceAsync;
 import opr.client.service.IBatchServiceAsync;
-import opr.client.service.ICoinServiceAsync;
-import opr.client.service.IMetaService;
-import opr.client.service.IMetaServiceAsync;
-import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.BatchDTO;
-import opr.shared.CoinDTO;
-import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
@@ -31,8 +25,8 @@ public class DeltaWeightView extends Composite{
 	private VerticalPanel vPanel2 = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
 
-	FlexTable ft = new FlexTable();
-	FlexTable ft2 = new FlexTable();
+	private FlexTable ft = new FlexTable();
+	private FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
 	private Label prdName = new Label("Product Name");
 	private Label batchID = new Label("BatchID");
@@ -201,7 +195,7 @@ public class DeltaWeightView extends Composite{
 			@Override
 			public void onSuccess(Double result) {
 				SIDataBox.setText(Double.toString(result));
-				dbar.deltaBarData2(result, bW, tol);
+				dbar.deltaBarData(result, bW, tol);
 				getSIData(c,bW,tol);
 			}
 		});		

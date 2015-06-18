@@ -90,7 +90,7 @@ public class ListView extends Composite {
 		c.getMetaService().getTables(new AsyncCallback<List<String>>(){
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Failed to access databse: "+caught.getMessage());
+				Window.alert("Failed to access database: "+caught.getMessage());
 
 			}
 
@@ -247,7 +247,7 @@ public class ListView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -328,7 +328,7 @@ public class ListView extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -485,7 +485,7 @@ public class ListView extends Composite {
 			c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 				}
 
 				@Override
@@ -600,7 +600,7 @@ public class ListView extends Composite {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert("Failed to access databse: "+caught.getMessage());
+				Window.alert("Failed to access database: "+caught.getMessage());
 			}
 			@Override
 			public void onSuccess(List<BatchDTO> result) {
