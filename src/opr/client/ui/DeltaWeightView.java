@@ -63,7 +63,7 @@ public class DeltaWeightView extends Composite{
 		
 				viewInfo.addStyleName("deltaWeight");
 				vPanel.add(viewInfo);
-				viewInfo.setHeight("92px");
+				viewInfo.setHeight("70px");
 
 		vPanel.add(dbar);
 		dbar.setHeight("71px");
