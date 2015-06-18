@@ -24,9 +24,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MainView extends Composite implements Login.Callback, WeightView.Callback,
-		StykWeight.Callback, DeltaWeightView.Callback,
-		ConnectionView.Callback, TestView.Callback, ListView.Callback, EditView.Callback {
-	
+UnitWeightView.Callback, DeltaWeightView.Callback, ListView.Callback, EditView.Callback {
+
 	private OperatoerDTO activeUser;
 	private VerticalPanel content = new VerticalPanel();
 	private Login login;
@@ -39,13 +38,9 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	private final IFruitServiceAsync FruitService = GWT.create(IFruitService.class);
 	private final ICondimentsServiceAsync CondimentsService = GWT.create(ICondimentsService.class);
 	private final IBatchServiceAsync BatchService = GWT.create(IBatchService.class);
-	
-
-	
 
 	private AbsolutePanel aPanel = new AbsolutePanel();
 
-	
 	public MainView() throws Exception {
 		initWidget(aPanel);
 		ASEservice.connect(new AsyncCallback<Void>() {
@@ -60,59 +55,64 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 			}			
 		});
 		aPanel.setSize(Integer.toString(Window.getClientWidth())+"px", Integer.toString(Window.getClientHeight())+"px");
-		
+
 		login = new Login(this);
 		openLoginView();
-//		openDeltaWeightView();
 	}
-	
+
 	public Login getLogin() {
 		return login;
+	}
+	
+	@Override
+	public void loginFailiure() {
+		// TODO Auto-generated method stub
 	}
 
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
+
 	//-------------------------------------------------------------------------
 	//method for opening EditView when 
 	//EDIT-button (on-screen when ListView is open) is pressed
 	//-------------------------------------------------------------------------
-	
+
 	public void openEditView(int oprId) throws Exception {
 		content.clear();
 		content.add(new EditView(this, oprId));
-	
+
 	}
 
 	//-------------------------------------------------------------------------
 	//method for opening AddView when ADD-button is pressed
 	//-------------------------------------------------------------------------
-	
+
 	public void openAddView() throws Exception{
 		content.clear();
 		add = new AddView(this);
 		content.add(add);
-		
+
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
-	
+
 	//-------------------------------------------------------------------------
-	//method for opening StykView when UNIT-button is pressed
+	//method for opening UnitView when UNIT-button is pressed
 	//-------------------------------------------------------------------------
 
 	public void openStykWeight() throws Exception{
 		content.clear();
-		StykWeight coin = new StykWeight(this);
+		UnitWeightView coin = new UnitWeightView(this);
 		content.add(coin);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
-	
+
 	//-------------------------------------------------------------------------
 	//method for opening LoginView when LOGOUT-button is pressed
 	//-------------------------------------------------------------------------
+	
 	public void openLoginView() {
 		aPanel.clear();
 		content.clear();
@@ -121,24 +121,25 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		content.add(login);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/2-115,Window.getClientHeight()/4);
-		
+
 	}
-	
+
 	//-------------------------------------------------------------------------
 	//method for opening ListView when LIST-button is pressed
 	//-------------------------------------------------------------------------
+	
 	public void openListView() throws Exception {
 		content.clear();
 		content.add(new ListView(this));
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
-	
-	
+
+
 	//-------------------------------------------------------------------------
 	//method for opening MenuView if login is successful
 	//-------------------------------------------------------------------------
-	
+
 	@Override
 	public void loginSucces(OperatoerDTO activeUser) {
 		aPanel.clear();
@@ -148,15 +149,11 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		aPanel.setWidgetPosition(menu, 10, 10);
 	}
 
-	@Override
-	public void loginFailiure() {
-		// TODO Auto-generated method stub	
-	}
-
+	
 	//-------------------------------------------------------------------------
 	//method for opening WeightView when WEIGHT-button is pressed
 	//-------------------------------------------------------------------------
-	
+
 	public void openWeightView() throws Exception{
 		content.clear();
 		WeightView weight = new WeightView(this);
@@ -177,33 +174,19 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 		content.add(dWView);
 		aPanel.add(content);
 		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
-		
-	}
-
-	//---------------------------------------------------------------------------
-	//method for opening CoinWeight when COIN-button is pressed
-	//---------------------------------------------------------------------------
-
-	//Test 
-	
-	public void openTestView() {
-		content.clear();
-		content.add(new TestView(this));
-		aPanel.add(content);
-		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 
 	}
-	
-	
+
 	//---------------------------------------------------------------------------
 	//method for getting the dataBase service
 	//---------------------------------------------------------------------------
+	
 	@Override
 	public IOperatoerServiceAsync getService() {
 		return service;
 	}
 
-	
+
 	@Override
 	public IMetaServiceAsync getMetaService() {
 		// TODO Auto-generated method stub
@@ -213,34 +196,23 @@ public class MainView extends Composite implements Login.Callback, WeightView.Ca
 	public ICoinServiceAsync getCoinService() {
 		return CoinService;
 	}
-	
+
 	public IASEServiceAsync getASEService() {
 		return ASEservice;
 	}
-	
+
 
 	public IBatchServiceAsync getBatchService() {
 		return BatchService;
-	}
-
-	public void openConnetion() throws Exception{
-		content.clear();
-		ConnectionView ContView = new ConnectionView(this);
-		content.add(ContView);
-		aPanel.add(content);
-		aPanel.setWidgetPosition(content,Window.getClientWidth()/8,Window.getClientHeight()/8);
 	}
 
 	@Override
 	public IFruitServiceAsync getFruitService() {
 		return FruitService;
 	}
-	
+
 	@Override
 	public ICondimentsServiceAsync getCondimentsService(){
 		return CondimentsService;
 	}
-
-	
-
 }

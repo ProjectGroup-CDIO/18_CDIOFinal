@@ -15,22 +15,7 @@ public class MenuView extends Composite {
 		initWidget(this.vPanel);
 		this.vPanel.setBorderWidth(1);
 
-		//-----------------------------------------------------
-		//add-button, opens AddView when pressed
-		//-----------------------------------------------------
-
-//		Button addBtn = new Button("ADD", new ClickHandler(){
-//			@Override
-//			public void onClick(ClickEvent event) {
-//
-//				try {
-//					main.openAddView();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-
+		
 		//-----------------------------------------------------
 		//list-button, opens ListView when pressed
 		//-----------------------------------------------------
@@ -106,23 +91,6 @@ public class MenuView extends Composite {
 		});
 		
 		//-----------------------------------------------------
-		//connectionView-button, opens Connection when pressed
-		//-----------------------------------------------------
-		
-//		Button connectionBtn = new Button("CONNECTION", new ClickHandler(){
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				try {
-//					main.openConnetion();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}	
-//		});
-//		
-
-		//-----------------------------------------------------
 		//adding buttons to vertical panel, setting pixel size
 		//-----------------------------------------------------
 
@@ -130,16 +98,12 @@ public class MenuView extends Composite {
 		unitWBtn.setPixelSize( 100, 30);
 		deltaWBtn.setPixelSize( 100, 30);
 		listBtn.setPixelSize(100, 30);
-//		addBtn.setPixelSize(100, 30);
-//		connectionBtn.setPixelSize(100, 30);
 		logoutBtn.setPixelSize(100, 30);
 		
 		vPanel.add(weightBtn);
 		vPanel.add(unitWBtn);
 		vPanel.add(deltaWBtn);
 		vPanel.add(listBtn);
-//		vPanel.add(addBtn);
-//		vPanel.add(connectionBtn);
 		vPanel.add(logoutBtn);
 		
 	}

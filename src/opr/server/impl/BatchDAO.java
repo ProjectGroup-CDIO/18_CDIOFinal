@@ -61,13 +61,6 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 		}
 		return list;
 	}
-	//Dosent atm so we cant test or use it.
-	@Override
-	public void updateLog(LogDTO logDTO) throws Exception {
-//		Connector.doUpdate(
-//				"INSERT INTO vejelog (log_id, opr_id, batch_id, afvigelse) VALUES " +
-//						"("+logDTO.getLog_id()+", "+logDTO.getOpr_id()+", "+logDTO.getBatch_id()+", "+logDTO.getAfvigelse()+")"
-//				);
-	}
-
+	//Doesn't atm so we cant test or use it.
+	
 }
