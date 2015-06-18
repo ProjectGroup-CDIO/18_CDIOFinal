@@ -44,9 +44,6 @@ public class DeltaWeightView extends Composite{
 	private TextBox batchData = new TextBox();
 	private TextBox SIDataBox = new TextBox();
 
-
-
-
 	private List<BatchDTO> batchList;
 	private DeltaBar dbar = new DeltaBar();
 
@@ -88,16 +85,10 @@ public class DeltaWeightView extends Composite{
 
 		ft2.setStyleName("H2");
 		batchCellView(c);
-
-
-
-
 	}
 
 
 	private void batchCellView(final Callback c) {
-
-
 		c.getBatchService().getBatchList(new AsyncCallback<List<BatchDTO>>(){
 
 			@Override
@@ -107,8 +98,6 @@ public class DeltaWeightView extends Composite{
 			@Override
 			public void onSuccess(List<BatchDTO> result) {
 				batchList = result;
-
-
 				CellTable<BatchDTO> batchTable = new CellTable<BatchDTO>();
 				batchTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
