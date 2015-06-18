@@ -4,10 +4,14 @@ import java.util.List;
 
 import opr.client.service.IBatchServiceAsync;
 import opr.client.service.ICoinServiceAsync;
+import opr.client.service.ICondimentsServiceAsync;
+import opr.client.service.IFruitServiceAsync;
 import opr.client.service.IMetaServiceAsync;
 import opr.client.service.IOperatoerServiceAsync;
 import opr.shared.BatchDTO;
 import opr.shared.CoinDTO;
+import opr.shared.FruitDTO;
+import opr.shared.CondimentsDTO;
 import opr.shared.OperatoerDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -37,10 +41,14 @@ public class ListView extends Composite {
 	private List<String> tableList;
 	private List<OperatoerDTO> oprList;
 	private List<CoinDTO> coinList;
+	private List<FruitDTO> fruitList;
+	private List<CondimentsDTO> condimentsList;
 	private List<BatchDTO> batchList;
 
 	private BatchDTO batchSelect;
 	private CoinDTO coinSelect;
+	private FruitDTO fruitSelect;
+	private CondimentsDTO condimentsSelect;
 	private OperatoerDTO oprSelect;
 
 	private int chosen = 0;
@@ -54,6 +62,8 @@ public class ListView extends Composite {
 		public void openListView() throws Exception;
 		public void openEditView(int i) throws Exception;
 		public ICoinServiceAsync getCoinService();
+		public IFruitServiceAsync getFruitService();
+		public ICondimentsServiceAsync getCondimentsService();
 		public IMetaServiceAsync getMetaService();
 		public IBatchServiceAsync getBatchService();
 
@@ -123,6 +133,14 @@ public class ListView extends Composite {
 						}
 						if(selected.equals("coins")){
 							coinCellView(c);
+
+						}
+						if(selected.equals("fruits")){
+							fruitCellView(c);
+
+						}
+						if(selected.equals("condiments")){
+							condimentsCellView(c);
 
 						}
 						if(selected.equals("batch")){
@@ -296,6 +314,161 @@ public class ListView extends Composite {
 
 	}
 
+	private void fruitCellView(Callback c) {
+		try {
+			c.getFruitService().getFruitList(new AsyncCallback<List<FruitDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access databse: "+caught.getMessage());
+
+				}
+				@Override
+				public void onSuccess(List<FruitDTO> result) {
+					fruitList = result;
+
+					CellTable<FruitDTO> fruitTable = new CellTable<FruitDTO>();
+					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					// Add a text column to show the name.
+					TextColumn<FruitDTO> nameColumn = new TextColumn<FruitDTO>() {
+						@Override
+						public String getValue(FruitDTO object) {
+							return object.getName();
+						}
+					};
+					fruitTable.addColumn(nameColumn, "Fruit Name");
+
+					TextColumn<FruitDTO> toleColumn = new TextColumn<FruitDTO>() {
+						@Override
+						public String getValue(FruitDTO object) {
+							return Double.toString(object.getTolerance());
+						}
+					};
+					fruitTable.addColumn(toleColumn, "Tolerance");
+
+					TextColumn<FruitDTO> wPrUnitColumn = new TextColumn<FruitDTO>() {
+						@Override
+						public String getValue(FruitDTO object) {
+							return Double.toString(object.getWeightPerUnit());
+						}
+					};
+
+					fruitTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
+
+					final SingleSelectionModel<FruitDTO> selectionModel = new SingleSelectionModel<FruitDTO>();
+					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					fruitTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							FruitDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+						
+							fruitSelect = selected;
+						}
+					});
+
+
+					fruitTable.setRowCount(fruitList.size(), true);
+					// Push the data into the widget.
+					fruitTable.setRowData(0, fruitList);
+					fruitTable.redraw();
+					ft.setWidget(0,1, fruitTable);
+				}
+
+			});
+
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void condimentsCellView(Callback c) {
+		try {
+			c.getCondimentsService().getCondimentsList(new AsyncCallback<List<CondimentsDTO>>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Failed to access database: "+caught.getMessage());
+
+				}
+				@Override
+				public void onSuccess(List<CondimentsDTO> result) {
+					condimentsList = result;
+
+					CellTable<CondimentsDTO> condimentsTable = new CellTable<CondimentsDTO>();
+					condimentsTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					// Add a text column to show the name.
+					TextColumn<CondimentsDTO> nameColumn = new TextColumn<CondimentsDTO>() {
+						@Override
+						public String getValue(CondimentsDTO object) {
+							return object.getName();
+						}
+					};
+					condimentsTable.addColumn(nameColumn, "Condiments Name");
+
+					TextColumn<CondimentsDTO> toleColumn = new TextColumn<CondimentsDTO>() {
+						@Override
+						public String getValue(CondimentsDTO object) {
+							return Double.toString(object.getTolerance());
+						}
+					};
+					condimentsTable.addColumn(toleColumn, "Tolerance");
+
+					TextColumn<CondimentsDTO> wPrUnitColumn = new TextColumn<CondimentsDTO>() {
+						@Override
+						public String getValue(CondimentsDTO object) {
+							return Double.toString(object.getWeightPerUnit());
+						}
+					};
+
+					condimentsTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
+
+					final SingleSelectionModel<CondimentsDTO> selectionModel = new SingleSelectionModel<CondimentsDTO>();
+					condimentsTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+
+					condimentsTable.setSelectionModel(selectionModel);
+					selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+						public void onSelectionChange(SelectionChangeEvent event) {
+							CondimentsDTO selected = selectionModel.getSelectedObject();
+							/*
+							 * Here we want to display the data in the table operatoer
+							 * then we want to make it able to then show both coins and operatoer
+							 * 
+							 */
+						
+							condimentsSelect = selected;
+						}
+					});
+
+
+					condimentsTable.setRowCount(condimentsList.size(), true);
+					// Push the data into the widget.
+					condimentsTable.setRowData(0, condimentsList);
+					condimentsTable.redraw();
+					ft.setWidget(0,1, condimentsTable);
+				}
+
+			});
+
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	
 	private void oprCellView(final Callback c) {
 		try {
 			c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
@@ -508,6 +681,6 @@ public class ListView extends Composite {
 		});
 	}
 
-
+	
 
 }
