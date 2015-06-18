@@ -20,6 +20,20 @@ public class MetaDAO extends RemoteServiceServlet implements IMetaDAO, IMetaServ
 	 */
 	private static final long serialVersionUID = 5711854845648826350L;
 
+	public MetaDAO(){
+		try {
+			new Connector();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public List<String> getTables() throws DALException {
 		List<String> list = new ArrayList<String>();
