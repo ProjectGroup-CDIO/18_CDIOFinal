@@ -123,7 +123,8 @@ public class EditView extends Composite {
 			}
 		});
 		
-		ft.setWidget(2, 4, btnEdit);
+		ft.setWidget(2, 0, btnEdit);
+		btnEdit.setPixelSize(174, 30);
 	}
 
 

@@ -52,6 +52,9 @@ public class ListView extends Composite {
 	private OperatoerDTO oprSelect;
 
 	private int chosen = 0;
+	
+	Button editBtn = new Button("Edit");
+	Button removeBtn = new Button("Edit");
 
 	private	FlexTable ft = new FlexTable();
 	private FlexCellFormatter ftFormat = ft.getFlexCellFormatter();
@@ -233,10 +236,12 @@ public class ListView extends Composite {
 
 		buttonPanel.add(editBtn);
 		buttonPanel.add(removeBtn);
+		vPanel.remove(buttonPanel);
 	}
 
 
 	private void coinCellView(Callback c) {
+		vPanel.remove(buttonPanel);
 		try {
 			c.getCoinService().getCoinList(new AsyncCallback<List<CoinDTO>>(){
 
@@ -315,6 +320,9 @@ public class ListView extends Composite {
 	}
 
 	private void fruitCellView(Callback c) {
+		//buttonPanel.remove(editBtn);
+		//buttonPanel.remove(removeBtn);
+		vPanel.remove(buttonPanel);
 		try {
 			c.getFruitService().getFruitList(new AsyncCallback<List<FruitDTO>>(){
 
@@ -392,6 +400,7 @@ public class ListView extends Composite {
 	}
 	
 	private void condimentsCellView(Callback c) {
+		vPanel.remove(buttonPanel);
 		try {
 			c.getCondimentsService().getCondimentsList(new AsyncCallback<List<CondimentsDTO>>(){
 
@@ -470,6 +479,8 @@ public class ListView extends Composite {
 
 	
 	private void oprCellView(final Callback c) {
+		vPanel.remove(buttonPanel);
+		vPanel.add(buttonPanel);
 		try {
 			c.getService().getOperatoerList(new AsyncCallback<List<OperatoerDTO>>(){
 				@Override
@@ -583,7 +594,7 @@ public class ListView extends Composite {
 	}
 
 	private void batchCellView(final Callback c) {
-
+		vPanel.remove(buttonPanel);
 
 		c.getBatchService().getBatchList(new AsyncCallback<List<BatchDTO>>(){
 
