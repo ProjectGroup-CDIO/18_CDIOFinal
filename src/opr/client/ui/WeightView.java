@@ -36,8 +36,6 @@ public class WeightView extends Composite {
 		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
 		
-		
-
 
 		//-------------------------------------------
 		//Weight-button, get
@@ -68,22 +66,7 @@ public class WeightView extends Composite {
 		hPanel1.add(getWeightButton);
 		getWeightButton.setPixelSize( 105, 30);
 		hPanel1.setBorderWidth(3);
-
-
-		//-------------------------------------------
-		//Weight-button, save
-		//-------------------------------------------
-
-		Button saveWeightButton = new Button("Save", new ClickHandler(){
-			@Override
-			public void onClick(ClickEvent event){
-				//implementering afventer
-			}
-		});
-
-		hPanel1.add(saveWeightButton);
-		saveWeightButton.setPixelSize(105, 30);
-		hPanel1.setBorderWidth(3);
+		
 
 		//-------------------------------------------		
 		//Weight-button, tara
