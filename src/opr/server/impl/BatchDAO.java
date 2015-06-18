@@ -9,10 +9,8 @@ import opr.client.service.IBatchService;
 import opr.server.Connector;
 import opr.server.interfaces.IBatchDAO;
 import opr.shared.BatchDTO;
-import opr.shared.CoinDTO;
 import opr.shared.DALException;
 import opr.shared.LogDTO;
-import opr.shared.OperatoerDTO;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

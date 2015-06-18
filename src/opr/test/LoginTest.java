@@ -1,10 +1,9 @@
 package opr.test;
 
-import static org.junit.Assert.*;
-import opr.client.ui.Login;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import opr.client.ui.MainView;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
