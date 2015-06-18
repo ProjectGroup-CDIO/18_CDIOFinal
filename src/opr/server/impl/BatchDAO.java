@@ -40,7 +40,7 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 		ResultSet rs = Connector.doQuery("SELECT * FROM batch WHERE batch_id = " + batchid);
 		try {
 			if (!rs.first()) throw new DALException("Batch med id " + batchid + " findes ikke");
-			return new BatchDTO(rs.getInt("batch_id"), rs.getInt("raavare_id"), rs.getString("raavare_navn"),
+			return new BatchDTO(rs.getInt("batch_id"), rs.getInt("raavare_id"), rs.getString("raavare"),
 					rs.getDouble("batchweight"), rs.getDouble("tolerance"));
 		}
 		catch (SQLException e) {throw new DALException(e.getMessage()); }
@@ -61,13 +61,13 @@ public class BatchDAO extends RemoteServiceServlet implements IBatchDAO, IBatchS
 		}
 		return list;
 	}
-
+	//Dosent atm so we cant test or use it.
 	@Override
 	public void updateLog(LogDTO logDTO) throws Exception {
-		Connector.doUpdate(
-				"INSERT INTO vejelog (log_id, opr_id, batch_id, afvigelse) VALUES " +
-						"("+logDTO.getLog_id()+", "+logDTO.getOpr_id()+", "+logDTO.getBatch_id()+", "+logDTO.getAfvigelse()+")"
-				);
+//		Connector.doUpdate(
+//				"INSERT INTO vejelog (log_id, opr_id, batch_id, afvigelse) VALUES " +
+//						"("+logDTO.getLog_id()+", "+logDTO.getOpr_id()+", "+logDTO.getBatch_id()+", "+logDTO.getAfvigelse()+")"
+//				);
 	}
 
 }
