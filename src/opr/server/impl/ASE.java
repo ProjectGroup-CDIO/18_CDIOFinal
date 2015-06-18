@@ -42,6 +42,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	//------------------------------------
 	
 
+
 	private static String host = "62.79.16.17";
 	private static int port = 8000;
 	
