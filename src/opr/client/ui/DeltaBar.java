@@ -11,10 +11,7 @@ public class DeltaBar extends Composite {
 	private double weightIndicator = 201.0;
 	private double lowerWeightBound = 191.0;
 	private double upperWeightBound = 211.0;
-	private static final double TOTALPIXELS = 402;
-	private static final double MIDDLE = TOTALPIXELS/2;
-	
-	
+	private static final double TOTALPIXELS = 536;
 
 	private LayoutPanel layoutPanel = new LayoutPanel();
 	HorizontalPanel hPanel = new HorizontalPanel();
@@ -33,7 +30,7 @@ public class DeltaBar extends Composite {
 		hPanel.add(layoutPanel);
 		hPanel.add(l2);
 		layoutPanel.setStyleName("layoutPanel0");
-		layoutPanel.setSize("402px", "37px");
+		layoutPanel.setSize("536px", "37px");
 
 		layoutPanel_1.setStyleName("layoutPanel2");
 		layoutPanel.add(layoutPanel_1);
@@ -64,30 +61,7 @@ public class DeltaBar extends Composite {
 	public void setUpperWeightBound(double upperWiegthBound) {
 		this.upperWeightBound = upperWiegthBound;
 	}
-	public void deltaBarData(double z, double q, double tolerance){
-		
-		double lower = q-q*(tolerance);
-		double upper = q+q*(tolerance);
-
-		double x = q+q*(tolerance*3);
-		double y = q-q*(tolerance*3);
-		
-		weightIndicator = (x-y/100)*4*z;
-		
-		lowerWeightBound = ((x-y/100)*4)*lower;
-		upperWeightBound = ((x-y/100)*4)*upper;
-		
-		l1.setText(Double.toString(y));
-		l2.setText(Double.toString(x));
-		//Window.alert(""+weigthIndicator + ":"+z + ":" + q +":" + tolerance);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_1, weightIndicator, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_1, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_2, lowerWeightBound, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_2, 0.0, Unit.PX, 37.0, Unit.PX);
-		layoutPanel.setWidgetLeftWidth(layoutPanel_3, upperWeightBound, Unit.PX, 2.0, Unit.PX);
-		layoutPanel.setWidgetTopHeight(layoutPanel_3, 0.0, Unit.PX, 37.0, Unit.PX);
-
-	}
+	
 	
 	/**
 	 * 
@@ -96,7 +70,7 @@ public class DeltaBar extends Composite {
 	 * @param tolerance	batchtolerance
 	 */
 
-	public void deltaBarData2(double w_input, double w_batch, double tolerance){
+	public void deltaBarData(double w_input, double w_batch, double tolerance){
 
 		double lower_w;
 		double upper_w;

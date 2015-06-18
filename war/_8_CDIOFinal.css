@@ -19,7 +19,7 @@ h1 {
 }
 
 .gwt-TextBox {
-	width: 99%;
+	width: 93%;
 	margin-left: auto;
 	margin-right: auto;	
 }
@@ -77,11 +77,11 @@ h1 {
 }
 
 .ipLabel {
-	font-size: 16pt;
+	font-size: 12pt;
 }
 
 .portLabel {
-	font-size: 16pt;
+	font-size: 12pt;
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
@@ -109,11 +109,4 @@ h1 {
   	font-size: 100%;
   	font-style: normal;
   	text-shadow: #000 0px 0px 0 !important;
-}
-#H3{
-  color: #BEC7CC !important;
-  /* padding: 3px 15px; */
-  /* text-align: left; */
-  /* text-shadow: #ddf 1px 1px 0; */
-  /* overflow: hidden; */
 }

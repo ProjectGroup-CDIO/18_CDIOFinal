@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
-public class StykWeight extends Composite {
+public class UnitWeightView extends Composite {
 	private FlexTable ft = new FlexTable();
 	FlexCellFormatter cellFormatter = ft.getFlexCellFormatter();
 	private Label unitLabel = new Label("Unit-weight");
@@ -50,7 +50,7 @@ public class StykWeight extends Composite {
 	private List<CoinDTO> coinList;
 	private List<FruitDTO> fruitList;
 	private List<CondimentsDTO> condimentsList;
-	
+
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
@@ -59,43 +59,39 @@ public class StykWeight extends Composite {
 		public IFruitServiceAsync getFruitService();
 		public ICondimentsServiceAsync getCondimentsService();
 	}
-	
-	public StykWeight(final Callback c){
+
+	public UnitWeightView(final Callback c){
 		this.initWidget(vPanel);
-		 unitLabel.addStyleName("unitLabel");
-		 vPanel.add(unitLabel);
-		 vPanel.add(ft);
-		 
-		 btnCoins.setPixelSize(100, 30);
-		 btnBills.setPixelSize(100, 30);
-		 btnFruit.setPixelSize(100, 30);
-		 btnCondiments.setPixelSize(100, 30);
-		
-		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
-		
+		unitLabel.addStyleName("unitLabel");
+		vPanel.add(unitLabel);
+		vPanel.add(ft);
+
+		btnCoins.setPixelSize(100, 30);
+		btnBills.setPixelSize(100, 30);
+		btnFruit.setPixelSize(100, 30);
+		btnCondiments.setPixelSize(100, 30);
+
 		wText.setEnabled(false);
 		stkText.setEnabled(false);
-				
-		ft.setBorderWidth(5);
+
+		ft.setBorderWidth(2);
 		ft.setWidget(1, 1, wLabel);
 		ft.setWidget(2, 1, wText);
 		ft.setWidget(3, 1, stkLabel);
 		ft.setWidget(4, 1, stkText);
 
-		//ft.setWidget(0, 0, msgLabel);
-
 		cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
 		ft.setHTML(0, 0, "Choose one of the buttons");
 		cellFormatter.setColSpan(0, 0, 2);
-		
+
 		ft.setWidget(1, 0, btnCoins);
 		ft.setWidget(2, 0, btnFruit);
 		ft.setWidget(3, 0, btnCondiments);
-		
-		
+
+
 		btnCoins.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -107,17 +103,17 @@ public class StykWeight extends Composite {
 						wText.setText("Netto: " + result + " kg");
 					}
 				});
-					coinCellView(c);
-					ft.setHTML(0, 0, "Choose one of the coins");
+			
+				coinCellView(c);
+				ft.setHTML(0, 0, "Choose one of the coins");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 		btnFruit.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -129,18 +125,17 @@ public class StykWeight extends Composite {
 						wText.setText("Netto: " + result + " kg");
 					}
 				});
-					fruitCellView(c);
-					ft.setHTML(0, 0, "Choose one of the fruits");
+				fruitCellView(c);
+				ft.setHTML(0, 0, "Choose one of the fruits");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		
+
 		btnCondiments.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -152,10 +147,9 @@ public class StykWeight extends Composite {
 						wText.setText("Netto: " + result + " kg");
 					}
 				});
-					condimentsCellView(c);
-					ft.setHTML(0, 0, "Choose one of the condiments");
+				condimentsCellView(c);
+				ft.setHTML(0, 0, "Choose one of the condiments");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -182,7 +176,7 @@ public class StykWeight extends Composite {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getValue());
-							
+
 						}
 
 
@@ -201,8 +195,7 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								//Window.alert("You selected: " + selected.getWeightPerUnit());
-								try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 									@Override
 									public void onFailure(Throwable caught) {
@@ -218,22 +211,21 @@ public class StykWeight extends Composite {
 									}
 								});
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
 						}
 					});
-					
-					
+
 					coinTable.setRowCount(coinList.size(), true);
 					coinTable.setSize("100%", "100%");
+					
 					// Push the data into the widget.
 					coinTable.setRowData(0, coinList);
 					coinTable.redraw();
 					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
-					//ft.setHTML(0, 0, "Choose one of the buttons");
 					ft.setWidget(5, 0, coinTable);
+					cellFormatter.setColSpan(5, 0, 2);
 
 				}
 
@@ -241,7 +233,6 @@ public class StykWeight extends Composite {
 
 
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -271,7 +262,7 @@ public class StykWeight extends Composite {
 
 					};
 					fruitTable.addColumn(nameColumn, "Fruit name");
-				
+
 					final SingleSelectionModel<FruitDTO> selectionModel = new SingleSelectionModel<FruitDTO>();
 					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -285,7 +276,7 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 									@Override
 									public void onFailure(Throwable caught) {
@@ -309,8 +300,8 @@ public class StykWeight extends Composite {
 
 						}
 					});
-					
-					
+
+
 					fruitTable.setRowCount(fruitList.size(), true);
 					fruitTable.setSize("100%", "100%");
 					// Push the data into the widget.
@@ -353,10 +344,9 @@ public class StykWeight extends Composite {
 						public String getValue(CondimentsDTO object) {
 							return object.getName();
 						}
-
 					};
 					condimentsTable.addColumn(nameColumn, "Condiment name");
-				
+
 					final SingleSelectionModel<CondimentsDTO> selectionModel = new SingleSelectionModel<CondimentsDTO>();
 					condimentsTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -370,7 +360,7 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								try {c.getASEService().getSIWeight(new AsyncCallback<Double>(){
+								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 									@Override
 									public void onFailure(Throwable caught) {
@@ -386,7 +376,6 @@ public class StykWeight extends Composite {
 									}
 								});
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
@@ -394,26 +383,22 @@ public class StykWeight extends Composite {
 
 						}
 					});
-					
-					
+
+
 					condimentsTable.setRowCount(condimentsList.size(), true);
 					condimentsTable.setSize("100%", "100%");
+					
 					// Push the data into the widget.
 					condimentsTable.setRowData(0, condimentsList);
 					condimentsTable.redraw();
 					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
-					//ft.setHTML(0, 0, "Choose one of the buttons");
 					ft.setWidget(5, 0, condimentsTable);
 					cellFormatter.setColSpan(5, 0, 2);
 				}
-
 			});
-
-
+			
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 }
