@@ -34,7 +34,6 @@ public class DeltaWeightView extends Composite{
 	FlexTable ft = new FlexTable();
 	FlexTable ft2 = new FlexTable();
 	private Label viewInfo = new Label("Delta-weight");
-	private Label lol = new Label("Table name");
 	private Label prdName = new Label("Product Name");
 	private Label batchID = new Label("BatchID");
 	private Label wData = new Label("Batch weight");
@@ -46,8 +45,8 @@ public class DeltaWeightView extends Composite{
 	private TextBox SIDataBox = new TextBox();
 
 
-	
-	
+
+
 	private List<BatchDTO> batchList;
 	private DeltaBar dbar = new DeltaBar();
 
@@ -59,22 +58,23 @@ public class DeltaWeightView extends Composite{
 
 	public DeltaWeightView(final Callback c) throws Exception {
 		initWidget(vPanel);
+
 		vPanel.setHeight("328px");
-		
-				viewInfo.addStyleName("deltaWeight");
-				vPanel.add(viewInfo);
-				viewInfo.setHeight("70px");
+		viewInfo.addStyleName("deltaWeight");
+		vPanel.add(viewInfo);
+		viewInfo.setHeight("92px");
 
 		vPanel.add(dbar);
+		vPanel.add(vPanel2);
 		dbar.setHeight("71px");
-		vPanel.add(hPanel1);
-		hPanel1.setHeight("97px");
-		vPanel.add(ft2);
+		vPanel2.add(hPanel1);
+		vPanel2.setBorderWidth(2);
+		hPanel1.setHeight("52px");
+		vPanel2.add(ft2);
 		ft2.setWidth("550");
-		
 
 		hPanel1.add(ft);
-		ft.setWidth("580px");
+		ft.setWidth("555px");
 		ft.setWidget(1, 0, prdName);
 		ft.setWidget(1, 1, batchID);		
 		ft.setWidget(1, 2, wData);
@@ -85,13 +85,13 @@ public class DeltaWeightView extends Composite{
 		ft.setWidget(2, 2, batchData);
 		ft.setWidget(2, 3, SIDataBox);
 		SIDataBox.setWidth("128px");
-		
+
 		ft2.setStyleName("H2");
 		batchCellView(c);
-		
 
 
-		
+
+
 	}
 
 
@@ -179,9 +179,6 @@ public class DeltaWeightView extends Composite{
 						 * then we want to make it able to then show both coins and operatoer
 						 * 
 						 */
-						if (selected != null) {
-							Window.alert("You selected: " + selected);
-						}
 
 						productName.setText(selected.getRaavare_navn());
 						batchIDBox.setText(""+selected.getBatch_id());
