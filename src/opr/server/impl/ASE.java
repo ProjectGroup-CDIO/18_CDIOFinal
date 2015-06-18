@@ -42,7 +42,8 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	//------------------------------------
 	
 
-	private static String host = "169.254.2.2";
+
+	private static String host = "62.79.16.17";
 	private static int port = 8000;
 	
 	public ASE() throws UnknownHostException, IOException {
@@ -79,7 +80,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 		String response = in.readLine();
 		if(response.startsWith("ES")) {
 			return -1;
-		}else if(response.startsWith("S+")){
+		}else if(response.startsWith("S +")){
 			throw new DALException("Weight Overload");
 			
 		}
