@@ -77,11 +77,11 @@ h1 {
 }
 
 .ipLabel {
-	font-size: 16pt;
+	font-size: 12pt;
 }
 
 .portLabel {
-	font-size: 16pt;
+	font-size: 12pt;
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
