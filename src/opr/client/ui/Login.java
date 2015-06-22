@@ -62,7 +62,7 @@ public class Login extends Composite {
 						@Override
 						public void onSuccess(OperatoerDTO data) {
 
-							if(data.getOprId() >= 0){
+							if(data.getOprId() >= 4){
 								c.loginSucces(data);
 							}
 						}

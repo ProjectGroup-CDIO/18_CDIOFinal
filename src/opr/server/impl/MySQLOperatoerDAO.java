@@ -48,7 +48,11 @@ public class MySQLOperatoerDAO extends RemoteServiceServlet implements Operatoer
 
 	}
 
-	public void createOperatoer(OperatoerDTO opr) throws DALException {		
+	/**
+	 * The following code creates an operatoer. The doUpdate method connects the GWT to the database,
+	 * and adds a new operatoer to the list.
+	 */
+	public void createOperatoer(OperatoerDTO opr) throws DALException {
 		Connector.doUpdate(
 				"INSERT INTO operatoer(opr_id, opr_navn, ini, cpr, password, aktiv) VALUES " +
 						"(" + opr.getOprId() + ", '" + opr.getOprNavn() + "', '" + opr.getIni() + "', '" + 
@@ -56,6 +60,10 @@ public class MySQLOperatoerDAO extends RemoteServiceServlet implements Operatoer
 				);
 	}
 
+	/**
+	 * This part of the code updates information regarding the operatoer. When the update is made, the applicaton connects to the database 
+	 * and changes the information. 
+	 */
 	public void updateOperatoer(OperatoerDTO opr) throws DALException {
 		Connector.doUpdate(
 				"UPDATE operatoer SET  opr_navn = '" + opr.getOprNavn() + "', ini =  '" + opr.getIni() + 
@@ -63,7 +71,10 @@ public class MySQLOperatoerDAO extends RemoteServiceServlet implements Operatoer
 				opr.getOprId() 
 				);
 	}
-
+	/**
+	 * This part of the code gets the list of operatoers from the database, and connects to the GWT APP. 
+	 */
+	
 	public List<OperatoerDTO> getOperatoerList() throws DALException {
 		List<OperatoerDTO> list = new ArrayList<OperatoerDTO>();
 		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer");
