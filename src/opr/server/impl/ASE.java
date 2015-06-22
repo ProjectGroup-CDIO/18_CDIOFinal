@@ -6,17 +6,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import opr.client.service.IASEService;
-import opr.server.Connector;
 import opr.server.interfaces.IASE;
 import opr.shared.DALException;
 
-public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runnable {
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+public class ASE extends RemoteServiceServlet implements IASE, IASEService {
+
+	
 	/**
 	 * 
 	 */
@@ -38,7 +37,7 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	//169.254.2.2
 	//------------------------------------
 
-	private static String host = "127.0.0.1";
+	private static String host = "62.79.16.17";
 	private static int port = 8000;
 
 	@Override
@@ -123,33 +122,6 @@ public class ASE extends RemoteServiceServlet implements IASE, IASEService, Runn
 	public double returnNetto() {
 		netto = (brutto - tara);
 		return netto;
-	}
-
-
-
-	@Override
-	public void run() {
-		try {
-			out.writeBytes("SIR\r\n");
-			String response;
-			double weight;
-			while((response = in.readLine()) != null) {
-				weight = Double.parseDouble(response.substring(3,response.length()-2).trim());
-				System.out.println(weight);
-			}
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-
-	}
-
-	@Override
-	public void changeSocket(String Ip, int port) throws IOException {
-		// TODO Auto-generated method stub
-
 	}
 
 }
