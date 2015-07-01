@@ -244,18 +244,13 @@ public class DeltaWeightView extends Composite{
 						if (selected != null) {
 							Window.alert("You selected: " + selected);
 						}
-
 						
 						productName.setText(selected.getRaavare_navn());
 						batchIDBox.setText(""+selected.getBatch_id());
 						batchData.setText("" + selected.getBatchweight());
 						
-						
-						getSIData(c,selected.getBatchweight(),selected.getTolerance());
-						
+						getSIData(c, selected.getBatchweight(), selected.getTolerance());
 					}
-
-				
 				});
 				
 				batchTable.setRowCount(batchList.size(), true);
@@ -264,29 +259,22 @@ public class DeltaWeightView extends Composite{
 				batchTable.redraw();
 				ft2.setWidget(0,1, batchTable);
 			}
-			
 		});
-		
 	}
 	
 	private void getSIData(final Callback c, final double bW, final double tol) {
 		c.getASEService().getSIWeight(new AsyncCallback<Double>(){
-
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert("Error accesing weight" + caught.getMessage());
-				
 			}
 
 			@Override
 			public void onSuccess(Double result) {
 				SIDataBox.setText(Double.toString(result));
 				dbar.deltaBarData(result, bW, tol);
-				
 				getSIData(c,bW,tol);
-				
 			}
-			
 		});		
 	}
 	private void coinCellView(Callback c) {
@@ -311,33 +299,26 @@ public class DeltaWeightView extends Composite{
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getValue());
 						}
-
-
 					};
+					
 					coinTable.addColumn(valueColumn, "Coin Value");
-
 
 					TextColumn<CoinDTO> toleColumn = new TextColumn<CoinDTO>() {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getTolerance());
 						}
-
-
 					};
 					coinTable.addColumn(toleColumn, "Tolerance");
-
 
 					TextColumn<CoinDTO> wPrUnitColumn = new TextColumn<CoinDTO>() {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getWeightPerUnit());
 						}
-
-
 					};
-					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
 					
+					coinTable.addColumn(wPrUnitColumn, "Weight Pr Unit");
 					
 					final SingleSelectionModel<CoinDTO> selectionModel = new SingleSelectionModel<CoinDTO>();
 					coinTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
@@ -354,8 +335,6 @@ public class DeltaWeightView extends Composite{
 							if (selected != null) {
 								Window.alert("You selected: " + selected);
 							}
-
-
 						}
 					});
 					
