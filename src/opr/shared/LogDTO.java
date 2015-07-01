@@ -8,14 +8,14 @@ public class LogDTO implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 539673977986529416L;
-	
+
 	private int log_id;
 	private int opr_id;
 	private int batch_id;
 	private double afvigelse;
-	
+
 	public LogDTO() {
-		
+
 	}
 
 	public LogDTO(int log_id, int opr_id, int batch_id, double afvigelse) {
@@ -60,10 +60,10 @@ public class LogDTO implements Serializable
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 }

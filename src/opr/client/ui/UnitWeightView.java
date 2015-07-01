@@ -24,21 +24,24 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.FlexTable.FlexCellFormatter;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
-public class StykWeight extends Composite {
+public class UnitWeightView extends Composite {
 	private FlexTable ft = new FlexTable();
+	FlexCellFormatter cellFormatter = ft.getFlexCellFormatter();
 	private Label unitLabel = new Label("Unit-weight");
 	private VerticalPanel vPanel = new VerticalPanel();
 	Label wLabel = new Label("Weight");
 	TextBox wText = new TextBox();
 	Label stkLabel = new Label("# of items");
 	TextBox stkText = new TextBox();
+	Label msgLabel = new Label();
 	Button btnCoins = new Button("Coins");
 	Button btnBills = new Button("Bills");
 	Button btnFruit = new Button("Fruit");
@@ -46,7 +49,7 @@ public class StykWeight extends Composite {
 	private List<CoinDTO> coinList;
 	private List<FruitDTO> fruitList;
 	private List<CondimentsDTO> condimentsList;
-	
+
 	public interface Callback{
 		public IASEServiceAsync getASEService();
 		public IOperatoerServiceAsync getService();
@@ -55,38 +58,54 @@ public class StykWeight extends Composite {
 		public IFruitServiceAsync getFruitService();
 		public ICondimentsServiceAsync getCondimentsService();
 	}
-	
-	public StykWeight(final Callback c){
+
+	public UnitWeightView(final Callback c){
 		this.initWidget(vPanel);
-		 unitLabel.addStyleName("unitLabel");
-		 vPanel.add(unitLabel);
-		 vPanel.add(ft);
-		 
-		 btnCoins.setPixelSize(100, 30);
-		 btnBills.setPixelSize(100, 30);
-		 btnFruit.setPixelSize(100, 30);
-		 btnCondiments.setPixelSize(100, 30);
-		
-		//FlexCellFormatter ftf = ft.getFlexCellFormatter();
-		
+		unitLabel.addStyleName("unitLabel");
+		vPanel.add(unitLabel);
+		vPanel.add(ft);
+
+		btnCoins.setPixelSize(100, 30);
+		btnBills.setPixelSize(100, 30);
+		btnFruit.setPixelSize(100, 30);
+		btnCondiments.setPixelSize(100, 30);
+
 		wText.setEnabled(false);
 		stkText.setEnabled(false);
-				
-		ft.setBorderWidth(5);
+
+		ft.setBorderWidth(2);
 		ft.setWidget(1, 1, wLabel);
 		ft.setWidget(2, 1, wText);
 		ft.setWidget(3, 1, stkLabel);
 		ft.setWidget(4, 1, stkText);
+
+		cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
+		ft.setHTML(0, 0, "Choose one of the buttons");
+		cellFormatter.setColSpan(0, 0, 2);
+
 		ft.setWidget(1, 0, btnCoins);
 		ft.setWidget(2, 0, btnFruit);
 		ft.setWidget(3, 0, btnCondiments);
-		
+
+
 		btnCoins.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
-				try {
-					coinCellView(c);
+				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("An error occured: " + caught.getMessage());
+					}
+
+					@Override
+					public void onSuccess(Double result) {
+						wText.setText("Netto: " + result + " kg");
+					}
+				});
+			
+				coinCellView(c);
+				ft.setHTML(0, 0, "Choose one of the coins");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -105,14 +124,14 @@ public class StykWeight extends Composite {
 						wText.setText("Netto: " + result + " kg");
 					}
 				});
-					fruitCellView(c);
+				fruitCellView(c);
+				ft.setHTML(0, 0, "Choose one of the fruits");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		
+
 		btnCondiments.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
 				try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
@@ -127,9 +146,9 @@ public class StykWeight extends Composite {
 						wText.setText("Netto: " + result + " kg");
 					}
 				});
-					condimentsCellView(c);
+				condimentsCellView(c);
+				ft.setHTML(0, 0, "Choose one of the condiments");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -141,7 +160,7 @@ public class StykWeight extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -156,7 +175,7 @@ public class StykWeight extends Composite {
 						@Override
 						public String getValue(CoinDTO object) {
 							return Double.toString(object.getValue());
-							
+
 						}
 
 
@@ -175,7 +194,6 @@ public class StykWeight extends Composite {
 							 * 
 							 */
 							if (selected != null) {
-								//Window.alert("You selected: " + selected.getWeightPerUnit());
 								try {c.getASEService().getSWeight(new AsyncCallback<Double>(){
 
 									@Override
@@ -192,27 +210,27 @@ public class StykWeight extends Composite {
 									}
 								});
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
 						}
 					});
-					
-					
+
 					coinTable.setRowCount(coinList.size(), true);
+					coinTable.setSize("100%", "100%");
+					
 					// Push the data into the widget.
 					coinTable.setRowData(0, coinList);
 					coinTable.redraw();
-					ft.setWidget(5, 1, coinTable);
-//					ft.setStyleName("H2");
+					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
+					ft.setWidget(5, 0, coinTable);
+					cellFormatter.setColSpan(5, 0, 2);
 				}
 
 			});
 
 
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -223,7 +241,7 @@ public class StykWeight extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -242,7 +260,7 @@ public class StykWeight extends Composite {
 
 					};
 					fruitTable.addColumn(nameColumn, "Fruit name");
-				
+
 					final SingleSelectionModel<FruitDTO> selectionModel = new SingleSelectionModel<FruitDTO>();
 					fruitTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -280,13 +298,17 @@ public class StykWeight extends Composite {
 
 						}
 					});
-					
-					
+
+
 					fruitTable.setRowCount(fruitList.size(), true);
+					fruitTable.setSize("100%", "100%");
 					// Push the data into the widget.
 					fruitTable.setRowData(0, fruitList);
 					fruitTable.redraw();
-					ft.setWidget(5, 1, fruitTable);
+					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
+					//ft.setHTML(0, 0, "Choose one of the buttons");
+					ft.setWidget(5, 0, fruitTable);
+					cellFormatter.setColSpan(5, 0, 2);
 				}
 
 			});
@@ -304,7 +326,7 @@ public class StykWeight extends Composite {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Failed to access databse: "+caught.getMessage());
+					Window.alert("Failed to access database: "+caught.getMessage());
 
 				}
 				@Override
@@ -320,10 +342,9 @@ public class StykWeight extends Composite {
 						public String getValue(CondimentsDTO object) {
 							return object.getName();
 						}
-
 					};
 					condimentsTable.addColumn(nameColumn, "Condiment name");
-				
+
 					final SingleSelectionModel<CondimentsDTO> selectionModel = new SingleSelectionModel<CondimentsDTO>();
 					condimentsTable.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
 
@@ -353,7 +374,6 @@ public class StykWeight extends Composite {
 									}
 								});
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
@@ -361,22 +381,22 @@ public class StykWeight extends Composite {
 
 						}
 					});
-					
-					
+
+
 					condimentsTable.setRowCount(condimentsList.size(), true);
+					condimentsTable.setSize("100%", "100%");
+					
 					// Push the data into the widget.
 					condimentsTable.setRowData(0, condimentsList);
 					condimentsTable.redraw();
-					ft.setWidget(5, 1, condimentsTable);
+					cellFormatter.setHorizontalAlignment(0,0, HasHorizontalAlignment.ALIGN_LEFT);
+					ft.setWidget(5, 0, condimentsTable);
+					cellFormatter.setColSpan(5, 0, 2);
 				}
-
 			});
-
-
+			
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 }

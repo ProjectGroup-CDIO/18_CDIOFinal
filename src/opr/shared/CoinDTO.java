@@ -3,20 +3,20 @@ package opr.shared;
 import java.io.Serializable;
 
 public class CoinDTO implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2846969203314216759L;
-	
+
 	private double value;
 	private double weightPerUnit;
 	private double tolerance;
-	
+
 	public CoinDTO() {
-		
+
 	}
-	
+
 	public CoinDTO(double value, double weightPerUnit, double tolerance) {
 		this.value = value;
 		this.weightPerUnit = weightPerUnit;
@@ -29,6 +29,6 @@ public class CoinDTO implements Serializable {
 	public double getTolerance() {return tolerance;}
 	public void setTolerance(double tolerance) {this.tolerance = tolerance;}
 	public String toString() { return value + " " + weightPerUnit + " " + tolerance; }
-	
+
 
 }

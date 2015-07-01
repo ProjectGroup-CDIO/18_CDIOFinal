@@ -12,5 +12,4 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface IBatchService extends RemoteService {
 	BatchDTO getBatch(int batchid) throws Exception;
 	List<BatchDTO> getBatchList() throws Exception;
-	void updateLog(LogDTO logdto) throws Exception;
 }

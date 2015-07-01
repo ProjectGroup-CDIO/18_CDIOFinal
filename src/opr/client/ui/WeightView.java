@@ -17,7 +17,6 @@ public class WeightView extends Composite {
 
 	private VerticalPanel vPanel = new VerticalPanel();
 	private HorizontalPanel hPanel1 = new HorizontalPanel();
-	private HorizontalPanel hPanel2 = new HorizontalPanel();
 	private Label weightLabel = new Label("Netto"); 
 
 	public interface Callback{
@@ -26,21 +25,22 @@ public class WeightView extends Composite {
 
 	public WeightView(final Callback c) {
 
-		//-------------------------------------------
-		//initialiserer panel, tilføjer paneler og labels
-		//-------------------------------------------
+		/**
+		 * Initialiserer paneler, og tilføjer andre paneler til det initialiserede panel
+		 */
 
 		initWidget(this.vPanel);
 		weightLabel.addStyleName("weightLabel");
 		vPanel.add(weightLabel);
-		vPanel.setBorderWidth(2);
-		vPanel.add(hPanel2);
 		vPanel.add(hPanel1);
+		
 
-
-		//-------------------------------------------
-		//Weight-button, get
-		//-------------------------------------------
+		/**
+		 * "Get weight"-knappen. 
+		 * Knappen oprettes, og der tilføjes en ClickHandler
+		 * Der laves CallBack til ASEService, og herefter kan getSWeight() hentes
+		 * Knappen tilføjes til et panel, og størrelse og border sættes
+		 */
 
 		Button getWeightButton = new Button("Get weight", new ClickHandler(){
 			@Override
@@ -66,26 +66,16 @@ public class WeightView extends Composite {
 
 		hPanel1.add(getWeightButton);
 		getWeightButton.setPixelSize( 105, 30);
+		hPanel1.setBorderWidth(3);
+		
+		
 
-
-		//-------------------------------------------
-		//Weight-button, save
-		//-------------------------------------------
-
-		Button saveWeightButton = new Button("Save", new ClickHandler(){
-			@Override
-			public void onClick(ClickEvent event){
-				//implementering afventer
-			}
-		});
-
-		hPanel1.add(saveWeightButton);
-		saveWeightButton.setPixelSize(105, 30);
-
-
-		//-------------------------------------------		
-		//Weight-button, tara
-		//-------------------------------------------
+		/**
+		 * "Get tara"-knappen
+		 * Knappen oprettes, og der tilføjes ClickHandler
+		 * CallBack til ASEService, og udfører tara()-metoden
+		 * Knappen tilføjes til panel, og størrelse/border sættes
+		 */
 
 		Button taraWeightButton = new Button("Tara", new ClickHandler() {
 			@Override
@@ -122,6 +112,7 @@ public class WeightView extends Composite {
 
 		hPanel1.add(taraWeightButton);
 		taraWeightButton.setPixelSize(105, 30);
+		hPanel1.setBorderWidth(3);
 
 	}
 }

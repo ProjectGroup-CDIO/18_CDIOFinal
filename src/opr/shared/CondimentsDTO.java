@@ -3,21 +3,21 @@ package opr.shared;
 import java.io.Serializable;
 
 public class CondimentsDTO implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2846969203314216759L;
-	
+
 	private double id;
 	private String name;
 	private double weightPerUnit;
 	private double tolerance;
-	
+
 	public CondimentsDTO() {
-		
+
 	}
-	
+
 	public CondimentsDTO(double id, String name, double weightPerUnit, double tolerance) {
 		this.id = id;
 		this.name = name;
@@ -33,6 +33,6 @@ public class CondimentsDTO implements Serializable {
 	public double getTolerance() {return tolerance;}
 	public void setTolerance(double tolerance) {this.tolerance = tolerance;}
 	public String toString() { return name + " " + weightPerUnit + " " + tolerance; }
-	
+
 
 }

@@ -11,12 +11,12 @@ import java.io.Serializable;
 
 public class OperatoerDTO implements Serializable
 {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6563826727375700233L;
-	
+
 	/** Operatoer-identifikationsnummer (opr_id) i omraadet 1-99999999. Vaelges af brugerne */
 	int oprId;                     
 	/** Operatoernavn (opr_navn) min. 2 max. 20 karakterer */
@@ -32,9 +32,9 @@ public class OperatoerDTO implements Serializable
 
 	public OperatoerDTO()
 	{
-		
+
 	}
-	
+
 	public OperatoerDTO(int oprId, String oprNavn, String ini, String cpr, String password)
 	{
 		this.oprId = oprId;
@@ -44,7 +44,7 @@ public class OperatoerDTO implements Serializable
 		this.password = password;
 		this.active = 1;
 	}
-	
+
 	public OperatoerDTO(int oprId, String oprNavn, String ini, String cpr, String password, int active)
 	{
 		this.oprId = oprId;
@@ -54,18 +54,18 @@ public class OperatoerDTO implements Serializable
 		this.password = password;
 		this.active = active;
 	}
-	
-    public OperatoerDTO(OperatoerDTO opr)
-    {
-    	this.oprId = opr.getOprId();
-    	this.oprNavn = opr.getOprNavn();
-    	this.ini = opr.getIni();
-    	this.cpr = opr.getCpr();
-    	this.password = opr.getPassword();
-    	this.active = opr.getActive();
-    }
-    
-    public int getOprId() { return oprId; }
+
+	public OperatoerDTO(OperatoerDTO opr)
+	{
+		this.oprId = opr.getOprId();
+		this.oprNavn = opr.getOprNavn();
+		this.ini = opr.getIni();
+		this.cpr = opr.getCpr();
+		this.password = opr.getPassword();
+		this.active = opr.getActive();
+	}
+
+	public int getOprId() { return oprId; }
 	public void setOprId(int oprId) { this.oprId = oprId; }
 	public String getOprNavn() { return oprNavn; }
 	public void setOprNavn(String oprNavn) { this.oprNavn = oprNavn; }
@@ -78,5 +78,5 @@ public class OperatoerDTO implements Serializable
 	public String toString() { return oprId + "\t" + oprNavn + "\t" + ini + "\t" + cpr + "\t" + password + "\t" + (active>0? "aktiv":"inaktiv"); }
 	public int getActive() {return active;}
 	public void setActive(int active) { this.active = active; }
-	
+
 }
